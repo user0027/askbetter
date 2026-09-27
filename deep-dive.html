@@ -353,7 +353,7 @@
 
       <h3 class="q">설치한 뒤 새 버전은 어떻게 받나요?</h3>
       <div class="a">
-        <p>한 줄로 설치하면 설치 목록이 로컬 폴더라서, 목록을 갱신해도 새 버전이 있는지 알 방법이 없었어요. 그래서 세션을 시작할 때 실행되는 훅으로 새 버전을 확인해요. <strong>세션 시작이 늦어지지 않도록 훅은 버전 확인을 백그라운드로 넘기고 바로 종료돼요.</strong></p>
+        <p>한 줄로 설치하면 설치 목록이 로컬 폴더라서, 목록을 갱신해도 새 버전이 있는지 알 방법이 없었어요. 그래서 세션을 시작할 때 실행되는 훅으로 새 버전을 확인해요. <strong>세션 시작이 늦어지지 않도록 훅은 버전 확인을 백그라운드로 넘기고 바로 종료돼요.</strong> 받은 새 버전은 다음 세션부터 적용돼요. GitHub 저장소로 설치하면 배포 키가 없어서 훅이 이 확인을 건너뛰니, <code>/plugin update</code>로 직접 갱신해요.</p>
       </div>
       <div class="flow">
         <div class="flow-step"><div class="idx">01</div><div class="t">세션 시작</div><div class="d">지난 확인 결과를 한 줄 알림</div></div>
@@ -539,7 +539,7 @@
         <table>
           <thead><tr><th>방식</th><th>이럴 때 고릅니다</th><th>사례</th></tr></thead>
           <tbody>
-            <tr><td class="nm">플러그인 배포</td><td>여러 사람이 어느 폴더에서든 같은 커맨드를 써야 할 때</td><td>tip(세무달력), figma-ai, jira-gen(Jira 이슈 생성)</td></tr>
+            <tr><td class="nm">플러그인 배포</td><td>여러 사람이 어느 폴더에서든 같은 커맨드를 써야 할 때</td><td>tip(세무달력), figma-ai(Figma 기획서에 설명 패널과 케이스 시트 작성), jira-gen(Jira 이슈 생성)</td></tr>
             <tr><td class="nm">로컬 전용</td><td>사내망에 접속해야 하거나, Claude Code 없이 정해진 시각에 돌아야 할 때</td><td>product-tools, status-board, work-automation CLI</td></tr>
             <tr><td class="nm">서버 연결</td><td>외부 서비스의 데이터를 읽거나, 결과를 링크로 넘겨야 할 때</td><td>Figma 원격 MCP, 그룹웨어 문서 MCP, 검사 결과 공유 사본</td></tr>
           </tbody>
@@ -568,7 +568,7 @@
         <li>GitHub 초대를 받지 않았거나 Xcode Command Line Tools가 없는 팀원은 링크 한 줄로 설치합니다. git이 필요 없고, figma-ai는 같은 줄을 다시 실행하면 갱신됩니다</li>
         <li>플러그인으로 설치하면 저장소의 .claude/settings.json(공유 권한, MCP 자동 승인)이 적용되지 않습니다. 그래서 첫 실행에 Figma 로그인과 도구 승인 확인이 한 번 뜹니다</li>
         <li>계정이 필요한 플러그인은 설치할 때 물어보고 macOS 키체인에 저장합니다. jira-gen은 Jira 비밀번호를 설정 파일에 남기지 않습니다</li>
-        <li>조직 안에서만 쓰는 파일은 저장소에 넣지 않습니다. jira-gen의 사내 롤 파일은 사내 채널로 받아 상태 폴더에 넣고, 이 폴더는 플러그인을 갱신해도 지워지지 않습니다</li>
+        <li>조직 안에서만 쓰는 파일은 저장소에 넣지 않습니다. jira-gen이 이슈의 기획·설계자, 개발자, QA 칸을 채울 때 쓰는 조직 전용 담당자 규칙 파일(롤 파일)은 사내 채널로 받아 상태 폴더에 넣고, 이 폴더는 플러그인을 갱신해도 지워지지 않습니다</li>
       </ul>
 
       <h3 class="q">로컬에서만 쓰는 방식은 언제 고르나요?</h3>
