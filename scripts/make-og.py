@@ -87,7 +87,8 @@ CARD = """<!doctype html><html lang="ko"><head><meta charset="utf-8">
 
 def meta(p):
     img = f"{URL}/assets/og/{p['img']}.png"
-    page = URL + "/" + ("" if p["file"] == "index.html" else p["file"])
+    # 배포본은 /case-study.html 을 /case-study 로 넘기므로 넘어간 뒤 주소를 적는다
+    page = URL + "/" + ("" if p["file"] == "index.html" else p["file"].removesuffix(".html"))
     e = lambda s: html.escape(s, quote=True)
     tags = [
         f'<meta name="description" content="{e(p["desc"])}">',
