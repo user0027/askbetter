@@ -328,6 +328,9 @@ details[open] summary{ color:var(--ink); }
   box-shadow:var(--shadow); margin:24px 0; background:var(--surface);
 }
 .shot img{ display:block; width:100%; height:auto; }
+/* 세로로 긴 캡처는 칸 폭을 다 채우면 한 화면을 넘는다. 바탕에 얹고 가운데 작게 둔다 */
+.shot.portrait{ background:var(--bg-tint); }
+.shot.portrait img{ width:min(100%, 440px); margin:28px auto; border-radius:8px; box-shadow:var(--shadow); }
 .shot .cap{
   padding:11px 16px; font-size:12.5px; color:var(--ink-faint);
   border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace;
@@ -422,3 +425,31 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 
 /* 표·통계 다음에 오는 블록처럼 자동 여백(.a + *) 규칙이 안 닿는 자리에 쓰는 여백 */
 .mt28{ margin-top:28px; }
+
+/* ---------- Motion (story-motion.js 가 html.motion 을 붙인 페이지만) ---------- */
+.read-progress{
+  position:fixed; left:0; right:0; top:0; height:3px; z-index:40; pointer-events:none;
+  transform-origin:0 50%; transform:scaleX(0);
+  background:linear-gradient(90deg, var(--accent), #8fa8ff);
+}
+.motion .mv{
+  opacity:0; transform:translateY(18px);
+  transition:opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.motion .mv.is-in{ opacity:1; transform:none; }
+.motion .chapter .num.mv{ transform:translateX(-24px); }
+.motion .chapter h2.mv{ transition-delay:.12s; }
+.motion .chapter h2::before{ transform-origin:0 50%; transform:scaleX(0); transition:transform .8s cubic-bezier(.2,.7,.2,1) .35s; }
+.motion .chapter h2.is-in::before{ transform:scaleX(1); }
+.motion .section .shot.mv{ transform:translateY(28px) scale(.98); }
+
+/* 호버: 떠 있는 카드는 살짝 올라오고, 격자 칸은 바탕색만 바뀐다 */
+.stat, .card, .term, .section .shot{ transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.motion .mv.is-in.stat:hover, .motion .mv.is-in.card:hover, .motion .mv.is-in.term:hover{
+  transform:translateY(-3px); box-shadow:0 12px 28px -14px rgba(19,26,46,.25);
+}
+.motion .section .shot.is-in:hover{ transform:translateY(-4px); box-shadow:0 22px 44px -22px rgba(19,26,46,.35); }
+.app-cell, .quad-cell, .motion .app-cell.mv, .motion .quad-cell.mv{ transition:background-color .2s ease, opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.app-cell:hover, .quad-cell:hover{ background:var(--accent-soft); }
+.flow-step .idx{ transition:color .2s ease; }
+.flow-step:hover .idx{ color:var(--accent-ink); }
