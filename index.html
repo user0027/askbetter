@@ -146,6 +146,11 @@
   .ch-1 .media{ grid-column:6 / -1; margin-right:calc(-1 * (max(0px, (100vw - var(--max)) / 2) + var(--gut))); }
   .ch-1 .shot{ aspect-ratio:1456 / 828; }
   .ch-1 .shot img{ object-position:left top; }
+  /* 포털 첫 화면: 배경이 열린 뒤 가운데 카드가 떠오른다. 좌표는 1456×828 캡처 기준 */
+  .pop-stage .pop-card{ position:absolute; left:30.426%; top:29.602%; width:39.148%; height:auto; object-fit:initial;
+    opacity:0; transform:translateY(8%) scale(.96); transition:opacity .9s var(--ease) .6s, transform 1.2s var(--ease) .6s; }
+  .pop-stage.is-in .pop-card{ opacity:1; transform:none; }
+  .ch:hover .pop-stage.is-in .pop-card{ transform:translateY(-10px); transition-delay:0s; }
   .ch-1 .sub{ width:48%; margin-top:clamp(-120px, -8vw, -48px); margin-left:6%; position:relative; box-shadow:0 30px 60px -30px rgba(19,26,46,.35); aspect-ratio:1456 / 828; }
 
   /* 02·03·04 · 화면 없는 챕터는 텍스트만 한 단으로 둔다 */
@@ -201,7 +206,7 @@
     *{ animation:none !important; transition:none !important; }
     .hl > span{ transform:none; }
     .hl > span{ opacity:1; }
-    .rv{ opacity:1; transform:none; } .unveil{ clip-path:none; }
+    .rv{ opacity:1; transform:none; } .unveil{ clip-path:none; } .pop-stage .pop-card{ opacity:1; transform:none; }
     .hero-photo, .who, .hero-q, .hero-a .tag{ opacity:1; transform:none; }
   }
 </style>
@@ -277,7 +282,7 @@
           <a class="ch-link" href="case-study.html" data-site-href="story.href"><span data-site="story.label">케이스 스터디</span> 읽기 →</a>
         </div>
         <div class="media">
-          <div class="shot unveil"><img src="assets/portal-hero.jpg" alt="WH-TFT 사내 도구 포털 실제 화면" loading="lazy"></div>
+          <div class="shot unveil pop-stage"><img src="assets/portal-hero-base.jpg" alt="WH-TFT 사내 도구 포털 실제 화면" loading="lazy"><img class="pop-card" src="assets/portal-hero-card.png" alt="" loading="lazy"></div>
           <div class="shot sub rv"><img src="assets/product-tools-jira-gen.jpg" alt="jira-gen 도구 카드, Jira 이슈 초안 자동 생성 설명" loading="lazy"></div>
           <p class="cap mono">사내 도구 포털 / jira-gen 설치 카드</p>
         </div>
