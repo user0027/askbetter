@@ -14,6 +14,8 @@ window.SITE = {
   // 연락처. 링크는 data-site-href="contact.mailto" 로 건다
   contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
   brand: 'ASKBETTER',
+  // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
+  url: 'https://askbetter-portfolio.wh-tft.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다
   nav: {
     story: 'Case Study',

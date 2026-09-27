@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Deep Dive · ASKBETTER</title>
+<!-- og:start -->
+<meta name="description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ASKBETTER">
+<meta property="og:title" content="대조 규칙부터 운영 점검까지 | ASKBETTER">
+<meta property="og:description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
+<meta property="og:url" content="https://askbetter-portfolio.wh-tft.workers.dev/deep-dive.html">
+<meta property="og:image" content="https://askbetter-portfolio.wh-tft.workers.dev/assets/og/deep-dive.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<!-- og:end -->
 <link rel="icon" href="assets/brand/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
@@ -270,7 +283,7 @@
         <p>쪽지는 퍼블리셔에게 그달 발송본 제작을 요청하는 메시지예요. 원본 표의 영상 주소를 눈이나 문자 인식으로 옮기면 대문자 I, 소문자 l, 숫자 1이 섞여 없는 주소가 만들어져요. 9월분에서 실제로 3개가 그랬어요. <strong>그래서 쪽지를 만들기 전에 시안과 항목을 대조하고, 영상 링크가 실제로 재생되는지 확인하는 단계를 커맨드에 넣었어요.</strong> 쪽지는 본문만 만들어 보여 주고 보내는 것은 사람이 해요.</p>
       </div>
 
-      <h3 class="q">Figma에 달력을 그리는 스크립트는 어디서 막혔나요?</h3>
+      <h3 class="q">디자인 파일에 달력을 그리는 스크립트는 어디서 막혔나요?</h3>
       <div class="a">
         <p>13분이 걸리던 때는 원본 문서를 브라우저로 열다가 로그인 화면에 막혀 50초를 쓰기도 했어요. 지금은 그룹웨어 문서를 읽는 MCP로 본문 HTML을 바로 받아요. 자격증명은 MCP 서버에 있어서 스크립트에는 로그인 절차가 없어요.</p>
       </div>
@@ -414,7 +427,7 @@
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">status-board는 언제 여나요?</h3>
+      <h3 class="q">점검 화면은 언제 여나요?</h3>
       <div class="a">
         <p>status-board는 제 맥에서 도는 도구와 예약 작업, 팀에 공유한 도구가 정상인지 한 화면에 모아 보는 점검 페이지예요. 따로 열지 않아요. 맥을 켜면 status-board 서버가 실행되고, 서버가 응답하는 것을 확인한 뒤 크롬 창까지 자동으로 열려요. <strong>업무를 시작할 때 이미 떠 있고, 퇴근할 때까지 탭 하나로 켜 둬요.</strong></p>
         <p>처음에는 그날 첫 AI 세션을 열 때 같이 띄웠어요. 그러면 터미널을 열기 전까지 점검 화면이 없어서, 부팅할 때 켜지도록 옮겼어요. 만든 계기는 팀에 공유한 링크 검색 도구가 9분 사이에 세 번 끊겼다 복구된 일이었어요. 자동 복구는 되고 있었는데 아무도 몰랐거든요.</p>
@@ -455,7 +468,7 @@
         <p>아침 QA는 매일 09:20 에 팀원이 쓰는 기능 17가지를 실제로 한 번씩 실행해 봐요. 주소가 열려도 기능이 멈춘 채 며칠 정상으로 보인 적이 있어서, 출근해서 볼 때는 이미 기능까지 확인된 결과가 떠 있게 했어요.</p>
       </div>
 
-      <h3 class="q">보는 것 말고 status-board에서 하는 일도 있나요?</h3>
+      <h3 class="q">보는 것 말고 점검 화면에서 하는 일도 있나요?</h3>
       <div class="a">
         <p>종일 켜 둔 탭이라 자주 여는 도구도 여기서 열어요. 하루 동안 status-board에서 하는 일은 아래와 같아요.</p>
       </div>
@@ -528,15 +541,16 @@
     <div class="wrap narrow">
       <h3 class="q">만든 도구는 어떤 방식으로 나눠 쓰나요?</h3>
       <div class="a">
-        <p>플러그인 배포, 로컬 전용, 서버 연결의 세 가지로 나눠 써요. 한 도구가 여러 방식을 같이 지원하기도 해서, figma-ai는 플러그인으로도 clone한 폴더에서도 같은 커맨드가 동작하고, 일일보고를 만드는 work-automation은 플러그인과 CLI를 같이 설치해도 돼요.</p>
+        <p>플러그인 배포, 웹 링크 공유, 로컬 전용, 서버 연결의 네 가지로 나눠 써요. 앞의 둘은 팀원에게 건네는 방식이 달라요. 플러그인은 팀원 맥마다 설치해서 Claude Code 안에서 쓰고, 웹 링크는 설치 없이 브라우저에서 열어요. 한 도구가 여러 방식을 같이 지원하기도 해서, figma-ai는 플러그인으로도 clone한 폴더에서도 같은 커맨드가 동작하고, 일일보고를 만드는 work-automation은 플러그인과 CLI를 같이 설치해도 돼요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
           <thead><tr><th>방식</th><th>이럴 때 고릅니다</th><th>사례</th></tr></thead>
           <tbody>
             <tr><td class="nm">플러그인 배포</td><td>여러 사람이 어느 폴더에서든 같은 커맨드를 써야 할 때</td><td>tip(세무달력), figma-ai(Figma 기획서에 설명 패널과 케이스 시트 작성), jira-gen(Jira 이슈 생성)</td></tr>
-            <tr><td class="nm">로컬 전용</td><td>사내망에 접속해야 하거나, Claude Code 없이 정해진 시각에 돌아야 할 때</td><td>product-tools, status-board, work-automation CLI</td></tr>
-            <tr><td class="nm">서버 연결</td><td>외부 서비스의 데이터를 읽거나, 결과를 링크로 넘겨야 할 때</td><td>Figma 원격 MCP, 그룹웨어 문서 MCP, 검사 결과 공유 사본</td></tr>
+            <tr><td class="nm">웹 링크 공유</td><td>팀원이 설치 없이 브라우저에서 열어야 할 때. 사내망이 필요한 앱은 제 맥에서 돌리고 Cloudflare 터널로 고정 주소를 붙이고, 미리 만들 수 있는 페이지는 Cloudflare Pages에 올립니다</td><td>product-tools, link-hub, pptx-helper, 기획 검수 현황, 검사 결과 공유 사본</td></tr>
+            <tr><td class="nm">로컬 전용</td><td>저만 보는 화면이거나, Claude Code 없이 정해진 시각에 돌아야 할 때</td><td>status-board, work-automation CLI</td></tr>
+            <tr><td class="nm">서버 연결</td><td>외부 서비스의 데이터를 읽어야 할 때</td><td>Figma 원격 MCP, 그룹웨어 문서 MCP</td></tr>
           </tbody>
         </table>
       </div>

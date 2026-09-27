@@ -416,13 +416,15 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .motion .chapter h2::before{ transform-origin:0 50%; transform:scaleX(0); transition:transform .8s cubic-bezier(.2,.7,.2,1) .35s; }
 .motion .chapter h2.is-in::before{ transform:scaleX(1); }
 .motion .section .shot.mv{ transform:translateY(28px) scale(.98); }
+/* 위 줄이 .mv.is-in 보다 우선순위가 높아서, 등장한 뒤 원위치로 돌리는 줄을 따로 둔다 */
+.motion .section .shot.mv.is-in{ transform:none; }
 
 /* 호버: 떠 있는 카드는 살짝 올라오고, 격자 칸은 바탕색만 바뀐다 */
 .stat, .card, .term, .section .shot{ transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
 .motion .mv.is-in.stat:hover, .motion .mv.is-in.card:hover, .motion .mv.is-in.term:hover{
   transform:translateY(-3px); box-shadow:0 12px 28px -14px rgba(19,26,46,.25);
 }
-.motion .section .shot.is-in:hover{ transform:translateY(-4px); box-shadow:0 22px 44px -22px rgba(19,26,46,.35); }
+.motion .section .shot.mv.is-in:hover{ transform:translateY(-4px); box-shadow:0 22px 44px -22px rgba(19,26,46,.35); }
 .app-cell, .quad-cell, .motion .app-cell.mv, .motion .quad-cell.mv{ transition:background-color .2s ease, opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .app-cell:hover, .quad-cell:hover{ background:var(--accent-soft); }
 .flow-step .idx{ transition:color .2s ease; }

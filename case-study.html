@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Workflow Case Study · ASKBETTER</title>
+<!-- og:start -->
+<meta name="description" content="하던 업무를 나눠 보니 AI에게 맡길 일과 기획자가 남길 일이 보였습니다. 세무달력 한 건을 2시간에서 2.9분으로 줄인 과정을 담았습니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ASKBETTER">
+<meta property="og:title" content="AI에게 맡길 일, 기획자가 남길 일 | ASKBETTER">
+<meta property="og:description" content="하던 업무를 나눠 보니 AI에게 맡길 일과 기획자가 남길 일이 보였습니다. 세무달력 한 건을 2시간에서 2.9분으로 줄인 과정을 담았습니다.">
+<meta property="og:url" content="https://askbetter-portfolio.wh-tft.workers.dev/case-study.html">
+<meta property="og:image" content="https://askbetter-portfolio.wh-tft.workers.dev/assets/og/case-study.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<!-- og:end -->
 <link rel="icon" href="assets/brand/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
@@ -353,15 +366,16 @@
 
       <h3 class="q">만든 도구는 모두 플러그인으로 설치해야 쓸 수 있나요?</h3>
       <div class="a">
-        <p>도구마다 쓰는 방식이 달라요. 누가 쓰는지, 어떤 자료가 필요한지에 따라 세 가지 중에서 골랐어요. 세무달력처럼 팀원 맥마다 설치해야 하는 도구는 플러그인으로 배포해요. 사내망에 접속해야 하거나 제 맥의 서비스를 직접 확인해야 하는 도구는 로컬에서 실행해요. 사내 문서나 디자인 자료가 필요한 도구는 그 자료가 있는 서버에 연결해요.</p>
-        <p>세 방식은 한 도구 안에서 섞어 쓸 수 있어요. 세무달력은 플러그인으로 배포하지만, 원본 일정 문서는 MCP로 그룹웨어에서 받아 와요. 자세한 설정은 <a href="deep-dive.html">숙련자용 페이지</a>에 정리했어요.</p>
+        <p>도구마다 쓰는 방식이 달라요. 누가 쓰는지, 어떤 자료가 필요한지에 따라 네 가지 중에서 골랐어요. 세무달력처럼 팀원이 Claude Code 안에서 쓰는 도구는 플러그인으로 배포해요. 팀원이 브라우저에서 여는 도구는 웹 주소로 공유해서 따로 설치할 것이 없어요. 제 맥의 서비스를 확인하거나 정해진 시각에 도는 도구는 제 맥에서만 실행해요. 사내 문서나 디자인 자료가 필요한 도구는 그 자료가 있는 서버에 연결해요.</p>
+        <p>여러 방식을 한 도구 안에서 섞어 쓸 수 있어요. 세무달력은 플러그인으로 배포하지만, 원본 일정 문서는 MCP로 그룹웨어에서 받아 와요. 자세한 설정은 <a href="deep-dive.html">숙련자용 페이지</a>에 정리했어요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
           <thead><tr><th>쓰는 방식</th><th>어떻게 쓰나요</th><th>이 글의 예</th></tr></thead>
           <tbody>
             <tr><td class="nm">플러그인으로 배포</td><td>Claude Code 플러그인으로 묶어 저장소나 포털 설치 카드로 나눠 줍니다. 팀원 맥마다 설치되고, 새 버전은 세션을 시작할 때 자동으로 받습니다.</td><td>세무달력(tip)</td></tr>
-            <tr><td class="nm">내 맥에서 로컬로</td><td>따로 배포하지 않고 제 맥에서 실행합니다. 맥을 켜면 자동으로 실행되게 설정했고, 팀에 링크로 공유하는 도구도 제 맥에서 돌립니다.</td><td>status-board, 사내 화면 검사 도구(product-tools)</td></tr>
+            <tr><td class="nm">웹 주소로 공유</td><td>팀원은 브라우저에서 링크만 열면 되고 설치할 것이 없습니다. 사내망이 필요한 도구는 제 맥에서 돌리고 Cloudflare 터널(제 맥의 서비스를 바깥 주소로 여는 연결)로 고정 주소를 붙였습니다. 주간 집계처럼 미리 만들어 둘 수 있는 페이지는 Cloudflare Pages에 올려서 제 맥이 꺼져 있어도 열립니다.</td><td>사내 화면 검사 도구(product-tools), 링크 모음(link-hub), 기획 검수 현황</td></tr>
+            <tr><td class="nm">내 맥에서만</td><td>따로 배포하지 않고 제 맥에서만 실행합니다. 맥을 켜면 자동으로 실행되게 설정했습니다.</td><td>status-board, 일일보고 예약 작업</td></tr>
             <tr><td class="nm">서버에 연결</td><td>필요한 자료를 다른 서버에서 받아 옵니다. 사내 문서는 MCP(Claude Code가 외부 시스템의 자료를 읽도록 연결하는 방식)로 읽고, 디자인 자료는 Zeplin·Figma API로 받습니다.</td><td>세무달력 원본 문서, 시안·기획서 대조</td></tr>
           </tbody>
         </table>
@@ -371,6 +385,44 @@
       <div class="a">
         <p>처음에는 팀에 건넨 도구가 멈췄는지 확인할 방법이 없었어요. 팀원이 여는 도구 일부는 제 맥에서 돌리는 서비스였고, 멈추면 자동으로 다시 켜지도록만 설정해 뒀어요. 그러다 팀에 공유한 링크 검색 도구가 9분 사이에 세 번 끊겼다 복구된 일이 있었어요. <strong>복구는 되고 있었는데 저도 팀원도 그 사실을 몰랐어요.</strong></p>
         <p>그래서 돌고 있는 서비스의 상태를 한 화면에서 확인하는 점검 화면(status-board)을 만들었어요. 알림을 보내지 않고 켜 둔 탭에서 상태를 확인하는 방식이에요. 지금은 맥을 켜면 status-board가 크롬 창으로 자동으로 열리고, 퇴근할 때까지 탭 하나로 켜 둬요. 쓰는 법은 <a href="deep-dive.html#ch5">숙련자용 페이지</a>에 따로 정리했어요.</p>
+      </div>
+
+      <h3 class="q">점검 화면은 어떻게 읽나요?</h3>
+      <div class="a">
+        <p>화면을 만들 때 정한 기준은 하나였어요. 열었을 때 지금 손볼 것이 있는지 바로 판단할 수 있어야 해요. 그래서 표마다 답할 질문을 하나로 정하고, 그 질문과 관계없는 값은 빼거나 접어 뒀어요. 색도 판단이 필요한 곳에만 칠했어요. 오늘 작업 중인 저장소처럼 곧 정리될 것까지 노랑으로 칠하면 화면이 늘 노랗게 보여서 정말 손볼 것을 놓치거든요. <strong>알림은 보내지 않고, 필요할 때 열어 본 사람이 바로 판단할 수 있게 만든 화면이에요.</strong></p>
+      </div>
+      <div class="shot">
+        <img src="assets/status-board.jpg" alt="status-board 모니터링 화면. 점수 카드, 라이브 서버 표, 예약 작업 표">
+        <div class="cap">예시 데이터로 재현한 화면 · 퇴사 전 구성을 같은 코드로 다시 띄웠고, 팀에 공유한 주소는 가렸습니다</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>화면 영역</th><th>무엇을 알려 주나요</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">맨 위 점수</td><td>점검하는 항목 중 정상인 비율이에요. 100이면 전부 정상이고, 아래 칩에서 어느 묶음이 몇 개 중 몇 개 정상인지 보여 줘요.</td></tr>
+            <tr><td class="nm">라이브 서버</td><td>팀원이 링크로 여는 도구예요. 로컬은 제 맥 안에서 여는 주소, 고정주소는 팀원이 여는 주소예요. 200은 페이지가 정상으로 열렸다는 뜻이고, 옆 숫자는 응답에 걸린 시간이에요.</td></tr>
+            <tr><td class="nm">가동</td><td>도구가 마지막으로 켜진 뒤 흐른 시간이에요. 이 값이 이전보다 줄면 도구가 꺼졌다 다시 켜졌다는 뜻이라, 도구 이름 옆에 '재시작' 표시가 10분 동안 붙어요. 9분 사이 세 번 끊긴 일도 이 표시로 드러나요.</td></tr>
+            <tr><td class="nm">예약 작업</td><td>정해진 시각에 한 번 돌고 끝나는 작업이에요. 일일보고처럼 예정 시각이 지났는데 마지막 실행이 그보다 앞서 있으면 노랑으로 바뀌어요.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="q">점검 화면은 그 밖에 무엇을 확인하나요?</h3>
+      <div class="a">
+        <p>위 화면은 첫 탭인 모니터링이에요. 탭이 다섯 개 더 있어요. <strong>팀에 건넨 도구뿐 아니라 제가 AI와 일하는 환경 전체를 한 화면에서 확인해요.</strong></p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>탭</th><th>무엇을 확인하나요</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">모니터링</td><td>서버와 예약 작업 외에, 아침마다 도구에 실제 작업을 한 번씩 시켜 결과가 나오는지 확인해요. 주소는 열리는데 기능이 멈춘 상태를 잡으려고 넣었고, 기능 17개를 확인해요. 아직 올리지 않은 작업이 남은 저장소와, 다른 세션이 끝내지 못하고 넘긴 일 목록도 여기에 있어요.</td></tr>
+            <tr><td class="nm">확장</td><td>설치한 Claude Code 플러그인이 최신 버전인지, 제가 만든 플러그인이 팀원에게 나간 버전과 같은지 보여 줘요. 연결된 MCP 서버마다 어떤 기능을 쓸 수 있는지, 크롬 확장과 Figma 플러그인 목록도 여기서 확인해요.</td></tr>
+            <tr><td class="nm">토큰</td><td>Claude Code를 쓰며 소비한 토큰 양을 날짜별로 모아 보여 줘요.</td></tr>
+            <tr><td class="nm">메모리</td><td>Claude Code가 기억해 두는 메모 파일을 목록으로 보고, 그 자리에서 고치거나 지울 수 있어요. 세션마다 읽히는 목록이 토큰을 얼마나 쓰는지, 끊어진 연결이 있는지도 알려 줘요.</td></tr>
+            <tr><td class="nm">구조</td><td>도구와 저장소가 어떻게 이어져 있는지 그린 관계도예요. 여러 Claude Code 세션이 서로 주고받은 메시지도 메신저처럼 보여 줘요.</td></tr>
+            <tr><td class="nm">web-qa</td><td>사내 화면 자동 검수가 오늘 돈 결과예요. 검사 한 건이 한 줄이고, 실패하면 어느 스펙 문서의 어느 항목 때문인지까지 보여 줘요.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -398,17 +450,6 @@
             <tr><td class="nm">결과 확인</td><td>같은 항목을 매번 확인</td><td>기본 확인까지 마친 결과를 판단</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <h3 class="q">앞에 나온 숫자들은 어떻게 보면 되나요?</h3>
-      <div class="a">
-        <p>어떤 일이 실제로 맡겨졌는지 확인하려고 남긴 지표예요. <strong>성과를 증명하는 근거로 보지는 않아요.</strong> 세무달력 한 건이 <span data-site="metrics.manual">2시간</span>에서 <span data-site="metrics.auto">2.9분</span>이 된 것도, 검수 항목 <span data-site="metrics.checks">22개</span>를 자동으로 확인하는 것도 그 업무를 AI가 실제로 맡고 있다는 표시로 봐 주시면 좋겠어요.</p>
-      </div>
-      <div class="stat-strip">
-        <div class="stat"><div class="n">2<span class="unit">시간</span><span class="arrow">→</span><span class="to">2.9<span class="unit">분</span></span></div><div class="l">세무달력 제작 시간</div></div>
-        <div class="stat"><div class="n">22<span class="unit-muted">개</span></div><div class="l">검수 항목 자동 확인</div></div>
-        <div class="stat"><div class="n">31<span class="unit-muted">건</span></div><div class="l">사용하며 기준을 고친 기록</div></div>
-        <div class="stat"><div class="n">5<span class="unit-muted">개</span></div><div class="l">스펙·검색·검수·정책·달력</div></div>
       </div>
 
       <h3 class="q">자기 업무에 AI를 붙여 보고 싶은 기획자는 어떤 순서로 시작하면 좋을까요?</h3>
