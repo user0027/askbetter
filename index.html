@@ -152,8 +152,8 @@
   .ch-1 .sub{ width:48%; margin-top:clamp(-120px, -8vw, -48px); margin-left:6%; position:relative; overflow:visible; background:none; aspect-ratio:auto;
     border-radius:18px; box-shadow:0 30px 60px -30px rgba(19,26,46,.35), 0 8px 24px -12px rgba(19,26,46,.18); }
   .ch-1 .sub img{ display:block; height:auto; object-fit:initial; border-radius:18px; }
-  .ch-1 .sub.rv{ transform:translateY(40px) scale(.96); transition:opacity 1s ease .5s, transform 1.3s var(--ease) .5s; }
-  .ch-1 .sub.rv.is-in{ transform:none; }
+  .ch-1 .sub.rv{ transform:translateY(40px) scale(.96); transition:opacity .5s ease, transform .6s var(--ease); }
+  .ch-1 .sub.rv.is-in{ transform:none; transition:opacity 1s ease .5s, transform 1.3s var(--ease) .5s; }
 
   /* 02·03·04 · 화면 없는 챕터는 텍스트만 한 단으로 둔다 */
   .ch-2 .txt, .ch-3 .txt, .ch-4 .txt{ grid-column:1 / 8; }
@@ -261,24 +261,24 @@
             <div class="pr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
             <span class="pr-num">01</span>
           </div>
-          <h3>문제의 본질을 드러낸다</h3>
-          <p>겉으로 보이는 현상보다 해결해야 할 핵심 문제를 묻습니다.</p>
+          <h3>무엇을 해결할지 정한다</h3>
+          <p>현상과 원인을 구분해 해결해야 할 문제를 명확히 합니다.</p>
         </div>
         <div class="pr-card">
           <div class="pr-head">
             <div class="pr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h4M4 4v4M20 4h-4M20 4v4M4 20h4M4 20v-4M20 20h-4M20 20v-4"/></svg></div>
             <span class="pr-num">02</span>
           </div>
-          <h3>답할 수 있는 범위를 만든다</h3>
-          <p>대상과 상황을 구체화해 실제로 검증할 수 있는 질문을 만듭니다.</p>
+          <h3>무엇을 확인할지 정한다</h3>
+          <p>대상과 상황을 구체화해 실제로 검증할 수 있게 합니다.</p>
         </div>
         <div class="pr-card">
           <div class="pr-head">
             <div class="pr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></div>
             <span class="pr-num">03</span>
           </div>
-          <h3>다음 판단으로 이어진다</h3>
-          <p>답을 얻는 데서 끝나지 않고 실제 선택과 행동으로 연결됩니다.</p>
+          <h3>무엇을 결정할지 연결한다</h3>
+          <p>답이 우선순위와 다음 행동을 결정하는 근거가 되게 합니다.</p>
         </div>
       </div>
     </div>
@@ -418,7 +418,7 @@
 <script>
   (function(){
     // 화면에 들어온 요소만 한 번 드러낸다
-    var targets = document.querySelectorAll('.rv, .unveil');
+    var targets = document.querySelectorAll('.rv:not(.sub), .unveil');
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
@@ -426,6 +426,20 @@
       targets.forEach(function(el){ io.observe(el); });
     } else {
       targets.forEach(function(el){ el.classList.add('is-in'); });
+    }
+
+    // jira-gen 팝업은 위로 다시 올라가 화면 아래로 빠지면 도로 숨긴다
+    var pops = document.querySelectorAll('.rv.sub');
+    if ('IntersectionObserver' in window) {
+      var po = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) e.target.classList.add('is-in');
+          else if (e.boundingClientRect.top > 0) e.target.classList.remove('is-in');
+        });
+      }, { threshold:0.2 });
+      pops.forEach(function(el){ po.observe(el); });
+    } else {
+      pops.forEach(function(el){ el.classList.add('is-in'); });
     }
 
     var opening = document.getElementById('opening');
