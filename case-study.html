@@ -63,25 +63,6 @@
     </div>
   </section>
 
-  <!-- 처음 읽는 분께 -->
-  <section class="primer">
-    <div class="wrap narrow">
-      <div class="box">
-        <h2>처음 읽는 분께</h2>
-        <p class="lead">이 글은 개발을 하지 않는 기획자가 매달 하던 업무에 AI를 붙여 본 이야기입니다. 코드나 명령어를 몰라도 읽을 수 있도록, 본문에 자주 나오는 말을 먼저 정리했습니다.</p>
-        <div class="terms">
-          <div class="term"><div class="k">세무달력</div><div class="v">매달 그달의 세무 일정을 원본 문서에서 확인해 달력 화면으로 만들어 보내던 업무입니다. 이 글의 첫 사례입니다.</div></div>
-          <div class="term"><div class="k">스펙</div><div class="v">화면이 어떻게 보이고 어떻게 동작하는지 적은 기획 문서입니다.</div></div>
-          <div class="term"><div class="k">시안</div><div class="v">디자이너가 만든 화면 디자인입니다. 기획서와 맞게 그려졌는지 대조하는 일이 본문에 나옵니다.</div></div>
-          <div class="term"><div class="k">검수</div><div class="v">만든 결과물이 정한 기준대로 됐는지 확인하는 일입니다.</div></div>
-          <div class="term"><div class="k">규칙</div><div class="v">AI가 무엇을 맞다고 보고 무엇을 걸러 낼지 미리 정해 둔 기준입니다.</div></div>
-          <div class="term"><div class="k">포털</div><div class="v">팀원이 만든 도구를 한곳에서 찾아 설치하거나 바로 열 수 있게 모아 둔 사내 페이지입니다.</div></div>
-          <div class="term"><div class="k">지라 · 위키 · 제플린</div><div class="v">각각 업무 요청 관리, 문서 공유, 디자인 전달에 쓰는 협업 도구입니다.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 01 -->
   <section class="chapter" id="ch1">
     <div class="wrap narrow">
@@ -376,7 +357,7 @@
 
       <h3 class="q">만든 도구는 모두 플러그인으로 설치해야 쓸 수 있나요?</h3>
       <div class="a">
-        <p>도구마다 쓰는 방식이 달라요. 누가 쓰는지, 어떤 자료가 필요한지에 따라 세 가지 중에서 골랐어요. 세무달력처럼 팀원 맥마다 설치해야 하는 도구는 플러그인으로 배포하고, 저만 보거나 제 맥에서 돌리면 되는 도구는 로컬로만 써요. 사내 문서나 디자인 자료가 필요한 도구는 그 자료가 있는 서버에 연결해요.</p>
+        <p>도구마다 쓰는 방식이 달라요. 누가 쓰는지, 어떤 자료가 필요한지에 따라 세 가지 중에서 골랐어요. 세무달력처럼 팀원 맥마다 설치해야 하는 도구는 플러그인으로 배포해요. 사내망에 접속해야 하거나 제 맥의 서비스를 직접 확인해야 하는 도구는 로컬에서 실행해요. 사내 문서나 디자인 자료가 필요한 도구는 그 자료가 있는 서버에 연결해요.</p>
         <p>세 방식은 한 도구 안에서 섞어 쓸 수 있어요. 세무달력은 플러그인으로 배포하지만, 원본 일정 문서는 MCP로 그룹웨어에서 받아 와요. 자세한 설정은 <a href="deep-dive.html">숙련자용 페이지</a>에 정리했어요.</p>
       </div>
       <div class="tbl-wrap">
@@ -384,7 +365,7 @@
           <thead><tr><th>쓰는 방식</th><th>어떻게 쓰나요</th><th>이 글의 예</th></tr></thead>
           <tbody>
             <tr><td class="nm">플러그인으로 배포</td><td>Claude Code 플러그인으로 묶어 저장소나 포털 설치 카드로 나눠 줍니다. 팀원 맥마다 설치되고, 새 버전은 세션을 시작할 때 자동으로 받습니다.</td><td>세무달력(tip)</td></tr>
-            <tr><td class="nm">내 맥에서 로컬로</td><td>따로 배포하지 않고 제 맥에서 실행합니다. 맥을 켜면 자동으로 실행되게 설정했고, 팀에 링크로 공유하는 도구도 제 맥에서 돌립니다.</td><td>status-board, 링크 검색 도구</td></tr>
+            <tr><td class="nm">내 맥에서 로컬로</td><td>따로 배포하지 않고 제 맥에서 실행합니다. 맥을 켜면 자동으로 실행되게 설정했고, 팀에 링크로 공유하는 도구도 제 맥에서 돌립니다.</td><td>status-board, 사내 화면 검사 도구(product-tools)</td></tr>
             <tr><td class="nm">서버에 연결</td><td>필요한 자료를 다른 서버에서 받아 옵니다. 사내 문서는 MCP(Claude Code가 외부 시스템의 자료를 읽도록 연결하는 방식)로 읽고, 디자인 자료는 Zeplin·Figma API로 받습니다.</td><td>세무달력 원본 문서, 시안·기획서 대조</td></tr>
           </tbody>
         </table>
