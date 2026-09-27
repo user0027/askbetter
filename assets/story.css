@@ -128,7 +128,7 @@ section.chapter{ scroll-margin-top:84px; }
 
 /* ---------- Chapter divider ---------- */
 /* 네이비 띠에 오른쪽 위 빛번짐과 옅은 격자를 깔고, 번호는 외곽선 숫자로 크게 세운다 */
-.chapter{
+.chapter, .closing{
   --ch-glow:#2f4fb8; --ch-num:#8fa8ff;
   position:relative; overflow:hidden; isolation:isolate;
   background:
@@ -286,9 +286,10 @@ section.chapter{ scroll-margin-top:84px; }
 @media (max-width:760px){ .steps{ grid-template-columns:1fr 1fr; row-gap:24px; } .step{ border-right:none; } }
 
 /* closing */
-.closing{ background:var(--navy); color:var(--navy-ink); padding:88px 0; }
-.closing h2{ color:var(--navy-ink); font-size:clamp(26px,4vw,38px); line-height:1.4; max-width:760px; }
-.closing .sub{ margin-top:20px; color:var(--navy-ink-soft); font-size:15px; max-width:520px; }
+.closing{ color:var(--navy-ink); padding:clamp(64px, 7vw, 96px) 0; }
+.closing h2{ color:var(--navy-ink); font-size:clamp(26px,4vw,38px); line-height:1.4; }
+.closing .eyebrow.on-dark{ margin-bottom:16px; color:#8fa8ff; letter-spacing:.08em; }
+.closing .sub{ margin-top:20px; color:var(--navy-ink-soft); font-size:15.5px; line-height:1.8; }
 
 /* appendix */
 /* 처음 읽는 분께: 입문자용 안내와 용어 풀이 */
@@ -331,6 +332,9 @@ details[open] summary{ color:var(--ink); }
 /* 세로로 긴 캡처는 칸 폭을 다 채우면 한 화면을 넘는다. 바탕에 얹고 가운데 작게 둔다 */
 .shot.portrait{ background:var(--bg-tint); }
 .shot.portrait img{ width:min(100%, 440px); margin:28px auto; border-radius:8px; box-shadow:var(--shadow); }
+.shot.portrait .pair{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px; padding:28px; }
+.shot.portrait .pair img{ width:100%; margin:0; }
+@media (max-width:640px){ .shot.portrait .pair{ grid-template-columns:1fr; padding:20px; } }
 .shot .cap{
   padding:11px 16px; font-size:12.5px; color:var(--ink-faint);
   border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace;
@@ -343,18 +347,22 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 
 
 /* ---------- Closing CTA row ---------- */
-.cta-row{ margin-top:40px; display:flex; flex-wrap:wrap; gap:14px; }
+/* 세 버튼을 같은 높이의 알약 모양으로 맞추고, 홈 버튼 하나만 흰 바탕으로 세운다 */
+.cta-row{ margin-top:36px; display:flex; flex-wrap:wrap; gap:10px; }
 .cta{
-  display:inline-flex; align-items:center; gap:9px; padding:14px 22px; border-radius:12px;
-  font-weight:700; font-size:14.5px; text-decoration:none; border:1px solid transparent;
+  display:inline-flex; align-items:center; gap:8px; height:46px; padding:0 20px; border-radius:999px;
+  font-weight:700; font-size:14px; text-decoration:none; white-space:nowrap;
+  border:1px solid rgba(238,241,251,.18); background:rgba(238,241,251,.04); color:var(--navy-ink);
+  transition:background-color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.cta.coffee{ background:var(--coffee-soft); color:var(--coffee); border-color:var(--coffee-line); }
-.cta.coffee svg{ width:16px; height:16px; }
-.cta.coffee:hover{ background:#f1ded0; }
-.cta.mail{ background:rgba(255,255,255,0.06); color:var(--navy-ink); border-color:rgba(255,255,255,0.16); }
-.cta.mail:hover{ background:rgba(255,255,255,0.1); }
-.cta.home{ background:var(--accent); color:#fff; }
-.cta.home:hover{ background:#2444b8; }
+.cta:hover{ transform:translateY(-2px); background:rgba(238,241,251,.1); border-color:rgba(238,241,251,.34); }
+.cta svg{ width:16px; height:16px; flex:none; }
+.cta.coffee svg{ color:#f0b98d; }
+.cta.coffee:hover{ border-color:rgba(240,185,141,.55); }
+.cta.home{ background:#fff; color:var(--navy); border-color:#fff; }
+.cta.home:hover{ background:#fff; box-shadow:0 10px 26px -10px rgba(143,168,255,.7); }
+.cta .go{ display:inline-block; transition:transform .2s ease; }
+.cta.home:hover .go{ transform:translateX(4px); }
 .closing .note{ margin-top:16px; font-size:12px; color:var(--navy-ink-soft); opacity:0.75; }
 
 @media (prefers-reduced-motion: no-preference){
