@@ -27,6 +27,10 @@
   --accent-soft:#eaf0ff;
   --accent-line:#c8d6ff;
   --good:#1f7a52;
+  /* AI가 틀렸던 지점 상자. 글 페이지에서 경고 성격의 강조에만 쓴다 */
+  --fail:#c2410c;
+  --fail-soft:#fff6f0;
+  --fail-line:#f6d5c2;
   --accent-on-dark:#8fa8ff;  /* 어두운 판 위의 포인트 */
 
   /* 어두운 판(글 페이지 표지·마무리) */

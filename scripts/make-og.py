@@ -30,20 +30,20 @@ BRAND = js_str("brand")
 NAME = js_str("name")
 MANUAL, AUTO = js_str("manual"), js_str("auto")
 
-# 페이지별 공유 문구. title 은 미리보기 제목, desc 는 그 아래 두 줄, card 는 썸네일 안 글자
+# 페이지별 공유 문구. title 은 미리보기 제목(브랜드를 앞에, 직무는 PM 약어로), desc 는 그 아래 두 줄, 나머지는 썸네일 안 글자.
+# 첫 화면은 kicker 를 두지 않는다. 'Portfolio' 가 이력서처럼 읽힌다는 요청(2026-09-27)
 PAGES = [
     {
         "file": "index.html", "img": "home",
-        "title": f"{NAME} · Product Manager | {BRAND}",
-        "desc": "세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 " + NAME + "의 포트폴리오입니다. "
+        "title": f"{BRAND} | {NAME} · PM",
+        "desc": "세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 " + NAME + "입니다. "
                 "대표 작업과 AI로 기획 업무를 바꾼 과정을 정리했습니다.",
-        "kicker": "Portfolio",
         "head": "좋은 <em>질문</em>이,<br>더 나은 제품을 만듭니다.",
-        "foot": f"{NAME} · Product Manager",
+        "foot": f"{NAME} · PM",
     },
     {
         "file": "case-study.html", "img": "case-study",
-        "title": f"AI에게 맡길 일, 기획자가 남길 일 | {BRAND}",
+        "title": f"{BRAND} | AI에게 맡길 일, 기획자가 남길 일",
         "desc": f"하던 업무를 나눠 보니 AI에게 맡길 일과 기획자가 남길 일이 보였습니다. "
                 f"세무달력 한 건을 {MANUAL}에서 {AUTO}으로 줄인 과정을 담았습니다.",
         "kicker": "Case Study",
@@ -52,7 +52,7 @@ PAGES = [
     },
     {
         "file": "deep-dive.html", "img": "deep-dive",
-        "title": f"대조 규칙부터 운영 점검까지 | {BRAND}",
+        "title": f"{BRAND} | 대조 규칙부터 운영 점검까지",
         "desc": "케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. "
                 "대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.",
         "kicker": "Deep Dive",
@@ -126,7 +126,7 @@ def main():
         for p in PAGES:
             # about:blank 에서는 file:// 의 CSS·로고를 못 불러와서 파일로 써 두고 연다
             tmp = out / ".card.html"
-            tmp.write_text(CARD.format(root=ROOT.as_uri(), **p), encoding="utf-8")
+            tmp.write_text(CARD.format(root=ROOT.as_uri(), **{"kicker": "", **p}), encoding="utf-8")
             pg.goto(tmp.as_uri(), wait_until="networkidle")
             tmp.unlink()
             pg.evaluate("document.fonts.ready")

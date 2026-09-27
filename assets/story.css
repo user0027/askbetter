@@ -57,7 +57,7 @@ p{margin:0;}
   width:64px; height:4px; background:var(--accent); margin:28px 0 24px; border-radius:2px;
 }
 .cover .sub{
-  font-size:17px; color:var(--ink-soft); max-width:560px; font-weight:500;
+  font-size:17px; color:var(--ink-soft); font-weight:500;
 }
 /* 표지 목차. 챕터 번호를 누르면 그 챕터로 이동한다 */
 .cover .toc{ margin-top:56px; }
@@ -208,6 +208,15 @@ section.chapter{ scroll-margin-top:84px; }
 .prompt .label{ font-family:var(--mono); font-size:11.5px; color:var(--navy-ink-soft); margin-bottom:8px; letter-spacing:0.04em; }
 .prompt .cmd{ font-family:var(--mono); font-size:15.5px; color:var(--navy-ink); }
 .prompt .cmd::before{ content:'> '; color:var(--accent-ink); }
+/* 요청 한 줄과 수치 카드가 나란히 놓일 때는 같은 카드 틀·높이·제목 줄을 쓴다 */
+.cols-2:has(> .prompt + .card){ align-items:stretch; }
+.cols-2 > .prompt{
+  margin:0; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px;
+  box-shadow:var(--shadow); display:flex; flex-direction:column;
+}
+.cols-2 > .prompt .label{ font-family:inherit; font-size:15px; font-weight:700; color:var(--ink); letter-spacing:0; margin-bottom:10px; }
+.cols-2 > .prompt .cap{ font-size:12.5px; line-height:1.7; color:var(--ink-faint); margin-top:12px; }
+.cols-2 > .prompt .cmd{ background:var(--navy); color:var(--navy-ink); border-radius:8px; padding:14px 16px; font-size:15.5px; }
 
 /* before/after criteria */
 .criteria{ margin:20px 0; }
@@ -347,8 +356,9 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
   .section .wrap.narrow{ display:grid; grid-template-columns:var(--rail) minmax(0,1fr); column-gap:var(--rail-gap); }
   .section .wrap.narrow > *{ grid-column:2; }
   .section .wrap.narrow > .q{ grid-column:1; }
-  .section .wrap.narrow > .q + .a{ margin-top:64px; }
-  .section .wrap.narrow > .q:first-child + .a{ margin-top:0; }
+  /* 질문 제목과 같은 줄에 놓이는 첫 블록은 무엇이든 제목과 윗선을 맞춘다 */
+  .section .wrap.narrow > .q + *{ margin-top:64px; }
+  .section .wrap.narrow > .q:first-child + *{ margin-top:0; }
   .chapter .wrap{ grid-template-columns:var(--rail) minmax(0,1fr); column-gap:var(--rail-gap); }
         .closing .wrap.narrow{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:var(--rail-gap); }
   .closing .wrap.narrow > *{ grid-column:2; }
@@ -429,3 +439,66 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .app-cell:hover, .quad-cell:hover{ background:var(--accent-soft); }
 .flow-step .idx{ transition:color .2s ease; }
 .flow-step:hover .idx{ color:var(--accent-ink); }
+
+/* 질문형이 아닌 소제목. 핵심 질문만 Q. 를 붙이고 나머지는 이 모양으로 둔다 */
+.q.plain{ padding-left:0; }
+.q.plain::before{ content:none; }
+
+/* 내가 맡은 일. 글 첫머리에서 역할 범위를 먼저 보여 준다 */
+/* 맡은 역할은 소개 상자 안에서 '이 글에 대해'와 같은 두 칸 구조를 쓴다 */
+.guest .role-h{ margin-top:22px; }
+.role-strip{ margin-top:22px; border-top:1px solid var(--line); }
+.role{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:16px; padding:10px 0; border-bottom:1px solid var(--line); }
+.role:last-child{ border-bottom:0; padding-bottom:0; }
+.role .k{ font-size:14px; font-weight:900; color:var(--accent-ink); }
+.role .k::before{ content:"✓ "; }
+.role .d{ font-size:14.5px; line-height:1.6; color:var(--ink-body); }
+@media (min-width:861px){
+  .guest > h2:first-child{ grid-row:1; }
+  .guest .role-h{ grid-column:1; grid-row:2; }
+  .guest .role-strip{ grid-column:2; grid-row:2; }
+}
+@media (max-width:480px){ .role{ grid-template-columns:1fr; gap:2px; } }
+
+/* AI가 틀렸던 지점과 다시 세운 기준. 글에서 가장 눈에 띄어야 하는 상자 */
+.fail{ border:1px solid var(--fail-line); border-left:4px solid var(--fail); border-radius:12px; background:var(--fail-soft); padding:6px 24px 8px; margin:0 0 24px; }
+.fail-head{ font-size:12.5px; font-weight:900; color:var(--fail); letter-spacing:.04em; padding:14px 0 6px; }
+.fail-row{ display:grid; grid-template-columns:110px minmax(0,1fr); gap:16px; padding:14px 0; border-top:1px solid var(--fail-line); }
+.fail-row .k{ font-size:13px; font-weight:700; color:var(--ink-soft); }
+.fail-row .v{ font-size:15px; line-height:1.7; color:var(--ink-body); }
+.fail-row.fix .k{ color:var(--accent-ink); }
+.fail-row.fix .v{ font-weight:700; color:var(--ink); }
+.fail + .a{ margin-top:0; }
+@media (max-width:640px){ .fail{ padding:4px 18px 6px; } .fail-row{ grid-template-columns:1fr; gap:4px; } }
+
+/* 다섯 사례의 위계. 대표 둘은 크게, 확장 셋은 작게 */
+.cases-label{ font-size:12.5px; font-weight:700; color:var(--ink-faint); margin:0 0 10px; }
+.case-main, .case-sub{ display:grid; gap:12px; }
+.case-main{ grid-template-columns:1fr 1fr; margin-bottom:26px; }
+.case-sub{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+.case{ border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:var(--surface); }
+.case .t{ font-weight:700; font-size:14.5px; }
+.case .d{ margin-top:6px; font-size:13px; line-height:1.6; color:var(--ink-soft); }
+.case-main .case{ border-color:var(--accent-line); background:var(--accent-soft); padding:22px 24px; }
+.case-main .case .t{ font-size:17px; font-weight:900; }
+.case-main .case .d{ font-size:14px; }
+.case .m{ margin-top:12px; font-family:var(--mono); font-size:15px; font-weight:600; color:var(--accent-ink); }
+@media (max-width:760px){ .case-main, .case-sub{ grid-template-columns:1fr; } }
+
+/* 확대 캡처. 전체 화면 대신 봐야 할 부분만 잘라 보여 준다 */
+.shot.zoom{ background:var(--bg-tint); }
+.shot.zoom img{ width:auto; max-width:100%; margin:0 auto; }
+/* 카드 한 장 확대는 실제 카드 크기에 가깝게 보여 준다 */
+.shot.compact.zoom img{ width:min(100%, var(--shot-w)); }
+
+/* 본문 끝에서 숙련자용 페이지로 넘기는 한 줄 */
+.more{ margin-top:20px; font-size:13.5px; color:var(--ink-faint); }
+.more a{ color:var(--accent-ink); }
+
+/* 마무리. 맡긴 것과 남긴 것 두 목록으로만 정리한다 */
+.takeaway{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.12); border-radius:12px; overflow:hidden; }
+.takeaway > div{ background:var(--navy-surface); padding:22px 24px; }
+.takeaway .h{ font-size:13px; font-weight:900; color:var(--accent-on-dark); margin-bottom:12px; }
+.takeaway ul{ margin:0; padding-left:18px; color:var(--navy-ink); font-size:15px; line-height:1.9; }
+@media (max-width:640px){ .takeaway{ grid-template-columns:1fr; } }
+@media (min-width:861px){ .closing .wrap.narrow > .takeaway{ grid-row:1 / span 2; } }

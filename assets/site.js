@@ -15,7 +15,7 @@ window.SITE = {
   contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
   brand: 'ASKBETTER',
   // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
-  url: 'https://askbetter-portfolio.wh-tft.workers.dev',
+  url: 'https://askbetter.studio54.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다
   nav: {
     story: 'Case Study',
@@ -48,7 +48,7 @@ window.SITE = {
   ],
   // 탭 제목은 로고에 맞춰 영어로 쓴다
   home: {
-    title: 'Product Manager',
+    title: 'PM',
   },
   story: {
     label: 'Case Study',
@@ -69,7 +69,7 @@ window.SITE = {
   }
   // data-site="story.label"      → 글자 채우기
   // data-site-href="story.href"  → 링크 주소 채우기
-  // data-site-title="story.title" (html 요소) → 문서 제목을 '값 · 브랜드' 로
+  // data-site-title="story.title" (html 요소) → 문서 제목을 '브랜드 | 값' 으로. 공유 제목과 같은 순서
   document.querySelectorAll('[data-site]').forEach(function (el) {
     var v = get(el.getAttribute('data-site'));
     if (v != null) el.textContent = v;
@@ -79,5 +79,5 @@ window.SITE = {
     if (v != null) el.setAttribute('href', v);
   });
   var t = document.documentElement.getAttribute('data-site-title');
-  if (t && get(t) != null) document.title = get(t) + ' · ' + window.SITE.brand;
+  if (t && get(t) != null) document.title = window.SITE.brand + ' | ' + get(t);
 })();

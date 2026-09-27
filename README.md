@@ -1,4 +1,4 @@
-# ASKBETTER Portfolio
+# ASKBETTER
 
 프로덕트 매니저 개인 브랜딩 사이트다. 소개, 경력, TFT 케이스 스터디를 담은 정적 페이지로 구성된다.
 

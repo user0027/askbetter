@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deep Dive · ASKBETTER</title>
+<title>ASKBETTER | Deep Dive</title>
 <!-- og:start -->
 <meta name="description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ASKBETTER">
-<meta property="og:title" content="대조 규칙부터 운영 점검까지 | ASKBETTER">
+<meta property="og:title" content="ASKBETTER | 대조 규칙부터 운영 점검까지">
 <meta property="og:description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
-<meta property="og:url" content="https://askbetter-portfolio.wh-tft.workers.dev/deep-dive">
-<meta property="og:image" content="https://askbetter-portfolio.wh-tft.workers.dev/assets/og/deep-dive.png">
+<meta property="og:url" content="https://askbetter.studio54.workers.dev/deep-dive">
+<meta property="og:image" content="https://askbetter.studio54.workers.dev/assets/og/deep-dive.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
@@ -466,6 +466,44 @@
       </div>
       <div class="a mt28">
         <p>아침 QA는 매일 09:20 에 팀원이 쓰는 기능 17가지를 실제로 한 번씩 실행해 봐요. 주소가 열려도 기능이 멈춘 채 며칠 정상으로 보인 적이 있어서, 출근해서 볼 때는 이미 기능까지 확인된 결과가 떠 있게 했어요.</p>
+      </div>
+
+      <h3 class="q">화면의 각 영역은 무엇을 알려 주나요?</h3>
+      <div class="a">
+        <p>화면을 만들 때 정한 기준은 하나였어요. 열었을 때 지금 손볼 것이 있는지 바로 판단할 수 있어야 해요. 그래서 표마다 답할 질문을 하나로 정하고, 그 질문과 관계없는 값은 빼거나 접어 뒀어요. 색도 판단이 필요한 곳에만 칠했어요.</p>
+      </div>
+      <div class="shot">
+        <img src="assets/status-board.jpg" alt="status-board 모니터링 화면. 점수 카드, 라이브 서버 표, 예약 작업 표">
+        <div class="cap">예시 데이터로 재현한 화면 · 퇴사 전 구성을 같은 코드로 다시 띄웠고, 팀에 공유한 주소는 가렸습니다</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>화면 영역</th><th>무엇을 알려 주나요</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">맨 위 점수</td><td>점검하는 항목 중 정상인 비율이에요. 100이면 전부 정상이고, 아래 칩에서 어느 묶음이 몇 개 중 몇 개 정상인지 보여 줘요.</td></tr>
+            <tr><td class="nm">라이브 서버</td><td>팀원이 링크로 여는 도구예요. 로컬은 제 맥 안에서 여는 주소, 고정주소는 팀원이 여는 주소예요. 200은 페이지가 정상으로 열렸다는 뜻이고, 옆 숫자는 응답에 걸린 시간이에요.</td></tr>
+            <tr><td class="nm">가동</td><td>도구가 마지막으로 켜진 뒤 흐른 시간이에요. 이 값이 이전보다 줄면 도구가 꺼졌다 다시 켜졌다는 뜻이라, 도구 이름 옆에 '재시작' 표시가 10분 동안 붙어요. 9분 사이 세 번 끊긴 일도 이 표시로 드러나요.</td></tr>
+            <tr><td class="nm">예약 작업</td><td>정해진 시각에 한 번 돌고 끝나는 작업이에요. 일일보고처럼 예정 시각이 지났는데 마지막 실행이 그보다 앞서 있으면 노랑으로 바뀌어요.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="q">모니터링 말고 다른 탭에서는 무엇을 확인하나요?</h3>
+      <div class="a">
+        <p>위 화면은 첫 탭인 모니터링이에요. 탭이 다섯 개 더 있고, 팀에 건넨 도구뿐 아니라 제가 AI와 일하는 환경 전체를 확인해요.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>탭</th><th>무엇을 확인하나요</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">모니터링</td><td>서버와 예약 작업 외에, 아침마다 도구에 실제 작업을 한 번씩 시켜 결과가 나오는지 확인해요. 주소는 열리는데 기능이 멈춘 상태를 잡으려고 넣었고, 기능 17개를 확인해요. 아직 올리지 않은 작업이 남은 저장소와, 다른 세션이 끝내지 못하고 넘긴 일 목록도 여기에 있어요.</td></tr>
+            <tr><td class="nm">확장</td><td>설치한 Claude Code 플러그인이 최신 버전인지, 제가 만든 플러그인이 팀원에게 나간 버전과 같은지 보여 줘요. 연결된 MCP 서버마다 어떤 기능을 쓸 수 있는지, 크롬 확장과 Figma 플러그인 목록도 여기서 확인해요.</td></tr>
+            <tr><td class="nm">토큰</td><td>Claude Code를 쓰며 소비한 토큰 양을 날짜별로 모아 보여 줘요.</td></tr>
+            <tr><td class="nm">메모리</td><td>Claude Code가 기억해 두는 메모 파일을 목록으로 보고, 그 자리에서 고치거나 지울 수 있어요. 세션마다 읽히는 목록이 토큰을 얼마나 쓰는지, 끊어진 연결이 있는지도 알려 줘요.</td></tr>
+            <tr><td class="nm">구조</td><td>도구와 저장소가 어떻게 이어져 있는지 그린 관계도예요. 여러 Claude Code 세션이 서로 주고받은 메시지도 메신저처럼 보여 줘요.</td></tr>
+            <tr><td class="nm">web-qa</td><td>사내 화면 자동 검수가 오늘 돈 결과예요. 검사 한 건이 한 줄이고, 실패하면 어느 스펙 문서의 어느 항목 때문인지까지 보여 줘요.</td></tr>
+          </tbody>
+        </table>
       </div>
 
       <h3 class="q">보는 것 말고 점검 화면에서 하는 일도 있나요?</h3>

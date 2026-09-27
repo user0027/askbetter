@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product Manager · ASKBETTER</title>
+<title>ASKBETTER | PM</title>
 <!-- og:start -->
-<meta name="description" content="세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 박유진의 포트폴리오입니다. 대표 작업과 AI로 기획 업무를 바꾼 과정을 정리했습니다.">
+<meta name="description" content="세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 박유진입니다. 대표 작업과 AI로 기획 업무를 바꾼 과정을 정리했습니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ASKBETTER">
-<meta property="og:title" content="박유진 · Product Manager | ASKBETTER">
-<meta property="og:description" content="세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 박유진의 포트폴리오입니다. 대표 작업과 AI로 기획 업무를 바꾼 과정을 정리했습니다.">
-<meta property="og:url" content="https://askbetter-portfolio.wh-tft.workers.dev/">
-<meta property="og:image" content="https://askbetter-portfolio.wh-tft.workers.dev/assets/og/home.png">
+<meta property="og:title" content="ASKBETTER | 박유진 · PM">
+<meta property="og:description" content="세무·금융 B2B 서비스와 게임 커뮤니티를 기획해 온 박유진입니다. 대표 작업과 AI로 기획 업무를 바꾼 과정을 정리했습니다.">
+<meta property="og:url" content="https://askbetter.studio54.workers.dev/">
+<meta property="og:image" content="https://askbetter.studio54.workers.dev/assets/og/home.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
@@ -138,11 +138,11 @@
   .ch:hover .shot img{ transform:translateY(-6px); }
   .cap{ margin-top:12px; font-size:12px; color:var(--ink-faint); }
 
-  /* 01 · 텍스트 왼쪽, 화면이 오른쪽 가장자리까지 흐른다 */
-  .ch-1 .txt{ grid-column:1 / 6; align-self:start; position:sticky; top:120px; }
-  .ch-1 .media{ grid-column:6 / -1; margin-right:calc(-1 * (max(0px, (100vw - var(--max)) / 2) + var(--gut))); }
-  .ch-1 .shot{ aspect-ratio:1456 / 828; }
-  .ch-1 .shot img{ object-position:left top; }
+  /* 01·02·03·04 · 텍스트 왼쪽, 화면이 오른쪽 가장자리까지 흐른다 */
+  .ch-1 .txt, .ch-2 .txt, .ch-3 .txt, .ch-4 .txt{ grid-column:1 / 6; align-self:start; position:sticky; top:120px; }
+  .ch-1 .media, .ch-2 .media, .ch-3 .media, .ch-4 .media{ grid-column:6 / -1; margin-right:calc(-1 * (max(0px, (100vw - var(--max)) / 2) + var(--gut))); }
+  .ch-1 .shot, .ch-2 .shot, .ch-3 .shot, .ch-4 .shot{ aspect-ratio:1456 / 828; }
+  .ch-1 .shot img, .ch-2 .shot img, .ch-3 .shot img{ object-position:left top; }
   /* jira-gen 설치 카드: 포털 화면 위에 팝업처럼 겹치고, 화면에 들어오면 한 박자 늦게 떠오른다 */
   .ch-1 .sub{ width:48%; margin-top:clamp(-120px, -8vw, -48px); margin-left:6%; position:relative; overflow:visible; background:none; aspect-ratio:auto;
     border-radius:18px; box-shadow:0 30px 60px -30px rgba(19,26,46,.35), 0 8px 24px -12px rgba(19,26,46,.18); }
@@ -150,13 +150,10 @@
   .ch-1 .sub.rv{ transform:translateY(40px) scale(.96); transition:opacity .5s ease, transform .6s var(--ease); }
   .ch-1 .sub.rv.is-in{ transform:none; transition:opacity 1s ease .5s, transform 1.3s var(--ease) .5s; }
 
-  /* 02·03·04 · 화면 없는 챕터는 텍스트만 한 단으로 둔다 */
-  .ch-2 .txt, .ch-3 .txt, .ch-4 .txt{ grid-column:1 / 8; }
-
   @media (max-width:860px){
     .grid > *{ grid-column:1 / -1 !important; }
-    .ch-1 .txt{ position:static; margin-bottom:40px; }
-    .ch-1 .media{ margin-right:calc(-1 * var(--gut)); }
+    .ch-1 .txt, .ch-2 .txt, .ch-3 .txt, .ch-4 .txt{ position:static; margin-bottom:40px; }
+    .ch-1 .media, .ch-2 .media, .ch-3 .media, .ch-4 .media{ margin-right:calc(-1 * var(--gut)); }
     .ch-1 .sub{ width:64%; margin-left:0; margin-top:-24px; }
     .pr-cards{ grid-template-columns:1fr; }
     .pr-card{ padding:28px 0 0; border-left:none !important; border-top:1px solid var(--line); }
@@ -168,7 +165,7 @@
   .about > .grid > .label{ grid-column:1 / 4; padding-top:.6em; }
   .believes{ grid-column:4 / -1; display:grid; gap:clamp(40px, 7vh, 72px); }
   .believes .label{ display:block; margin-bottom:12px; }
-  .believes p{ font-size:clamp(21px, 2.3vw, 30px); line-height:1.5; letter-spacing:-0.03em; font-weight:500; text-wrap:pretty; }
+  .believes p{ font-size:15px; line-height:1.6; color:var(--ink-soft); text-wrap:pretty; }
   .believes p em{ font-style:normal; color:var(--accent); }
 
   /* 경력은 보조 정보라 작게 둔다. 회사 로고는 이력서 정보로 유지한다(CLAUDE.md) */
@@ -310,6 +307,9 @@
             <div><span class="label">Result</span><span data-site="work.1.result">급여이체 서비스 상용화.</span></div>
           </div>
         </div>
+        <div class="media">
+          <div class="shot unveil"><img src="assets/work/djbank-hero.png" alt="DJ Bank 계좌이체 화면, ERP 급여 데이터와 은행 이체 업무 연동" loading="lazy"></div>
+        </div>
       </div>
     </article>
 
@@ -324,6 +324,9 @@
             <div><span class="label">Work</span><span data-site="work.2.did">VOC 기반으로 재설계.</span></div>
             <div><span class="label">Result</span><span data-site="work.2.result">사내 '최고의 기획자상' 수상.</span></div>
           </div>
+        </div>
+        <div class="media">
+          <div class="shot unveil"><img src="assets/work/yearend-tax-hero.png" alt="연말정산 초기 설정 위자드 화면, WEHAGO T" loading="lazy"></div>
         </div>
       </div>
     </article>
@@ -340,6 +343,9 @@
             <div><span class="label">Result</span><span data-site="work.3.result">이탈률 개선, DAU 상승. 초·중학교 대상 MOU 체결로 B2B 확장.</span></div>
           </div>
         </div>
+        <div class="media">
+          <div class="shot unveil"><img src="assets/work/game-editor-hero.png" alt="게임 공유 플랫폼 zempie 커뮤니티 화면" loading="lazy"></div>
+        </div>
       </div>
     </article>
   </section>
@@ -350,16 +356,16 @@
       <span class="label rv">How I work</span>
       <div class="believes">
         <div class="rv">
-          <span class="label">좋아하는 문제</span>
-          <p>자동화보다 먼저 팀의 업무 방식과 반복 구조를 이해해야 풀리는 문제, 정책과 <em>예외 케이스</em>가 얽힌 문제를 좋아합니다.</p>
+          <span class="label">FOCUS</span>
+          <p>복잡한 요구사항에서 해결해야 할 핵심 문제와 우선순위를 명확히 합니다.</p>
         </div>
         <div class="rv">
-          <span class="label">일하는 방식</span>
-          <p>VOC·GA 데이터로 문제를 확인하고, 요구사항을 <em>스펙</em>으로 구체화해 유관부서와 적용 범위·배포 시점을 조율합니다.</p>
+          <span class="label">CONTEXT</span>
+          <p>사용자, 비즈니스, 운영 환경을 함께 살펴 의사결정에 필요한 맥락을 정리합니다.</p>
         </div>
         <div class="rv">
-          <span class="label">중요하게 보는 것</span>
-          <p>화면을 새로 바꾸는 것보다, 기존 사용자 경험을 <em>해치지 않는 범위</em>에서 불편한 점을 줄이는 일을 중요하게 봅니다.</p>
+          <span class="label">DECISION</span>
+          <p>정리한 기준을 바탕으로 실행 가능한 방향을 결정하고, 실제 결과를 통해 검증합니다.</p>
         </div>
       </div>
     </div>
