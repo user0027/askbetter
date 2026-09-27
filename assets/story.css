@@ -136,7 +136,7 @@ section.chapter{ scroll-margin-top:84px; }
     radial-gradient(40% 80% at 0% 100%, rgba(143,168,255,.12) 0%, rgba(143,168,255,0) 70%),
     var(--navy);
   color:var(--navy-ink);
-  padding:clamp(64px, 8vw, 104px) 0;
+  padding:clamp(40px, 4.5vw, 60px) 0;
 }
 .chapter::before{
   content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
@@ -150,18 +150,18 @@ section.chapter{ scroll-margin-top:84px; }
 .chapter .wrap{ display:grid; grid-template-columns:auto 1fr; gap:40px; align-items:end; }
 .chapter .num{
   font-weight:800; font-variant-numeric:tabular-nums;
-  font-size:clamp(64px, 8vw, 112px); line-height:.82; letter-spacing:-0.04em;
+  font-size:clamp(44px, 5vw, 68px); line-height:.82; letter-spacing:-0.04em;
   color:transparent; -webkit-text-stroke:1.5px var(--ch-num);
   background:linear-gradient(180deg, rgba(143,168,255,.35), rgba(143,168,255,0) 85%);
   -webkit-background-clip:text; background-clip:text;
 }
 .chapter .num::before{
-  content:"CHAPTER"; display:block; margin-bottom:14px;
+  content:"CHAPTER"; display:block; margin-bottom:10px;
   font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.24em; line-height:1;
   color:var(--ch-num); -webkit-text-stroke:0; opacity:.9;
 }
 .chapter h2{
-  position:relative; padding-top:22px;
+  position:relative; padding-top:18px;
   color:var(--navy-ink); font-size:clamp(26px,3.6vw,38px); line-height:1.34;
 }
 .chapter h2::before{
@@ -172,8 +172,8 @@ section.chapter{ scroll-margin-top:84px; }
   margin-top:16px; color:var(--navy-ink-soft); font-size:15px; font-weight:500;
 }
 @media (max-width:640px){
-  .chapter .wrap{ grid-template-columns:1fr; gap:20px; }
-  .chapter .num{ font-size:64px; }
+  .chapter .wrap{ grid-template-columns:1fr; gap:16px; }
+  .chapter .num{ font-size:44px; }
 }
 
 /* ---------- Section (content) ---------- */
