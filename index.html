@@ -54,13 +54,6 @@
 
   /* ---------- Opening ---------- */
   .opening{ position:relative; min-height:calc(100svh - 68px); display:flex; flex-direction:column; }
-  /* 얇은 편집 그리드선. 진입할 때 한 번 그어지고 그대로 남는다 */
-  .rules{ position:absolute; inset:0; pointer-events:none; }
-  .rules .page{ height:100%; display:grid; grid-template-columns:repeat(4,1fr); }
-  .rules i{ border-left:1px solid var(--hair); transform:scaleY(0); transform-origin:top; transition:transform 1.8s var(--ease); }
-  .rules i:last-child{ border-right:1px solid var(--hair); }
-  .rules i:nth-child(2){ transition-delay:.12s; } .rules i:nth-child(3){ transition-delay:.24s; } .rules i:nth-child(4){ transition-delay:.36s; }
-  .opening.is-in .rules i{ transform:none; }
 
   .opening > .page{ position:relative; flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; }
 
@@ -107,9 +100,6 @@
     /* 좁은 화면에선 사진을 위쪽 띠로 깔고 아래로 흐리게 녹인다. 빼면 헤드라인 위가 통째로 빈다 */
     .hero-photo{ width:100%; bottom:42%; -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 100%); mask-image:linear-gradient(to bottom, #000 45%, transparent 100%); }
     .hero-text{ max-width:100%; }
-    .rules .page{ grid-template-columns:repeat(2,1fr); }
-    .rules i:nth-child(n+3){ display:none; }
-    .rules i:nth-child(2){ border-right:1px solid var(--hair); }
   }
 
   /* ---------- 공통 reveal ---------- */
@@ -120,6 +110,17 @@
   .unveil.is-in{ clip-path:inset(0 0 0 0); }
 
   /* ---------- Work ---------- */
+  .principle{ padding-top:clamp(120px, 18vh, 200px); padding-bottom:clamp(80px, 12vh, 140px); }
+  .principle p{ grid-column:4 / 11; font-size:clamp(20px, 2vw, 26px); line-height:1.55; letter-spacing:-0.025em; color:var(--ink-soft); }
+
+  .pr-examples{ grid-column:1 / -1; margin-top:clamp(48px, 7vh, 80px); border-top:1px solid var(--line); }
+  .pr-ex{ display:grid; grid-template-columns:1fr 40px 1fr; align-items:center; gap:20px; padding-block:32px; border-bottom:1px solid var(--line); }
+  .pr-before, .pr-after{ display:flex; flex-direction:column; gap:10px; }
+  .pr-tag{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--ink-faint); }
+  .pr-before p{ font-size:16px; line-height:1.5; color:var(--ink-faint); text-decoration:line-through; text-decoration-color:var(--line); text-decoration-thickness:1px; }
+  .pr-after p{ font-size:18px; line-height:1.5; color:var(--ink); font-weight:500; }
+  .pr-after em{ font-style:normal; color:var(--accent); }
+  .pr-arrow{ font-family:var(--mono); font-size:16px; color:var(--ink-faint); text-align:center; }
   .ch{ padding-block:clamp(56px, 10vh, 112px); }
   .ch-no{ display:flex; align-items:center; gap:14px; font-family:var(--mono); font-size:12px; letter-spacing:.12em; color:var(--ink-faint); }
   .ch-no::after{ content:''; width:40px; height:1px; background:var(--line); }
@@ -155,6 +156,8 @@
     .ch-1 .txt{ position:static; margin-bottom:40px; }
     .ch-1 .media{ margin-right:calc(-1 * var(--gut)); }
     .ch-1 .sub{ width:64%; margin-left:0; margin-top:-24px; }
+    .pr-ex{ grid-template-columns:1fr; gap:14px; padding-block:24px; }
+    .pr-arrow{ display:none; }
   }
 
   /* ---------- About ---------- */
@@ -196,7 +199,7 @@
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
     *{ animation:none !important; transition:none !important; }
-    .rules i, .hl > span{ transform:none; }
+    .hl > span{ transform:none; }
     .hl > span{ opacity:1; }
     .rv{ opacity:1; transform:none; } .unveil{ clip-path:none; }
     .hero-photo, .who, .hero-q, .hero-a .tag{ opacity:1; transform:none; }
@@ -220,7 +223,6 @@
   <!-- Opening: 헤드라인 두 줄, 이름과 직무, 시그니처 물음표 -->
   <section class="opening" id="opening">
     <div class="hero-photo" aria-hidden="true"></div>
-    <div class="rules" aria-hidden="true"><div class="page"><i></i><i></i><i></i><i></i></div></div>
     <div class="page">
       <div class="hero-text">
         <div class="hero-q">
@@ -244,6 +246,23 @@
 
   <!-- Work -->
   <section id="work">
+    <div class="page grid principle rv">
+      <p>좋은 질문은 크지 않습니다. 답으로 바로 이어질 만큼, 문제를 좁혀 묻는 질문입니다.</p>
+
+      <div class="pr-examples">
+        <div class="pr-ex">
+          <div class="pr-before"><span class="pr-tag">막연한 질문</span><p>업무를 더 편하게 만들 수 없을까?</p></div>
+          <span class="pr-arrow">→</span>
+          <div class="pr-after"><span class="pr-tag">좁힌 질문</span><p>반복되는 기획 업무를 <em>어디까지</em> 자동화할 수 있을까?</p></div>
+        </div>
+        <div class="pr-ex">
+          <div class="pr-before"><span class="pr-tag">막연한 질문</span><p>사용자 불편을 어떻게 없앨까?</p></div>
+          <span class="pr-arrow">→</span>
+          <div class="pr-after"><span class="pr-tag">좁힌 질문</span><p>사용자가 겪는 불편함에서 <em>무엇을 먼저</em> 바꿔야 할까?</p></div>
+        </div>
+      </div>
+    </div>
+
     <!-- 01 -->
     <article class="ch ch-1">
       <div class="page grid">
