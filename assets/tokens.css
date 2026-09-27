@@ -1,0 +1,60 @@
+/* 사이트 전역 디자인 값. 색·글꼴·지면 폭은 여기 한 곳에만 둔다.
+   메인(index.html)·글 페이지(story.css)·헤더(nav.css)가 전부 이 값을 쓰고, 파일마다 따로 적지 않는다.
+   다크모드는 쓰지 않는다. 라이트 팔레트로 고정한다 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root{
+  /* 바탕 */
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --tint:#f3f5fa;            /* 아주 연한 블루그레이. 판·캡처 배경 */
+  --tint-2:#e9edf7;
+  --bg-tint:var(--tint);     /* 글 페이지에서 쓰는 이름 */
+
+  /* 글자. Navy 를 기준색으로 세 단계 */
+  --ink:#131a2e;
+  --ink-soft:#4e5770;
+  --ink-faint:#8a91a6;
+  --ink-body:#232a40;        /* 글 페이지 긴 답변 본문 */
+
+  /* 선 */
+  --line:rgba(19,26,46,.12);
+  --hair:rgba(19,26,46,.06);
+
+  /* 포인트. Indigo Blue 는 강조에만 쓴다 */
+  --accent:#2b53d6;
+  --accent-ink:var(--accent);
+  --accent-soft:#eaf0ff;
+  --accent-line:#c8d6ff;
+  --good:#1f7a52;
+  --accent-on-dark:#8fa8ff;  /* 어두운 판 위의 포인트 */
+
+  /* 어두운 판(글 페이지 표지·마무리) */
+  --navy:#0f1830;
+  --navy-surface:#16213f;
+  --navy-ink:#eef1fb;
+  --navy-ink-soft:#a7b0cf;
+
+  /* 후원 버튼 */
+  --coffee:#a9673a;
+  --coffee-soft:#f7ece2;
+  --coffee-line:#e3c6ae;
+
+  --shadow:0 1px 2px rgba(19,26,46,.04), 0 8px 24px rgba(19,26,46,.06);
+
+  /* 글꼴 */
+  --sans:'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --ease:cubic-bezier(.19,1,.22,1);
+
+  /* 지면 폭과 좌우 여백. 헤더 로고 왼쪽 선과 본문 왼쪽 선이 이 값으로 맞는다 */
+  --page-max:1280px;
+  --page-gut:clamp(20px, 4vw, 48px);
+  --max:var(--page-max);     /* 메인에서 쓰는 이름 */
+  --gut:var(--page-gut);
+
+  /* 넓은 화면 글 페이지의 두 단(왼쪽 질문·제목, 오른쪽 답·자료) */
+  --rail:260px;
+  --rail-gap:56px;
+  --rail-min:861px;
+}

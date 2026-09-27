@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="apple-touch-icon" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/story.css">
 <link rel="stylesheet" href="assets/nav.css">
 </head>
@@ -213,13 +214,13 @@
   <section class="chapter" data-toc="세무달력 검수기">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>세무달력 2.9분과 검수 22개의 내역</h2></div>
+      <div><h2>세무달력 <span data-site="metrics.auto">2.9분</span>과 검수 <span data-site="metrics.checks">22개</span>의 내역</h2></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">2.9분은 어떻게 나온 숫자인가요?</h3>
+      <h3 class="q"><span data-site="metrics.auto">2.9분</span>은 어떻게 나온 숫자인가요?</h3>
       <div class="a">
         <p>10월분을 만들 때 잰 174초예요. 원본 문서에서 그달 일정을 뽑고, 직전 달 프레임을 복제해 Figma에 그리고, 월 테마 이미지를 만들고, 원본과 대조하는 네 단계를 합친 시간이에요.</p>
       </div>
@@ -233,9 +234,9 @@
         <p>스크립트를 만들기 전에는 AI가 Figma를 열두 번 나눠 고쳤고, 그렇게 13분이 걸렸어요. 그중 6분이 Figma를 오가는 시간이었어요. <strong>빌드 스크립트 하나로 그 왕복을 한 번으로 줄였어요.</strong> 복제 원본을 직전 달로 정한 것도 실측에서 나왔어요. 기준으로 쓰던 7월 프레임에는 이후 달에 붙는 홍보 배너가 없었거든요.</p>
       </div>
 
-      <h3 class="q">자동으로 확인하는 검수 22개는 무엇인가요?</h3>
+      <h3 class="q">자동으로 확인하는 검수 <span data-site="metrics.checks">22개</span>는 무엇인가요?</h3>
       <div class="a">
-        <p>발송본 한 장에서 링크와 항목을 원본과 맞춰 보는 22개예요. <strong>원본 대조를 빼고 돌리면 링크가 열리는지만 확인해서, 항목에 엉뚱한 영상이 붙어 있어도 통과해요.</strong> 그래서 원본 기준 파일을 빼고는 실행하지 않게 했어요.</p>
+        <p>발송본 한 장에서 링크와 항목을 원본과 맞춰 보는 <span data-site="metrics.checks">22개</span>예요. <strong>원본 대조를 빼고 돌리면 링크가 열리는지만 확인해서, 항목에 엉뚱한 영상이 붙어 있어도 통과해요.</strong> 그래서 원본 기준 파일을 빼고는 실행하지 않게 했어요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -609,9 +610,43 @@
     </div>
   </section>
 
+  <section class="chapter" data-toc="값 한 곳에 두기">
+    <div class="wrap narrow">
+      <div class="num"></div>
+      <div><h2>여러 곳에 쓰는 값은 처음부터 한 곳에 둔다</h2></div>
+    </div>
+  </section>
+
+  <section class="section" style="border-bottom:none;">
+    <div class="wrap narrow">
+      <h3 class="q">값을 곳곳에 직접 적어 두면 무엇이 문제인가요?</h3>
+      <div class="a">
+        <p>고칠 때 한 곳만 바뀌고 나머지가 그대로 남아요. AI에게 '제목 바꿔 줘'라고 하면 지금 보고 있는 자리만 고치고 끝나는 일이 많아서, 같은 값이 몇 군데에 더 있는지는 사람이 따로 챙겨야 해요. 이 페이지를 만들면서 실제로 아래 문제가 생겼어요.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>생긴 문제</th><th>원인</th><th>지금 두는 자리</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">목차에서 장이 빠짐</td><td>목차를 본문과 따로 적어 두어서, 6장을 추가할 때 목차에는 넣지 않은 채 남음</td><td>story-toc.js가 본문의 장 순서대로 목차를 만듦</td></tr>
+            <tr><td class="nm">장 번호가 어긋남</td><td>장을 나누거나 순서를 바꾸면 본문 번호, 목차 번호, 'N개 챕터' 숫자를 각각 고쳐야 했음</td><td>번호와 이동 주소도 같은 스크립트가 붙임. 제목은 각 장 제목 한 곳에만 둠</td></tr>
+            <tr><td class="nm">페이지마다 색이 조금씩 다름</td><td>메인과 글 페이지가 같은 팔레트라고 적어 두었지만 보조 글자색, 연한 배경색, 선 색이 파일마다 다른 값이었음. 헤더는 색을 또 따로 적었고 글꼴 불러오기도 두 곳에서 굵기 목록이 달랐음</td><td>tokens.css 한 파일. 다른 CSS는 변수 이름으로만 씀</td></tr>
+            <tr><td class="nm">수치가 문장마다 따로 남음</td><td><span data-site="metrics.auto">2.9분</span>, <span data-site="metrics.checks">22개</span> 같은 측정값이 세 파일 열 곳 넘게 직접 적혀 있어서, 측정을 다시 하면 전부 찾아 고쳐야 했음</td><td>site.js의 metrics. 본문은 그 값을 불러다 씀</td></tr>
+            <tr><td class="nm">바꾼 이름이 일부에만 반영됨</td><td>케이스 스터디 이름을 'Case Study'로 바꾼 뒤에도 이 페이지 맨 아래 링크에는 한글 이름이 남아 있었음</td><td>site.js의 story.label. 메뉴, 본문 링크, 하단 링크가 같은 값을 씀</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="bullets strong mt28">
+        <li>두 번 이상 쓰일 값은 처음 적을 때부터 한 파일에 모읍니다. 지금 한 곳뿐이어도 다른 페이지로 옮겨 쓸 값이면 같습니다</li>
+        <li>일단 되게 만들고 나중에 정리하는 순서로 가면 그 위에 다음 수정이 얹혀서, 정리할 때 드는 수고가 처음보다 커집니다</li>
+        <li>AI에게 이름이나 숫자를 바꾸라고 할 때는 '이 값이 쓰인 곳을 전부 찾아서 바꿔 줘'까지 적습니다. 값을 한 곳에 모아 두었다면 그 한 곳만 알려 주면 됩니다</li>
+        <li>HTML에 직접 적힌 글자는 스크립트가 돌지 않을 때 보이는 대체값으로만 둡니다. 페이지가 열리면 모아 둔 값으로 바뀝니다</li>
+      </ul>
+    </div>
+  </section>
+
   <footer class="pagefoot">
     <div class="wrap narrow">
-      <span><a href="case-study.html" data-site-href="story.href">← 케이스 스터디로</a></span>
+      <span><a href="case-study.html" data-site-href="story.href">← <span data-site="story.label">Case Study</span> 보기</a></span>
     </div>
   </footer>
 

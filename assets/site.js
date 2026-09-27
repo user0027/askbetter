@@ -1,8 +1,20 @@
 // 사이트 전역 문구. 페이지 이름을 바꿀 때는 이 파일만 고친다.
 // HTML 에 적힌 문구는 스크립트가 못 돌 때의 대체값이고, 로드되면 아래 값으로 덮인다.
+// 여러 페이지 본문에 되풀이되는 측정값. 숫자가 바뀌면 여기만 고친다.
+// HTML 에서는 <span data-site="metrics.auto">2.9분</span> 처럼 쓴다
+var METRICS = {
+  manual: '2시간',   // 세무달력 한 건을 검수까지 손으로 할 때
+  auto: '2.9분',     // 같은 일을 AI 흐름으로 돌릴 때
+  checks: '22개',    // 세무달력 발송본 자동 검수 항목 수
+  fixes: '31건',     // 쓰면서 기준을 고친 기록 수
+};
+
 window.SITE = {
+  metrics: METRICS,
+  // 연락처. 링크는 data-site-href="contact.mailto" 로 건다
+  contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
   brand: 'ASKBETTER',
-  // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구는 story.label(한글)을 쓴다
+  // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다
   nav: {
     story: 'Case Study',
     about: 'About me',
@@ -24,7 +36,7 @@ window.SITE = {
   // did 는 한 일, result 는 결과
   work: [
     { q: '반복되는 기획 업무를 어디까지 자동화할 수 있을까?', name: 'Claude TFT', org: '더존비즈온', year: '2025',
-      did: '반복되는 Jira 티켓 작성·QA 검토를 자동화하는 워크플로 설계.', result: '세무달력 제작 시간을 2시간에서 2.9분으로 단축.' },
+      did: '반복되는 Jira 티켓 작성·QA 검토를 자동화하는 워크플로 설계.', result: '손으로 ' + METRICS.manual + ' 걸리던 반복 업무를 ' + METRICS.auto + '으로 단축.' },
     { q: '복잡한 금융 업무를 어떻게 더 명확하게 만들 수 있을까?', name: 'DJBank', org: '더존비즈온', year: '2025',
       did: 'ERP 급여 데이터와 은행 이체 업무를 연동.', result: '급여이체 서비스 상용화.' },
     { q: '사용자가 겪는 불편함에서 무엇을 먼저 바꿔야 할까?', name: 'AI 수임처 연말정산 웹', org: '더존비즈온', year: '2026',
@@ -37,7 +49,7 @@ window.SITE = {
     title: 'Product Manager',
   },
   story: {
-    label: '케이스 스터디',
+    label: 'Case Study',
     href: 'case-study.html',
     title: 'AI Workflow Case Study',
   },

@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="apple-touch-icon" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/story.css">
 <link rel="stylesheet" href="assets/nav.css">
 </head>
@@ -80,7 +81,7 @@
             <tr><td class="nm">참고 자료</td><td>무엇을 보고 만드는지</td><td>지난달 세무달력과 이번 달 원본 일정 문서</td></tr>
             <tr><td class="nm">판단 기준</td><td>무엇이 맞고 틀린지</td><td>시안 문구가 기획서 문구와 같은지</td></tr>
             <tr><td class="nm">예외</td><td>언제 기준을 적용하지 않는지</td><td>줄바꿈만 다른 문구, 더미 데이터</td></tr>
-            <tr><td class="nm">완료 조건</td><td>어디까지 확인해야 끝인지</td><td>발송본이 검수 22개를 모두 통과하는지</td></tr>
+            <tr><td class="nm">완료 조건</td><td>어디까지 확인해야 끝인지</td><td>발송본이 검수 <span data-site="metrics.checks">22개</span>를 모두 통과하는지</td></tr>
           </tbody>
         </table>
       </div>
@@ -151,7 +152,7 @@
 
       <h3 class="q">그렇게 기준이 잡힌 뒤에는 무엇이 달라졌나요?</h3>
       <div class="a">
-        <p>요청 자체가 짧아졌어요. 지금은 그날 하던 대로 '9월 세무달력 만들어 줘' 한 줄만 보내요. 그러면 AI가 지난달 결과물에서 방식을 파악하고, 이번 달 원본에서 내용을 조회하고, 정해 둔 기준으로 결과를 만들어요. <strong>검수까지 손으로 하면 2시간 가까이 걸리던 세무달력 한 건이 2.9분으로 줄었습니다.</strong></p>
+        <p>요청 자체가 짧아졌어요. 지금은 그날 하던 대로 '9월 세무달력 만들어 줘' 한 줄만 보내요. 그러면 AI가 지난달 결과물에서 방식을 파악하고, 이번 달 원본에서 내용을 조회하고, 정해 둔 기준으로 결과를 만들어요. <strong>검수까지 손으로 하면 <span data-site="metrics.manual">2시간</span> 가까이 걸리던 세무달력 한 건이 <span data-site="metrics.auto">2.9분</span>으로 줄었습니다.</strong></p>
       </div>
       <div>
         <div class="prompt">
@@ -168,7 +169,7 @@
           </div>
           <div class="card">
             <div class="h">손으로 하던 시간 대비</div>
-            <div class="n mono">2시간 <span class="arrow">→</span> <span class="to">2.9분</span></div>
+            <div class="n mono"><span data-site="metrics.manual">2시간</span> <span class="arrow">→</span> <span class="to" data-site="metrics.auto">2.9분</span></div>
             <div class="cap">세무달력 1건 제작 시간, 손 작업 대비</div>
           </div>
         </div>
@@ -322,7 +323,7 @@
       <h3 class="q">한 번 잘 된 방식은 다음에도 쓰도록 어떻게 남겨 두었나요?</h3>
       <div class="a">
         <p><strong>한 번 잡힌 기준과 자료 위치를 매번 다시 설명하지 않도록 업무마다 폴더로 묶었어요.</strong> 기준과 자료 위치가 대화창에만 있으면 다음에 또 설명해야 하고, 팀원이 그대로 쓰기도 어려워요. 폴더로 남겨 두면 제가 다시 쓰기도 하고 팀에도 그대로 전달할 수 있어요. 세무달력 폴더 안에는 만드는 순서와 표기 방식을 적은 업무 순서 문서, 무엇을 어떻게 확인하는지 적은 검수 절차 문서, 매번 같은 말을 새로 쓰지 않도록 정리한 자주 쓰는 요청, 스펙·원본 위치·구조를 적어 둔 참고자료 5개, 검수·배포를 대신 해 주는 실행 도구를 넣어 뒀어요.</p>
-        <p><strong>이렇게 쓰면서 기준을 고친 기록은 모두 31건이고, 검수 항목 22개는 자동으로 확인하고 있어요.</strong></p>
+        <p><strong>이렇게 쓰면서 기준을 고친 기록은 모두 <span data-site="metrics.fixes">31건</span>이고, 검수 항목 <span data-site="metrics.checks">22개</span>는 자동으로 확인하고 있어요.</strong></p>
       </div>
       <div class="tree">tip/<br>
       <span class="dim">├─</span> skills/month/<span class="hi">SKILL.md</span> <span class="dim"># 업무 순서 · 표기 방식</span><br>
@@ -401,7 +402,7 @@
 
       <h3 class="q">앞에 나온 숫자들은 어떻게 보면 되나요?</h3>
       <div class="a">
-        <p>어떤 일이 실제로 맡겨졌는지 확인하려고 남긴 지표예요. <strong>성과를 증명하는 근거로 보지는 않아요.</strong> 세무달력 한 건이 2시간에서 2.9분이 된 것도, 검수 항목 22개를 자동으로 확인하는 것도 그 업무를 AI가 실제로 맡고 있다는 표시로 봐 주시면 좋겠어요.</p>
+        <p>어떤 일이 실제로 맡겨졌는지 확인하려고 남긴 지표예요. <strong>성과를 증명하는 근거로 보지는 않아요.</strong> 세무달력 한 건이 <span data-site="metrics.manual">2시간</span>에서 <span data-site="metrics.auto">2.9분</span>이 된 것도, 검수 항목 <span data-site="metrics.checks">22개</span>를 자동으로 확인하는 것도 그 업무를 AI가 실제로 맡고 있다는 표시로 봐 주시면 좋겠어요.</p>
       </div>
       <div class="stat-strip">
         <div class="stat"><div class="n">2<span class="unit">시간</span><span class="arrow">→</span><span class="to">2.9<span class="unit">분</span></span></div><div class="l">세무달력 제작 시간</div></div>
@@ -436,8 +437,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
           커피 한 잔 후원하기
         </a>
-        <a class="cta mail" href="mailto:71d2sr@gmail.com">이메일로 문의하기</a>
-        <a class="cta home" href="index.html">ASKBETTER 홈으로 <span class="go" aria-hidden="true">→</span></a>
+        <a class="cta mail" href="mailto:71d2sr@gmail.com" data-site-href="contact.mailto">이메일로 문의하기</a>
+        <a class="cta home" href="index.html"><span data-site="brand">ASKBETTER</span> 홈으로 <span class="go" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -453,7 +454,7 @@
 
   <footer class="pagefoot">
     <div class="wrap narrow">
-      <span><a href="index.html">← ASKBETTER 홈</a></span>
+      <span><a href="index.html">← <span data-site="brand">ASKBETTER</span> 홈</a></span>
     </div>
   </footer>
 

@@ -1,43 +1,19 @@
 /* 케이스 스터디·Deep Dive 두 글 페이지가 같이 쓰는 스타일. 한 페이지에서만 모양을 바꾸지 않는다 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-:root{
-  --bg:#ffffff;
-  --bg-tint:#f2f4fb;
-  --surface:#ffffff;
-  --ink:#131a2e;
-  --ink-soft:#565f7a;
-  --ink-faint:#8790a8;
-  --line:#e2e5f0;
-  --navy:#0f1830;
-  --navy-surface:#16213f;
-  --navy-ink:#eef1fb;
-  --navy-ink-soft:#a7b0cf;
-  --accent:#2b53d6;
-  --accent-ink:#2b53d6;
-  --accent-soft:#eaf0ff;
-  --accent-line:#c8d6ff;
-  --good:#1f7a52;
-  --coffee:#a9673a;
-  --coffee-soft:#f7ece2;
-  --coffee-line:#e3c6ae;
-  --shadow: 0 1px 2px rgba(19,26,46,0.04), 0 8px 24px rgba(19,26,46,0.06);
-}
-/* 발표 자료는 다크모드를 쓰지 않음 — 라이트 팔레트로 고정 */
+/* 색·글꼴·지면 폭은 tokens.css 에 있다 */
 
 *{box-sizing:border-box;}
 html{background:var(--bg);}
 body{
   background:var(--bg);
   color:var(--ink);
-  font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:var(--sans);
   line-height:1.6;
   margin:0;
   word-break:keep-all;
   overflow-wrap:break-word;
 }
 h1,h2,h3{
-  font-family:'Noto Sans KR', sans-serif;
+  font-family:var(--sans);
   font-weight:900;
   letter-spacing:-0.01em;
   text-wrap:balance;
@@ -46,7 +22,7 @@ h1,h2,h3{
 }
 p{margin:0;}
 .mono{
-  font-family:'JetBrains Mono', ui-monospace, monospace;
+  font-family:var(--mono);
   font-variant-numeric: tabular-nums;
 }
 
@@ -85,7 +61,7 @@ p{margin:0;}
 }
 /* 표지 목차. 챕터 번호를 누르면 그 챕터로 이동한다 */
 .cover .toc{ margin-top:56px; }
-.cover .toc-head{ font-size:13px; color:var(--ink-faint); font-family:'JetBrains Mono', monospace; margin-bottom:14px; }
+.cover .toc-head{ font-size:13px; color:var(--ink-faint); font-family:var(--mono); margin-bottom:14px; }
 /* 넓은 화면은 챕터 수만큼 칸을 나눠 한 줄, 좁은 화면은 한 줄에 하나 */
 .cover .toc ol{ list-style:none; margin:0; padding:0; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); column-gap:24px;
   border-top:1px solid var(--line); }
@@ -97,7 +73,7 @@ p{margin:0;}
 .cover .toc a{ display:flex; gap:14px; align-items:baseline; padding:14px 16px 14px 0; font-size:15px; font-weight:500;
   color:var(--ink-soft); text-decoration:none; transition:color .2s ease; }
 .cover .toc a:hover{ color:var(--ink); }
-.cover .toc .n{ font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink-faint); }
+.cover .toc .n{ font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); }
 .cover .toc a:hover .n{ color:var(--accent-ink); }
 /* 챕터로 이동할 때 고정 헤더에 제목이 가리지 않게 한다 */
 section.chapter{ scroll-margin-top:84px; }
@@ -109,7 +85,7 @@ section.chapter{ scroll-margin-top:84px; }
 .stat{
   background:var(--surface); padding:22px 20px;
 }
-.stat .n{ font-family:'JetBrains Mono', monospace; font-size:26px; font-weight:600; color:var(--ink); }
+.stat .n{ font-family:var(--mono); font-size:26px; font-weight:600; color:var(--ink); }
 .stat .n .unit{ font-size:14px; }
 .stat .n .unit-muted{ font-size:15px; color:var(--ink-faint); }
 .stat .l{ margin-top:6px; font-size:12.5px; color:var(--ink-faint); }
@@ -129,7 +105,7 @@ section.chapter{ scroll-margin-top:84px; }
 /* ---------- Chapter divider ---------- */
 /* 네이비 띠에 오른쪽 위 빛번짐과 옅은 격자를 깔고, 번호는 외곽선 숫자로 크게 세운다 */
 .chapter, .closing{
-  --ch-glow:#2f4fb8; --ch-num:#8fa8ff;
+  --ch-glow:#2f4fb8; --ch-num:var(--accent-on-dark);
   position:relative; overflow:hidden; isolation:isolate;
   background:
     radial-gradient(60% 120% at 100% 0%, rgba(47,79,184,.55) 0%, rgba(47,79,184,0) 70%),
@@ -157,7 +133,7 @@ section.chapter{ scroll-margin-top:84px; }
 }
 .chapter .num::before{
   content:"CHAPTER"; display:block; margin-bottom:10px;
-  font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.24em; line-height:1;
+  font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.24em; line-height:1;
   color:var(--ch-num); -webkit-text-stroke:0; opacity:.9;
 }
 .chapter h2{
@@ -207,7 +183,7 @@ section.chapter{ scroll-margin-top:84px; }
 /* process flow */
 .flow{ display:flex; align-items:stretch; gap:0; margin:8px 0 8px; }
 .flow-step{ flex:1; }
-.flow-step .idx{ font-family:'JetBrains Mono',monospace; color:var(--ink-faint); font-size:13px; }
+.flow-step .idx{ font-family:var(--mono); color:var(--ink-faint); font-size:13px; }
 .flow-step .t{ font-weight:700; font-size:16px; margin:8px 0 4px; }
 .flow-step .d{ font-size:13.5px; color:var(--ink-soft); }
 .flow-arrow{ display:flex; align-items:center; justify-content:center; width:44px; color:var(--ink-faint); font-size:18px; padding-top:28px; }
@@ -221,7 +197,7 @@ section.chapter{ scroll-margin-top:84px; }
 .formula .box{ flex:1; background:var(--bg-tint); border:1px solid var(--line); border-radius:10px; padding:18px; }
 .formula .box .t{ font-weight:700; font-size:14.5px; margin-bottom:6px; }
 .formula .box .d{ font-size:13px; color:var(--ink-soft); }
-.formula .op{ font-family:'JetBrains Mono',monospace; font-size:20px; color:var(--accent-ink); font-weight:600; }
+.formula .op{ font-family:var(--mono); font-size:20px; color:var(--accent-ink); font-weight:600; }
 .formula .box.result{ background:var(--accent-soft); border-color:var(--accent-line); }
 @media (max-width:760px){ .formula{ flex-direction:column; align-items:stretch; } .formula .op{ text-align:center; } }
 
@@ -229,8 +205,8 @@ section.chapter{ scroll-margin-top:84px; }
 .prompt{
   background:var(--navy); border-radius:10px; padding:18px 20px; margin:24px 0;
 }
-.prompt .label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--navy-ink-soft); margin-bottom:8px; letter-spacing:0.04em; }
-.prompt .cmd{ font-family:'JetBrains Mono',monospace; font-size:15.5px; color:var(--navy-ink); }
+.prompt .label{ font-family:var(--mono); font-size:11.5px; color:var(--navy-ink-soft); margin-bottom:8px; letter-spacing:0.04em; }
+.prompt .cmd{ font-family:var(--mono); font-size:15.5px; color:var(--navy-ink); }
 .prompt .cmd::before{ content:'> '; color:var(--accent-ink); }
 
 /* before/after criteria */
@@ -247,7 +223,7 @@ section.chapter{ scroll-margin-top:84px; }
 /* application grid */
 .app-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
 .app-cell{ background:var(--surface); padding:22px; }
-.app-cell .idx{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-faint); }
+.app-cell .idx{ font-family:var(--mono); font-size:12px; color:var(--ink-faint); }
 .app-cell .t{ font-weight:700; font-size:15px; margin:8px 0 4px; }
 .app-cell .d{ font-size:13px; color:var(--ink-soft); }
 @media (max-width:760px){ .app-grid{ grid-template-columns:1fr 1fr; } }
@@ -272,7 +248,7 @@ section.chapter{ scroll-margin-top:84px; }
 /* file tree */
 .tree{
   background:var(--navy); color:var(--navy-ink); border-radius:10px; padding:20px 22px;
-  font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.85; overflow-x:auto;
+  font-family:var(--mono); font-size:13px; line-height:1.85; overflow-x:auto;
 }
 .tree .dim{ color:var(--navy-ink-soft); }
 .tree .hi{ color:var(--accent-ink); }
@@ -281,28 +257,18 @@ section.chapter{ scroll-margin-top:84px; }
 .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); }
 .step{ padding:20px 20px 0 0; border-right:1px solid var(--line); }
 .step:last-child{ border-right:none; }
-.step .n{ font-family:'JetBrains Mono',monospace; color:var(--accent-ink); font-size:13px; }
+.step .n{ font-family:var(--mono); color:var(--accent-ink); font-size:13px; }
 .step .t{ font-weight:700; font-size:14.5px; margin-top:10px; }
 @media (max-width:760px){ .steps{ grid-template-columns:1fr 1fr; row-gap:24px; } .step{ border-right:none; } }
 
 /* closing */
 .closing{ color:var(--navy-ink); padding:clamp(64px, 7vw, 96px) 0; }
 .closing h2{ color:var(--navy-ink); font-size:clamp(26px,4vw,38px); line-height:1.4; }
-.closing .eyebrow.on-dark{ margin-bottom:16px; color:#8fa8ff; letter-spacing:.08em; }
+.closing .eyebrow.on-dark{ margin-bottom:16px; color:var(--accent-on-dark); letter-spacing:.08em; }
 .closing .sub{ margin-top:20px; color:var(--navy-ink-soft); font-size:15.5px; line-height:1.8; }
 
 /* appendix */
 /* 처음 읽는 분께: 입문자용 안내와 용어 풀이 */
-.primer{ padding:8px 0 24px; }
-.primer .box{ border:1px solid var(--line); border-radius:14px; padding:26px 30px; }
-.primer h2{ font-size:16px; font-weight:900; margin-bottom:10px; }
-.primer .lead{ font-size:15.5px; line-height:1.85; color:#232a40; margin:0 0 18px; }
-.primer .terms{ border-top:1px solid var(--line); }
-.primer .term{ display:grid; grid-template-columns:140px 1fr; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px; line-height:1.7; }
-.primer .term:last-child{ border-bottom:none; }
-.primer .term .k{ font-weight:700; color:var(--ink); }
-.primer .term .v{ color:var(--ink-soft); }
-@media (max-width:640px){ .primer .box{ padding:22px 20px; } .primer .term{ grid-template-columns:1fr; gap:2px; } }
 .appendix .go{ display:inline-flex; gap:8px; font-size:15px; font-weight:700; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:3px; }
 .appendix{ padding:56px 0 96px; }
 .appendix h2{ font-size:20px; color:var(--ink-faint); margin-bottom:8px; }
@@ -316,12 +282,12 @@ summary{
   list-style:none; display:flex; justify-content:space-between; align-items:center;
 }
 summary::-webkit-details-marker{ display:none; }
-summary::after{ content:'+'; font-family:'JetBrains Mono',monospace; color:var(--ink-faint); font-size:16px; }
+summary::after{ content:'+'; font-family:var(--mono); color:var(--ink-faint); font-size:16px; }
 details[open] summary::after{ content:'–'; }
 details[open] summary{ color:var(--ink); }
 .details-body{ padding-top:16px; font-size:13.5px; color:var(--ink-soft); }
 .details-body .row{ display:flex; gap:16px; padding:8px 0; }
-.details-body .row .k{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-faint); width:120px; flex-shrink:0; }
+.details-body .row .k{ font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); width:120px; flex-shrink:0; }
 
 /* real screenshots / demo */
 .shot{
@@ -340,7 +306,7 @@ details[open] summary{ color:var(--ink); }
 @media (max-width:640px){ .shot.portrait .pair{ grid-template-columns:1fr; padding:20px; } }
 .shot .cap{
   padding:11px 16px; font-size:12.5px; color:var(--ink-faint);
-  border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace;
+  border-top:1px solid var(--line); font-family:var(--mono);
 }
 
 
@@ -384,10 +350,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
   .section .wrap.narrow > .q + .a{ margin-top:64px; }
   .section .wrap.narrow > .q:first-child + .a{ margin-top:0; }
   .chapter .wrap{ grid-template-columns:var(--rail) minmax(0,1fr); column-gap:var(--rail-gap); }
-  .primer .box{ display:grid; grid-template-columns:calc(var(--rail) - 30px) minmax(0,1fr); column-gap:var(--rail-gap); }
-  .primer .box > *{ grid-column:2; }
-  .primer .box > h2{ grid-column:1; grid-row:1 / span 2; }
-  .closing .wrap.narrow{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:var(--rail-gap); }
+        .closing .wrap.narrow{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:var(--rail-gap); }
   .closing .wrap.narrow > *{ grid-column:2; }
   .closing .wrap.narrow > .eyebrow{ grid-column:1; grid-row:1; }
   .closing .wrap.narrow > h2{ grid-column:1; grid-row:2 / span 3; max-width:none; }
@@ -399,7 +362,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .guest{ background:var(--bg-tint); border-radius:14px; padding:28px 30px; }
 .guest h2{ font-size:16px; font-weight:900; margin-bottom:12px; }
 .guest h2 span{ color:var(--accent-ink); }
-.guest p{ font-size:15.5px; line-height:1.85; color:#232a40; margin:0 0 12px; }
+.guest p{ font-size:15.5px; line-height:1.85; color:var(--ink-body); margin:0 0 12px; }
 .guest p:last-child{ margin:0; }
 .guest-sec .stat-strip{ margin-top:28px; }
 /* 상자는 헤더 폭을 다 쓰므로 넓은 화면에서는 제목을 왼쪽, 본문을 오른쪽에 둬서 글줄이 상자 끝까지 차게 한다 */
@@ -418,7 +381,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 }
 .q::before{ content:"Q."; position:absolute; left:0; color:var(--accent-ink); }
 .section .wrap > .q:first-child{ margin-top:0; }
-.a p{ font-size:16px; line-height:1.85; color:#232a40; margin:0 0 14px; }
+.a p{ font-size:16px; line-height:1.85; color:var(--ink-body); margin:0 0 14px; }
 .a p:last-child{ margin-bottom:0; }
 .a strong{ color:var(--ink); font-weight:700; }
 .a + *:not(.q){ margin-top:28px; }
@@ -441,7 +404,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .read-progress{
   position:fixed; left:0; right:0; top:0; height:3px; z-index:40; pointer-events:none;
   transform-origin:0 50%; transform:scaleX(0);
-  background:linear-gradient(90deg, var(--accent), #8fa8ff);
+  background:linear-gradient(90deg, var(--accent), var(--accent-on-dark));
 }
 .motion .mv{
   opacity:0; transform:translateY(18px);
