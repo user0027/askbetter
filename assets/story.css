@@ -330,8 +330,11 @@ details[open] summary{ color:var(--ink); }
 }
 .shot img{ display:block; width:100%; height:auto; }
 /* 세로로 긴 캡처는 칸 폭을 다 채우면 한 화면을 넘는다. 바탕에 얹고 가운데 작게 둔다 */
-.shot.portrait{ background:var(--bg-tint); }
-.shot.portrait img{ width:min(100%, 440px); margin:28px auto; border-radius:8px; box-shadow:var(--shadow); }
+/* 원본이 작거나 세로로 긴 캡처는 본문 폭까지 늘리지 않고 --shot-w 에서 멈춘다 */
+.shot.portrait{ --shot-w:440px; }
+.shot.compact{ --shot-w:540px; }
+.shot.portrait, .shot.compact{ background:var(--bg-tint); }
+.shot.portrait img, .shot.compact img{ width:min(100%, var(--shot-w)); margin:28px auto; border-radius:8px; box-shadow:var(--shadow); }
 .shot.portrait .pair{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px; padding:28px; }
 .shot.portrait .pair img{ width:100%; margin:0; }
 @media (max-width:640px){ .shot.portrait .pair{ grid-template-columns:1fr; padding:20px; } }
