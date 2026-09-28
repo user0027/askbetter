@@ -7,6 +7,7 @@ var METRICS = {
   auto: '2.9분',     // 같은 일을 AI 흐름으로 돌릴 때
   checks: '22개',    // 세무달력 발송본 자동 검수 항목 수
   fixes: '31건',     // 쓰면서 기준을 고친 기록 수
+  tokens: '3,000만', // Claude Code 도입 후 한 달간 사용한 토큰 수
 };
 
 window.SITE = {

@@ -48,7 +48,7 @@
 
   /* 글꼴 */
   --sans:'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --mono:'JetBrains Mono', 'Noto Sans KR', ui-monospace, monospace;
   --ease:cubic-bezier(.19,1,.22,1);
 
   /* 지면 폭과 좌우 여백. 헤더 로고 왼쪽 선과 본문 왼쪽 선이 이 값으로 맞는다 */
