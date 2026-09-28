@@ -260,13 +260,19 @@ section.chapter{ scroll-margin-top:84px; }
 .cols-2 > .prompt .cmd{ background:var(--navy); color:var(--navy-ink); border-radius:8px; padding:14px 16px; font-size:15.5px; }
 
 /* mac-style dark terminal window */
+/* 나란히 놓인 터미널 창은 결과 줄 수가 달라도 높이를 맞춘다 */
+.cols-2:has(> .term-card){ align-items:stretch; }
+/* 명세 줄이 칸을 밀어 가로 스크롤을 만들지 않게 두 칸 폭을 고정한다. 한 단으로 쌓는 760px 이하는 건드리지 않는다 */
+@media (min-width:761px){ .cols-2:has(> .term-card){ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+.term-card{ display:flex; flex-direction:column; }
+.term-card .term-win{ flex:1; }
 .term-card .term-label{ font-size:14px; font-weight:700; color:var(--ink); margin-bottom:10px; }
 .term-win{ background:var(--navy); border-radius:10px; overflow:hidden; box-shadow:var(--shadow); }
 .term-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px; background:rgba(255,255,255,.05); }
 .term-bar .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
 .term-bar .dot.r{ background:#ff5f56; }
-.term-bar .dot.y{ background:#ffbd2e; }
-.term-bar .dot.g{ background:#27c93f; }
+.term-bar .dot.y{ background:var(--term-warn); }
+.term-bar .dot.g{ background:var(--term-ok); }
 .term-bar .term-path{ margin-left:6px; font-family:var(--mono); font-size:11.5px; color:var(--navy-ink-soft); }
 .term-body{ padding:16px 18px 20px; }
 .term-body .cmd{ font-family:var(--mono); font-size:14.5px; color:var(--navy-ink); line-height:1.6; }
@@ -276,10 +282,22 @@ section.chapter{ scroll-margin-top:84px; }
 .term-banner .term-badge svg{ width:16px; height:16px; flex:none; border-radius:4px; }
 .term-banner .term-hint{ font-size:11px; color:var(--navy-ink-soft); }
 .term-log{ margin:14px 0; padding:0; list-style:none; font-family:var(--mono); font-size:12.5px; color:var(--navy-ink-soft); line-height:2; }
-.term-log li::before{ content:'✓ '; color:#27c93f; }
-.term-ok{ font-family:var(--mono); font-size:12.5px; color:#27c93f; margin-bottom:12px; }
+.term-log li::before{ content:'✓ '; color:var(--term-ok); }
+.term-ok{ font-family:var(--mono); font-size:12.5px; color:var(--term-ok); margin-bottom:12px; }
 .term-file{ display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12px; color:var(--navy-ink); background:rgba(255,255,255,.06); border-radius:6px; padding:6px 10px; }
 .term-file svg{ width:13px; height:13px; flex:none; }
+/* API 조사 결과는 파일 대신 명세를 바로 보여 준다. 메서드 · 경로 줄 아래에 요청·응답 값을 들여 적는다 */
+.term-api{ font-family:var(--mono); font-size:12px; line-height:1.7; color:var(--navy-ink); background:rgba(255,255,255,.06); border-radius:6px; padding:10px 12px; }
+.term-api .ep{ overflow-wrap:anywhere; }
+.term-api .ep + .kv{ margin-top:2px; }
+.term-api .kv + .ep{ margin-top:10px; }
+.term-api .m{ display:inline-block; min-width:40px; margin-right:8px; font-weight:700; }
+.term-api .m.post{ color:var(--term-ok); }
+.term-api .m.get{ color:var(--term-warn); }
+/* 값이 길어 꺾이면 이어지는 줄이 라벨 밑이 아니라 값 첫 글자 밑에서 시작하도록 두 칸으로 나눈다 */
+.term-api .kv{ display:grid; grid-template-columns:36px minmax(0,1fr); padding-left:48px; color:var(--navy-ink-soft); overflow-wrap:anywhere; }
+@media (max-width:1100px){ .term-api .kv{ padding-left:0; } }
+.term-api .kv .k{ color:var(--accent-on-dark); }
 @media (max-width:640px){ .term-banner{ flex-direction:column; align-items:flex-start; gap:2px; } }
 
 /* before/after criteria */
@@ -431,7 +449,8 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
   .section .wrap.narrow > .q + *{ margin-top:64px; }
   .section .wrap.narrow > .q:first-child + *{ margin-top:0; }
   /* 넓은 화면은 질문이 왼쪽 칸에 있어 그 위 선이 오른쪽 칸까지 안 이어지므로, 뒤따르는 답 쪽에 선을 그어 두 칸을 가로질러 보이게 한다 */
-  .section .wrap.narrow > .q:not(:first-child){ margin-top:64px; padding-top:28px; border-top:none; }
+  /* 선은 답 쪽 ::before 가 긋는다. 여기에 padding-top 을 두면 제목만 그만큼 내려가 답 첫 줄과 어긋난다 */
+  .section .wrap.narrow > .q:not(:first-child){ margin-top:64px; padding-top:0; border-top:none; }
   /* 답 쪽도 질문과 같은 64px 로 띄워야 같은 줄(grid row)에서 위쪽이 맞는다. 여기를 28px 로 줄이면
      질문 제목보다 답 블록이 위로 붙어 버린다. 선은 그 64px 여백 안, 표·박스 테두리보다 위쪽에 따로 그어
      표가 선에 닿지 않게 한다 */
@@ -507,6 +526,8 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 }
 .motion .mv.is-in{ opacity:1; transform:none; }
 .motion .chapter .num.mv{ transform:translateX(-24px); }
+/* 위 줄이 .mv.is-in 보다 우선순위가 높아 번호가 24px 왼쪽에 남는다. 등장한 뒤 원위치로 돌린다 */
+.motion .chapter .num.mv.is-in{ transform:none; }
 .motion .chapter h2.mv{ transition-delay:.12s; }
 .motion .chapter h2::before{ transform-origin:0 50%; transform:scaleX(0); transition:transform .8s cubic-bezier(.2,.7,.2,1) .35s; }
 .motion .chapter h2.is-in::before{ transform:scaleX(1); }

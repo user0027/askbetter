@@ -32,6 +32,8 @@
   --fail-soft:#fff6f0;
   --fail-line:#f6d5c2;
   --accent-on-dark:#8fa8ff;  /* 어두운 판 위의 포인트 */
+  --term-ok:#27c93f;         /* 터미널 창의 완료 표시·POST 메서드 */
+  --term-warn:#ffbd2e;       /* 터미널 창의 GET 메서드·노란 점 */
 
   /* 어두운 판(글 페이지 표지·마무리) */
   --navy:#0f1830;

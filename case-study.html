@@ -195,11 +195,17 @@
               <div class="cmd">위키에서 급여이체 API 찾아줘</div>
               <ul class="term-log">
                 <li>위키 문서 검색</li>
-                <li>급여이체 API 스펙 확인</li>
-                <li>정리본 작성</li>
+                <li>급여이체 API 명세 확인</li>
+                <li>요청·응답 값 정리</li>
               </ul>
-              <div class="term-ok">✓ API 정리본이 생성되었습니다.</div>
-              <div class="term-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>payroll-transfer-api.md</div>
+              <div class="term-ok">✓ 급여이체 API 2건을 정리했습니다.</div>
+              <div class="term-api">
+                <div class="ep"><span class="m post">POST</span>/v1/payroll/transfers</div>
+                <div class="kv"><span class="k">요청</span><span>companyId, payDate, items[ ]</span></div>
+                <div class="kv"><span class="k">응답</span><span>200 { transferId, status }</span></div>
+                <div class="ep"><span class="m get">GET</span>/v1/payroll/transfers/{transferId}</div>
+                <div class="kv"><span class="k">응답</span><span>200 { status, failCode }</span></div>
+              </div>
             </div>
           </div>
         </div>
