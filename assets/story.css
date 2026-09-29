@@ -214,6 +214,7 @@ section.chapter{ scroll-margin-top:84px; }
 .bullets.strong li{ color:var(--ink); font-weight:500; }
 
 .card{
+  display:flex; flex-direction:column; justify-content:center;
   background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px;
   box-shadow:var(--shadow);
 }
@@ -234,12 +235,64 @@ section.chapter{ scroll-margin-top:84px; }
 }
 
 /* formula */
-.formula{ display:flex; align-items:center; gap:14px; margin:28px 0; }
-.formula .box{ flex:1; background:var(--bg-tint); border:1px solid var(--line); border-radius:10px; padding:18px; }
+.formula{ display:flex; align-items:stretch; gap:14px; margin:28px 0; }
+.formula .box{ flex:1; min-width:0; display:flex; flex-direction:column; background:var(--bg-tint); border:1px solid var(--line); border-radius:10px; padding:18px; }
+.formula .box > .stage,
+.formula .box > .input-list{ flex:1; }
 .formula .box .t{ font-weight:700; font-size:14.5px; margin-bottom:6px; }
 .formula .box .d{ font-size:13px; color:var(--ink-soft); }
-.formula .op{ font-family:var(--mono); font-size:20px; color:var(--accent-ink); font-weight:600; }
+.formula .box .d + .d{ margin-top:4px; }
+.formula .op{ display:flex; align-items:center; font-family:var(--mono); font-size:20px; color:var(--accent-ink); font-weight:600; }
 .formula .box.result{ background:var(--accent-soft); border-color:var(--accent-line); }
+.formula .inline-logo{ width:15px; height:15px; vertical-align:-2px; margin-right:5px; }
+.formula .d.faint{ color:var(--ink-faint); }
+
+/* 아이콘 타일. 브랜드 svg는 그대로 두고 배경 판만 입힌다 */
+.formula .icon-tile{ flex:none; width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+.formula .icon-tile.dark{ background:var(--ink); }
+.formula .icon-tile.dark img{ width:20px; height:20px; }
+.formula .icon-tile.dark svg{ width:20px; height:20px; color:#fff; }
+.formula .icon-tile.tint{ background:var(--accent-soft); color:var(--accent-ink); }
+.formula .icon-tile.tint svg{ width:20px; height:20px; }
+.formula .icon-tile.tint img{ width:36px; height:36px; border-radius:9px; border:1px solid var(--line); }
+.formula .box-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.formula .box-head .t{ margin-bottom:0; }
+
+/* 입력 자료: 항목별 카드. 목록 전체가 늘어나고, 남는 높이는 카드 사이 간격으로만 들어간다 */
+.formula .input-list{ display:flex; flex-direction:column; justify-content:space-between; gap:8px; }
+.formula .input-card{ display:flex; align-items:flex-start; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:15px 12px; }
+.formula .input-card .ct{ font-weight:700; font-size:13px; margin-bottom:2px; }
+.formula .input-card .cd{ font-size:12px; color:var(--ink-soft); line-height:1.5; }
+.formula .input-card .cd.faint{ color:var(--ink-faint); }
+
+.formula .stage{ display:flex; flex-direction:column; gap:8px; }
+.formula .stage-item{ flex:1; display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:11px 12px; }
+.formula .stage-item .n-slot{ flex:none; width:36px; display:flex; align-items:center; justify-content:center; }
+.formula .stage-item .n{ flex:none; width:20px; height:20px; border-radius:50%; background:var(--tint-2); color:var(--ink-faint); font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.formula .stage-item:last-child .n{ background:var(--accent-soft); color:var(--accent-ink); }
+.formula .stage-item .step-logo{ flex:none; width:16px; height:16px; }
+
+/* md 미리보기: 작성된 규칙 파일 내용 */
+.formula .md-preview{ margin-top:8px; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.formula .md-preview .head{ flex:none; display:flex; align-items:center; gap:6px; padding:8px 10px; background:var(--surface); border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--ink-soft); }
+.formula .md-preview .head svg{ flex:none; width:13px; height:13px; }
+.formula .md-preview .body{ flex:1; display:flex; flex-direction:column; justify-content:center; min-height:64px; padding:10px 12px; background:var(--tint-2); font-family:var(--mono); font-size:11.5px; color:var(--ink-soft); line-height:1.8; }
+.formula .md-preview .body div{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* 입력 카드 하단의 MCP 연결 표시 */
+.formula .mcp-tag{ display:flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--accent-ink); }
+.formula .mcp-tag svg{ flex:none; width:14px; height:14px; }
+
+/* 결과물 하단: 실제 발송본 스크린샷 */
+.formula .cal-mock{ border:1px solid var(--line); border-radius:9px; overflow:hidden; margin-top:14px; }
+.formula .cal-mock img{ display:block; width:100%; height:220px; object-fit:cover; object-position:top; }
+
+.formula-note{ display:flex; align-items:center; gap:14px; margin:-6px 0 28px; padding:16px 18px; background:var(--surface); border:1px solid var(--accent-line); border-radius:10px; }
+.formula-note .fn-emoji{ flex:none; font-size:20px; line-height:1; }
+.formula-note .fn-text{ flex:1; min-width:0; }
+.formula-note .fn-label{ font-weight:700; font-size:13px; color:var(--ink); margin-bottom:4px; }
+.formula-note .fn-desc{ font-size:13px; color:var(--ink-soft); line-height:1.6; }
+
 @media (max-width:760px){ .formula{ flex-direction:column; align-items:stretch; } .formula .op{ text-align:center; } }
 
 /* terminal-style request */
@@ -247,7 +300,7 @@ section.chapter{ scroll-margin-top:84px; }
   background:var(--navy); border-radius:10px; padding:18px 20px; margin:24px 0;
 }
 .prompt .label{ font-family:var(--mono); font-size:11.5px; color:var(--navy-ink-soft); margin-bottom:8px; letter-spacing:0.04em; }
-.prompt .cmd{ font-family:var(--mono); font-size:15.5px; color:var(--navy-ink); }
+.prompt .cmd{ font-family:var(--mono); font-size:15.5px; color:var(--navy-ink); padding-left:2ch; text-indent:-2ch; }
 .prompt .cmd::before{ content:'> '; color:var(--accent-ink); }
 /* 요청 한 줄과 수치 카드가 나란히 놓일 때는 같은 카드 틀·높이·제목 줄을 쓴다 */
 .cols-2:has(> .prompt + .card){ align-items:stretch; }
@@ -275,7 +328,7 @@ section.chapter{ scroll-margin-top:84px; }
 .term-bar .dot.g{ background:var(--term-ok); }
 .term-bar .term-path{ margin-left:6px; font-family:var(--mono); font-size:11.5px; color:var(--navy-ink-soft); }
 .term-body{ padding:16px 18px 20px; }
-.term-body .cmd{ font-family:var(--mono); font-size:14.5px; color:var(--navy-ink); line-height:1.6; }
+.term-body .cmd{ font-family:var(--mono); font-size:14.5px; color:var(--navy-ink); line-height:1.6; padding-left:2ch; text-indent:-2ch; }
 .term-body .cmd::before{ content:'> '; color:var(--accent-ink); }
 .term-banner{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; padding:10px 12px; margin-bottom:14px; border:1px solid rgba(255,255,255,.14); border-radius:8px; font-family:var(--mono); font-size:12.5px; color:var(--navy-ink); }
 .term-banner .term-badge{ display:inline-flex; }
@@ -496,7 +549,9 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .a .annot{ padding-left:14px; border-left:2px solid var(--line); font-size:13.5px; line-height:1.7; color:var(--ink-faint); }
 .a .annot a{ color:var(--accent-ink); }
 .a .annot a svg{ width:13px; height:13px; vertical-align:-2px; margin-right:3px; flex:none; }
-.mono-tag{ font-family:var(--mono); font-size:13px; color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:6px; padding:1px 7px; }
+.mono-tag{ font-family:var(--mono); font-size:13px; color:var(--accent-ink); background:color-mix(in srgb, var(--accent-soft), #fff 50%); border:1px solid var(--accent-line); border-radius:6px; padding:1px 7px; }
+.mono-tag.term{ text-decoration:none; }
+.mono-tag.term .help{ margin-right:4px; }
 .a + *:not(.q){ margin-top:28px; }
 .cols-2 + .a{ margin-top:28px; }
 @media (max-width:640px){ .q{ font-size:17.5px; margin-top:52px; } .a p{ font-size:15.5px; } }
@@ -562,7 +617,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .role .d{ font-size:14.5px; line-height:1.6; color:var(--ink-body); }
 .term{ text-decoration-line:underline; text-decoration-color:var(--accent); text-decoration-thickness:1.5px; text-underline-offset:3px; cursor:help; position:relative; }
 .help{ display:inline-flex; align-items:center; justify-content:center; width:15px; height:15px; margin-right:3px; border-radius:50%; background:var(--accent); color:#fff; font-family:var(--sans); font-size:10px; font-weight:700; line-height:1; vertical-align:middle; }
-.term::after{ content:attr(data-tip); position:absolute; left:50%; bottom:calc(100% + 8px); transform:translateX(-50%); width:max-content; max-width:240px; padding:8px 10px; border-radius:6px; background:var(--ink); color:#fff; font-size:12px; font-weight:400; line-height:1.5; white-space:normal; text-align:left; opacity:0; pointer-events:none; transition:opacity .15s ease; z-index:5; }
+.term::after{ content:attr(data-tip); position:absolute; left:50%; bottom:calc(100% + 8px); transform:translateX(-50%); width:max-content; max-width:300px; padding:8px 10px; border-radius:6px; background:var(--ink); color:#fff; font-size:12px; font-weight:400; line-height:1.5; white-space:normal; text-align:left; opacity:0; pointer-events:none; transition:opacity .15s ease; z-index:5; }
 .term:hover::after, .term:focus::after{ opacity:1; }
 @media (min-width:861px){
   .guest > h2:first-child{ grid-row:1; }
@@ -573,9 +628,10 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 @media (max-width:480px){ .role{ grid-template-columns:1fr; gap:2px; } }
 
 /* AI가 틀렸던 지점과 다시 세운 기준. 글에서 가장 눈에 띄어야 하는 상자 */
+.fail-head{ font-size:12.5px; font-weight:900; color:var(--fail); letter-spacing:.04em; margin-bottom:10px; }
 .fail{ border:1px solid var(--fail-line); border-left:4px solid var(--fail); border-radius:12px; background:var(--fail-soft); padding:6px 24px 8px; margin:0 0 24px; }
-.fail-head{ font-size:12.5px; font-weight:900; color:var(--fail); letter-spacing:.04em; padding:14px 0 6px; }
 .fail-row{ display:grid; grid-template-columns:110px minmax(0,1fr); gap:16px; padding:14px 0; border-top:1px solid var(--fail-line); }
+.fail-row:first-child{ border-top:none; }
 .fail-row .k{ font-size:13px; font-weight:700; color:var(--ink-soft); }
 .fail-row .v{ font-size:15px; line-height:1.7; color:var(--ink-body); }
 .fail-row.fix .k{ color:var(--accent-ink); }

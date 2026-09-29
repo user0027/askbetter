@@ -21,8 +21,9 @@ python3 -m http.server 8099
 
 ## 배포
 
-Cloudflare Workers 정적 배포(`wrangler.jsonc`)를 쓴다.
+Cloudflare Workers 정적 배포(`wrangler.jsonc`)를 쓴다. 배포 전에 최종 배포 시각부터 찍는다.
 
 ```
+python3 scripts/stamp-deploy-time.py
 wrangler deploy
 ```

@@ -10,11 +10,24 @@ var METRICS = {
   tokens: '3,000만', // Claude Code 도입 후 한 달간 사용한 토큰 수
 };
 
+// 본문에 반복되는 용어 툴팁. <span class="term" data-term="cli">Claude Code Cli</span> 처럼 쓰면
+// 아래 문구를 data-tip 으로 채우고 "?" 아이콘을 붙여준다. 툴팁 문구를 바꿀 때는 여기만 고친다.
+var TERMS = {
+  cli: '터미널에서 코드를 직접 읽고 고치는 Anthropic의 AI 코딩 도구예요.',
+  plugin: 'Claude Code에 설치해 쓰는 확장 기능이에요. 반복해서 사용하는 명령과 업무 규칙을 묶어, 필요할 때 바로 실행할 수 있게 해줘요.',
+  mcp: 'Model Context Protocol의 줄임말로, Claude Code가 Figma, 사내 문서 같은 외부 도구와 연결되어 필요한 정보를 직접 읽고 사용할 수 있게 해주는 방식이에요.',
+  skill: '반복해서 쓰는 업무 방법과 규칙을 묶어 두고, 필요한 작업에서 Claude가 불러와 적용할 수 있게 만든 업무 단위예요.',
+  context: 'AI가 대화하는 동안 기억하고 참고하는 정보의 범위예요.',
+};
+
 window.SITE = {
   metrics: METRICS,
+  terms: TERMS,
   // 연락처. 링크는 data-site-href="contact.mailto" 로 건다
   contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
   brand: 'ASKBETTER',
+  // 최종 배포 시각. wrangler deploy 전에 scripts/stamp-deploy-time.py 가 이 줄만 고쳐 쓴다
+  meta: { deployedAt: '2026.09.29 18:16' },
   // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
   url: 'https://askbetter.studio54.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다
@@ -78,6 +91,14 @@ window.SITE = {
   document.querySelectorAll('[data-site-href]').forEach(function (el) {
     var v = get(el.getAttribute('data-site-href'));
     if (v != null) el.setAttribute('href', v);
+  });
+  // data-term="cli" (class="term" 과 같이 쓴다) → TERMS 문구로 data-tip·"?" 아이콘을 채운다
+  document.querySelectorAll('[data-term]').forEach(function (el) {
+    var tip = TERMS[el.getAttribute('data-term')];
+    if (tip == null) return;
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('data-tip', tip);
+    el.insertAdjacentHTML('afterbegin', '<span class="help">?</span>');
   });
   var t = document.documentElement.getAttribute('data-site-title');
   if (t && get(t) != null) document.title = window.SITE.brand + ' | ' + get(t);
