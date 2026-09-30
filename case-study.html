@@ -341,14 +341,14 @@
         <img src="assets/zoom/tax-calendar-detail.png" alt="9월 세무달력 날짜 칸 확대, 칸마다 원본 일정 문서의 항목과 링크가 붙어 있다" loading="lazy">
         <div class="cap">날짜 칸마다 원본 일정 문서의 항목과 링크가 하나씩 붙어요. 검수는 이 항목을 원본 표와 한 줄씩 대조해요.</div>
       </div>
-      <div class="fail-head">틀렸던 지점</div>
+      <div class="fail-head">발생했던 문제</div>
       <div class="fail">
         <div class="fail-row"><div class="k">무엇이 틀렸나</div><div class="v">원본에 링크가 없는 항목에 다른 영상이 연결돼 있었지만 검수를 통과했어요.</div></div>
         <div class="fail-row"><div class="k">왜 못 잡았나</div><div class="v">이 검수도 Claude에게 맡겼는데, 당시 기준은 링크가 정상적으로 열리는지만 확인하는 거라 실제로 맞는 영상이 연결됐는지는 보지 않았어요.</div></div>
         <div class="fail-row fix"><div class="k">다시 세운 기준</div><div class="v">이후에는 원본 자료와 발송본을 항목별로 대조하고, 링크뿐 아니라 연결된 내용까지 함께 확인하도록 검수 기준을 바꿨어요.</div></div>
       </div>
       <div class="a"><p>이렇게 다듬은 기준은 저만 아는 채로 두지 않고, 세무달력을 만들고 검수하는 과정 전체를 <span class="term" data-term="plugin">Claude Code Plugin</span>으로 묶어 팀원들도 그대로 받아 쓸 수 있게 만들었어요. 담당자가 바뀌어도 같은 기준으로 세무달력을 만들 수 있어요.</p></div>
-      <div class="a"><p><strong>이 경험을 통해 AI가 잘 만드느냐보다, 어떤 기준으로 검수해야 안심하고 맡길 수 있는지가 더 중요하다는 걸 알게 됐어요.</strong></p></div>
+      <p class="endline">AI가 잘 만들어주긴 하지만, 기준을 세우고 <span class="hl">최종적인 검수는 '사람'이 해야한다</span>는 걸 경험했어요.</p>
     </div>
   </section>
 
@@ -356,44 +356,35 @@
   <section class="chapter" data-toc="대표 사례 2 · 시안 대조">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>시안과 기획서 대조, 잘못 걸리는 것부터 줄이기</h2></div>
+      <div><h2>다른 업무에도 AI 확장하기</h2></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q plain">적용한 다섯 업무</h3>
+      <h3 class="q">다른 업무에는 어떻게 적용했나요?</h3>
       <div class="a">
-        <p>세무달력 다음에는 하던 기획 업무 네 가지로 범위를 넓혔어요. 그중 결과를 수치로 확인한 두 가지를 대표 사례로 정리했고, 나머지 셋은 같은 방식으로 AI가 맡을 부분과 사람이 판단할 부분을 나눠 적용했어요.</p>
-      </div>
-      <div class="cases">
-        <div class="cases-label">대표 사례</div>
-        <div class="case-main">
-          <div class="case"><div class="t">세무달력</div><div class="d">지난달 결과물에 새 원본을 연결해 매달 반복해요.</div><div class="m"><span data-site="metrics.manual">2시간</span> → <span data-site="metrics.auto">2.9분</span></div></div>
-          <div class="case"><div class="t">시안·기획서 대조</div><div class="d">시안과 기획서 문구를 자동으로 맞추고 오탐은 규칙으로 걸러 내요.</div><div class="m">200건+ → 25건</div></div>
-        </div>
-        <div class="cases-label">확장 사례</div>
-        <div class="case-sub">
-          <div class="case"><div class="t">화면 스펙 작성</div><div class="d">AI가 화면 항목을 추출해 초안을 만들고, 정책과 예외는 제가 판단했어요.</div></div>
-          <div class="case"><div class="t">기존 화면 찾기</div><div class="d">AI가 링크·원문·날짜로 후보를 좁히고, 같은 화면인지는 제가 판단했어요.</div></div>
-          <div class="case"><div class="t">정책·문서 정리</div><div class="d">AI가 흩어진 조건을 모으고, 무엇을 정책으로 볼지는 제가 정했어요.</div></div>
-        </div>
-      </div>
-
-      <h3 class="q plain">시안·기획서 대조</h3>
-      <div class="a">
-        <p>퍼블리싱 페이지의 한국어 맞춤법을 검사하던 도구에 붙인 기능이에요. 디자이너가 만든 시안이 기획서 문구와 맞는지 제가 한 줄씩 맞춰 보던 검수를, 지금은 확정된 Zeplin 시안을 기준으로 같은 화면의 Figma 기획서와 자동으로 대조하고, 검수 리포트에서 반영·확인·표기 통일로 나눠 담당별로 보여 줘요.</p>
+        <p>최근 내가 <strong>업무의 어떤 과정에서 불편함을 느끼고 있을까</strong>를 고민해봤어요. 그러다 떠오른 것은 디자인 결과든 퍼블리싱 결과든, 나온 결과물이 기획서와 맞는지 확인하는 기획 검수를 두 번 반복해서 거치는 프로세스였어요. 이 반복을 줄이면 커뮤니케이션 비용도, 기획 업무 자체도 줄일 수 있겠다 싶어서 여기부터 적용해 봤어요.</p>
+        <p class="annot">특히 세무·회계 도메인이라 어려운 용어가 많았고, 그만큼 단어 오타도 잦은 편이었어요.</p>
       </div>
       <div class="flow">
-        <div class="flow-step"><div class="idx">01</div><div class="t">Zeplin 시안</div><div class="d">확정된 디자인 화면을 기준으로 둡니다</div></div>
+        <div class="flow-step"><div class="idx">01</div><div class="t">디자인 결과</div></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">02</div><div class="t">Figma 기획서</div><div class="d">같은 화면의 기획 문서와 자동 대조합니다</div></div>
+        <div class="flow-step"><div class="idx">02</div><div class="t">기획 검수</div></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">03</div><div class="t">검수 리포트</div><div class="d">반영·확인·표기 통일로 나눠 담당별로 보여 줍니다</div></div>
+        <div class="flow-step"><div class="idx">03</div><div class="t">퍼블리싱 결과</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="idx">04</div><div class="t">기획 검수</div></div>
+      </div>
+      <div class="a">
+        <p>퍼블리싱 뒤 검수는 특히 번거로웠어요. 텍스트가 틀렸거나 고칠 부분이 있으면 화면을 캡처해서 하나하나 옮겨 적어 전달해야 했거든요. 같은 화면을 보면서 바로 확인할 수 있는 도구를 여기에 먼저 만들었고, 이걸 시작으로 하던 기획 업무 네 가지로 범위를 넓혔어요. 그중 결과를 수치로 확인한 하나는 대표 사례로 정리했고, 나머지 셋은 같은 방식으로 AI가 맡을 부분과 사람이 판단할 부분을 나눠 적용했어요.</p>
       </div>
 
-      <h3 class="q">수백 건 중에서 실제로 볼 것만 남기려면 어떻게 해야 했나요?</h3>
-      <div class="fail-head">틀렸던 지점</div>
+      <h3 class="q">수백 건 중 실제로 볼 것만 남기려면 어떻게 했나요?</h3>
+      <div class="a">
+        <p>다른 점을 찾기 전에 잘못 걸리는 것부터 규칙으로 먼저 걸러 냈어요. 시안과 기획서는 화면을 만드는 방식이 달라서 같은 문구도 여러 조각으로 잡히는 경우가 많았고, 이런 오탐부터 줄이지 않으면 사람이 봐야 할 항목이 줄지 않았거든요.</p>
+      </div>
+      <div class="fail-head">발생했던 문제</div>
       <div class="fail">
         <div class="fail-row"><div class="k">무엇이 틀렸나</div><div class="v">화면 하나에서 200건 넘는 문구를 전부 다르다고 표시했어요. 실제로 고칠 항목은 그중 일부였고, 전부 다르다고 하니 아무도 보지 않았어요.</div></div>
         <div class="fail-row"><div class="k">왜 못 잡았나</div><div class="v">시안과 기획서는 화면을 만드는 방식이 달라요. 같은 문구가 여러 조각으로 잡히고, 표 안의 예시 데이터나 시안에만 있는 표시까지 차이로 잡혔어요.</div></div>
@@ -415,32 +406,51 @@
         </div>
       </div>
       <p class="more">규칙 8개와 AI 판단 단계는 <a href="deep-dive.html">숙련자용 페이지</a>에 정리했어요.</p>
+
+      <h3 class="q">검수 결과는 퍼블리셔에게 어떻게 공유했나요?</h3>
+      <div class="a">
+        <p>처음에는 검사 결과를 제 컴퓨터에서만 볼 수 있었어요. 퍼블리셔에게 보여주려면 제 화면을 옆에서 같이 보거나 같은 프로그램을 설치해야 했어요. 그래서 결과를 링크 하나로 보관·전달하고, 팀원은 설치 없이 그 링크만 열어보면 되도록 팀 공용 고정 주소로 서비스하기 시작했어요.</p>
+      </div>
+      <div class="fail-head">발생했던 문제</div>
+      <div class="fail">
+        <div class="fail-row"><div class="k">무엇이 틀렸나</div><div class="v">제 컴퓨터가 잠들거나 꺼지면 공유한 링크가 열리지 않았어요. 검수를 마치고 퇴근한 뒤 퍼블리셔가 링크를 열면 접속이 안 됐어요.</div></div>
+        <div class="fail-row"><div class="k">왜 못 잡았나</div><div class="v">결과를 서비스하는 서버가 제 컴퓨터 안에서만 돌고 있어서, 컴퓨터가 꺼지면 그 안의 결과도 함께 닫히는 구조였어요.</div></div>
+        <div class="fail-row fix"><div class="k">다시 세운 기준</div><div class="v">검사·수정 직후 결과의 읽기 전용 사본을 클라우드에 자동으로 올려 두고, 제 컴퓨터에 닿지 않을 때는 그 사본으로 대신 열리게 바꿨어요. 사본에는 편집 권한이 없어서 받은 사람이 실수로 내용을 바꿀 일도 없어졌어요.</div></div>
+      </div>
+      <div class="a">
+        <p>링크를 받는 사람은 사내 도구를 쓰러 오는 게 아니라 결과만 보러 오는 거라, 화면도 그 기준으로 다시 다듬었어요. 편집 버튼은 눌러도 반응 없이 남지 않도록 화면에서 아예 지웠고, 화면 이미지 용량을 줄여 링크를 열자마자 빨리 뜨도록 만들었어요.</p>
+      </div>
+      <div class="cols-2">
+        <ul class="bullets strong">
+          <li>편집 화면은 CSS로 끊어 실수로 눌러도 반응하지 않게 해요</li>
+          <li>링크 복사 버튼을 붙여 결과를 바로 전달할 수 있게 해요</li>
+          <li>화면 이미지를 webp로 압축해 여는 속도를 높여요</li>
+        </ul>
+        <div class="card">
+          <div class="h">공유 리포트 한 건 용량</div>
+          <div class="n mono">4.85MB <span class="arrow">→</span> <span class="to">2.1MB</span></div>
+          <div class="cap">화면 이미지를 webp로 바꾼 뒤, 글자 획은 눈으로 차이가 없이 절반 이하로 줄었어요.</div>
+        </div>
+      </div>
+      <div class="shot compact">
+        <img src="assets/product-tools-check-result.png" alt="프로덕트 툴이 실제 페이지 위에서 시안과 기획서 문구를 대조한 검사 결과 화면, 23건 발견" loading="lazy">
+        <div class="cap">이름을 프로덕트 툴로 바꾼 뒤, 실제 페이지 위에서 시안과 기획서 문구를 자동으로 대조한 검사 결과 화면이에요.</div>
+      </div>
       <div class="a"><p>이 도구는 원래 퍼블리싱 페이지의 한국어 맞춤법만 검사하던 작은 프로그램이었어요. 여기에 시안·기획서 대조 기능을 붙이면서 도구 이름도 '프로덕트 툴'로 바꿨고, 이어서 제플린 시안을 원본 화질 그대로 받는 기능까지 추가했어요.</p></div>
     </div>
   </section>
 
   <!-- 04 -->
-  <section class="chapter" data-toc="맡길 일과 남길 일">
+  <section class="chapter" data-toc="팀에 건넨 방법">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>맡길 일과 남길 일을 나누고 팀에 건네기</h2></div>
+      <div><h2>여러 방법으로 팀에게 건네기</h2></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">AI에게 맡길 일과 사람이 남길 일은 어떻게 나눴나요?</h3>
-      <div class="a">
-        <p>새 업무를 볼 때 네 가지로 나눠 봐요. 이 일을 어떤 모양과 규칙으로 하는지, 매번 새로 들어오는 정보가 어디 있는지, 정해진 순서로 반복되는 단계가 무엇인지, 기준·예외·최종 결정이 필요한 지점이 어디인지요. <strong>이렇게 나누면 AI에게 맡길 자리와 사람이 봐야 하는 자리가 함께 보여요.</strong></p>
-      </div>
-      <div class="quad">
-        <div class="quad-cell"><div class="t">기존 방식</div><div class="d">이 일을 어떤 모양과 규칙으로 하는지</div></div>
-        <div class="quad-cell"><div class="t">바뀌는 자료</div><div class="d">매번 새로 들어오는 정보가 어디 있는지</div></div>
-        <div class="quad-cell"><div class="t">반복 실행</div><div class="d">정해진 순서로 반복되는 단계가 무엇인지</div></div>
-        <div class="quad-cell"><div class="t">사람 판단</div><div class="d">기준·예외·최종 결정이 필요한 지점은 어디인지</div></div>
-      </div>
-
-      <h3 class="q plain">팀에 건넨 방법</h3>
+      <h3 class="q">팀에는 어떻게 건넸나요?</h3>
       <div class="a">
         <p><strong>제 PC에서만 돌던 방식을 팀원도 같은 방식으로 쓰게 하는 것이 목표였어요.</strong> 기술은 먼저 고르지 않았고, 막히는 지점이 생길 때마다 그 지점을 푸는 것으로 하나씩 골랐어요.</p>
       </div>
@@ -460,7 +470,7 @@
         <div class="cap">확대 · 사내 포털의 세무달력(tip) 설치 카드예요. 카드에 적힌 한 줄을 복사해 실행하면 설치돼요(주소는 가림).</div>
       </div>
 
-      <h3 class="q plain">건넨 도구 점검</h3>
+      <h3 class="q">건넨 도구는 잘 돌고 있는지 어떻게 확인했나요?</h3>
       <div class="fail-head">놓쳤던 지점</div>
       <div class="fail">
         <div class="fail-row"><div class="k">무엇을 놓쳤나</div><div class="v">팀에 공유한 링크 검색 도구가 9분 사이에 세 번 끊겼다 복구됐는데, 저도 팀원도 몰랐어요.</div></div>
@@ -505,6 +515,17 @@
             <tr><td class="nm">결과 확인</td><td>같은 항목을 매번 확인</td><td>기본 확인까지 마친 결과를 판단</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <h3 class="q">AI에게 맡길 일과 사람이 남길 일은 어떻게 나눴나요?</h3>
+      <div class="a">
+        <p>새 업무를 볼 때 네 가지로 나눠 봐요. 이 일을 어떤 모양과 규칙으로 하는지, 매번 새로 들어오는 정보가 어디 있는지, 정해진 순서로 반복되는 단계가 무엇인지, 기준·예외·최종 결정이 필요한 지점이 어디인지요. <strong>이렇게 나누면 AI에게 맡길 자리와 사람이 봐야 하는 자리가 함께 보여요.</strong></p>
+      </div>
+      <div class="quad">
+        <div class="quad-cell"><div class="t">기존 방식</div><div class="d">이 일을 어떤 모양과 규칙으로 하는지</div></div>
+        <div class="quad-cell"><div class="t">바뀌는 자료</div><div class="d">매번 새로 들어오는 정보가 어디 있는지</div></div>
+        <div class="quad-cell"><div class="t">반복 실행</div><div class="d">정해진 순서로 반복되는 단계가 무엇인지</div></div>
+        <div class="quad-cell"><div class="t">사람 판단</div><div class="d">기준·예외·최종 결정이 필요한 지점은 어디인지</div></div>
       </div>
 
       <h3 class="q">자기 업무에 AI를 붙여 보고 싶다면 어떤 순서로 시작하면 좋을까요?</h3>

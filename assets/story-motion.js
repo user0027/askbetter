@@ -9,7 +9,7 @@
     '.chapter .num', '.chapter h2',
     '.section .q', '.section .a > *', '.section .shot', '.card',
     '.flow-step', '.flow-arrow', '.app-cell', '.quad-cell', '.tbl-wrap',
-    '.closing .wrap > *'
+    '.endline', '.closing .wrap > *'
   ].join(',');
   var STAGGER_MS = 70;   // 같은 줄 형제끼리 늦춰 주는 간격
   var STAGGER_MAX = 6;   // 형제가 많아도 이 개수까지만 늦춘다

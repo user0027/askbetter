@@ -223,12 +223,11 @@ section.chapter{ scroll-margin-top:84px; }
 .card .cap{ font-size:12.5px; color:var(--ink-faint); margin-top:6px; }
 
 /* process flow */
-.flow{ display:flex; align-items:stretch; gap:0; margin:8px 0 8px; }
+.flow{ display:flex; align-items:stretch; gap:0; margin:8px 0 24px; }
 .flow-step{ flex:1; }
 .flow-step .idx{ font-family:var(--mono); color:var(--ink-faint); font-size:13px; }
-.flow-step .t{ font-weight:700; font-size:16px; margin:8px 0 4px; }
-.flow-step .d{ font-size:13.5px; color:var(--ink-soft); }
-.flow-arrow{ display:flex; align-items:center; justify-content:center; width:44px; color:var(--ink-faint); font-size:18px; padding-top:28px; }
+.flow-step .t{ font-weight:700; font-size:16px; margin:8px 0 0; }
+.flow-arrow{ display:flex; align-items:center; justify-content:center; width:44px; color:var(--ink-faint); font-size:18px; padding-top:14px; }
 @media (max-width:640px){
   .flow{ flex-direction:column; gap:16px; }
   .flow-arrow{ display:none; }
@@ -495,7 +494,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 /* 넓은 화면은 두 단이다. 왼쪽 칸에 질문·제목, 오른쪽 칸에 답과 자료를 둬서 글줄이 헤더 오른쪽 선까지 찬다.
    글을 폭 제한으로 끊지 않는다. 틀보다 짧게 끝나는 글줄이 생기면 scripts/check-margins.py 가 잡는다 */
 @media (min-width:861px){
-  .section .wrap.narrow{ display:grid; grid-template-columns:var(--rail) minmax(0,1fr); column-gap:var(--rail-gap); }
+  .section .wrap.narrow{ display:grid; grid-template-columns:var(--rail) minmax(0,1fr); column-gap:var(--rail-gap); align-items:start; }
   .section .wrap.narrow > *{ grid-column:2; }
   .section .wrap.narrow > .q{ grid-column:1; }
   /* 질문 제목과 같은 줄에 놓이는 첫 블록은 무엇이든 제목과 윗선을 맞춘다 */
@@ -565,6 +564,13 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .tbl-wrap td.nm{ font-weight:700; white-space:nowrap; }
 
 .endline{ margin-top:40px; font-size:18px; font-weight:700; line-height:1.7; padding-left:18px; border-left:3px solid var(--accent); }
+.endline .hl{
+  background-image:linear-gradient(var(--accent-soft), var(--accent-soft));
+  background-repeat:no-repeat; background-position:0 100%; background-size:100% 42%;
+  padding:0 2px; border-radius:2px;
+}
+.motion .endline .hl{ background-size:0% 42%; transition:background-size .7s cubic-bezier(.2,.7,.2,1) .3s; }
+.motion .endline.is-in .hl{ background-size:100% 42%; }
 
 /* 표·통계 다음에 오는 블록처럼 자동 여백(.a + *) 규칙이 안 닿는 자리에 쓰는 여백 */
 .mt28{ margin-top:28px; }
@@ -643,6 +649,7 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
 .cases-label{ font-size:12.5px; font-weight:700; color:var(--ink-faint); margin:0 0 10px; }
 .case-main, .case-sub{ display:grid; gap:12px; }
 .case-main{ grid-template-columns:1fr 1fr; margin-bottom:26px; }
+.case-main:has(.case:only-child){ grid-template-columns:1fr; }
 .case-sub{ grid-template-columns:repeat(3, minmax(0,1fr)); }
 .case{ border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:var(--surface); }
 .case .t{ font-weight:700; font-size:14.5px; }
