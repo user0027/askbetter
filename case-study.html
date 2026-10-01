@@ -106,8 +106,8 @@
 
       <h3 class="q">왜 Claude Code를 쓰기 시작했나요?</h3>
       <div class="a">
-        <p>회사에서 Claude Code를 전사 도입한다는 소식을 들었어요. 정식 도입보다 <strong>2주 먼저</strong> Pro 버전을 써봤어요. Claude Code의 실행 결과를 귀엽게 알려주는 작은 프로그램이 있으면 좋겠다고 생각했고, 그 생각에서 개인 다마고치 프로젝트 Nuttie를 만들기 시작했어요.</p>
-        <p>집과 회사에서 같은 프로젝트를 이어서 작업하려고 <strong>GitHub</strong>를 썼어요. Nuttie를 다른 사람에게도 보여주고 싶어서, 별도 개발환경 없이 바로 실행되는 <span class="mono-tag">.exe 프로그램</span> 형태로도 만들어봤어요. 이 과정에서 Git과 <strong>Claude Code CLI</strong>를 자연스럽게 익혔어요.</p>
+        <p>회사에서 Claude Code를 전사 도입한다는 소식을 듣고, 2주 먼저 <span class="term" data-term="pro">Pro</span> 버전을 먼저 써봤어요. Claude Code의 실행 결과를 귀엽게 알려주는 작은 프로그램이 있으면 좋겠다고 생각했고, 그 생각에서 개인 다마고치 프로젝트 Nuttie를 만들기 시작했어요.</p>
+        <p>집과 회사에서 같은 프로젝트를 이어서 작업하려고 <span class="term" data-term="github">GitHub</span>를 썼어요. Nuttie를 다른 사람에게도 보여주고 싶어서, 별도 개발환경 없이 바로 실행되는 <span class="mono-tag">.exe 프로그램</span> 형태로도 만들어봤어요. 이 과정에서 Git과 <strong>Claude Code CLI</strong>를 자연스럽게 익혔어요.</p>
       </div>
       <div class="shot tiny">
         <div class="trio">
@@ -143,7 +143,7 @@
         <table>
           <thead><tr><th>질문</th><th>AI가 이해해야 할 것</th><th>예시</th></tr></thead>
           <tbody>
-            <tr><td class="nm">어디서</td><td>어떤 자료와 데이터를 참고해야 하는지</td><td>기획서, Jira, Wiki, 기존 화면, 운영 데이터</td></tr>
+            <tr><td class="nm">어디서</td><td>어떤 자료와 데이터를 참고해야 하는지</td><td>기획서(Confluence, Figma), Jira, 실제 화면</td></tr>
             <tr><td class="nm">무엇을</td><td>어떤 결과물을 만들어야 하는지</td><td>Figma 시안, 화면 스펙, 정책 문서, 검수 결과</td></tr>
             <tr><td class="nm">어떻게</td><td>어떤 기준으로 판단하고 예외를 처리할지</td><td>문구 일치 여부, 제외 조건, 검수 기준, 완료 조건</td></tr>
             <tr><td class="nm">왜</td><td>이 일을 하는 목적이 무엇인지</td><td>사용자 불편 개선, 검수 누락 방지, 반복 업무 축소</td></tr>
@@ -347,7 +347,7 @@
         <div class="fail-row"><div class="k">왜 못 잡았나</div><div class="v">이 검수도 Claude에게 맡겼는데, 당시 기준은 링크가 정상적으로 열리는지만 확인하는 거라 실제로 맞는 영상이 연결됐는지는 보지 않았어요.</div></div>
         <div class="fail-row fix"><div class="k">다시 세운 기준</div><div class="v">이후에는 원본 자료와 발송본을 항목별로 대조하고, 링크뿐 아니라 연결된 내용까지 함께 확인하도록 검수 기준을 바꿨어요.</div></div>
       </div>
-      <div class="a"><p>이렇게 다듬은 기준은 저만 아는 채로 두지 않고, 세무달력을 만들고 검수하는 과정 전체를 <span class="term" data-term="plugin">Claude Code Plugin</span>으로 묶어 팀원들도 그대로 받아 쓸 수 있게 만들었어요. 담당자가 바뀌어도 같은 기준으로 세무달력을 만들 수 있어요.</p></div>
+      <div class="a"><p>이렇게 다듬은 기준은 저만 아는 채로 두지 않고, 세무달력을 만들고 검수하는 과정 전체를 <strong>Claude Code Plugin</strong>으로 묶어 팀원들도 그대로 받아 쓸 수 있게 만들었어요. 담당자가 바뀌어도 같은 기준으로 세무달력을 만들 수 있어요.</p></div>
       <p class="endline">AI가 잘 만들어주긴 하지만, 기준을 세우고 <span class="hl">최종적인 검수는 '사람'이 해야한다</span>는 걸 경험했어요.</p>
     </div>
   </section>
@@ -377,10 +377,155 @@
         <div class="flow-step"><div class="idx">04</div><div class="t">기획 검수</div></div>
       </div>
       <div class="a">
-        <p>퍼블리싱 뒤 검수는 특히 번거로웠어요. 텍스트가 틀렸거나 고칠 부분이 있으면 화면을 캡처해서 하나하나 옮겨 적어 전달해야 했거든요. 같은 화면을 보면서 바로 확인할 수 있는 도구를 여기에 먼저 만들었고, 이걸 시작으로 하던 기획 업무 네 가지로 범위를 넓혔어요. 그중 결과를 수치로 확인한 하나는 대표 사례로 정리했고, 나머지 셋은 같은 방식으로 AI가 맡을 부분과 사람이 판단할 부분을 나눠 적용했어요.</p>
+        <p>결과물 검수는 특히 번거로웠어요. 텍스트가 틀렸거나 고칠 부분이 있으면 화면을 캡처해서 하나하나 옮겨 적어 전달해야 했거든요.</p>
+      </div>
+      <div class="ba-card">
+        <div class="ba-head"><span class="k">결과물 검수</span><span class="v">캡처해서 옮겨 적던 걸 URL 공유로 끝내요</span></div>
+        <div class="ba-pair">
+          <figure class="ba-fig">
+            <span class="ba-tag">전</span>
+            <div class="ba-row">
+              <div class="ba-win-wrap">
+                <div class="ba-win-frame">
+                  <svg class="ba-win-svg" viewBox="0 0 200 104" aria-hidden="true">
+                    <rect x="1" y="1" width="198" height="102" rx="8" fill="var(--surface)" stroke="var(--line)" stroke-width="1.2"/>
+                    <path d="M1 9V9a8 8 0 0 1 8-8h182a8 8 0 0 1 8 8v10H1z" fill="var(--tint)"/>
+                    <circle cx="12" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <circle cx="20" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <circle cx="28" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <rect x="14" y="30" width="56" height="6" rx="3" fill="var(--line)"/>
+                    <rect x="14" y="44" width="100" height="14" rx="3" fill="var(--tint)"/>
+                    <rect x="14" y="66" width="110" height="7" rx="3" fill="var(--tint)"/>
+                    <rect x="14" y="80" width="80" height="7" rx="3" fill="var(--tint)"/>
+                    <rect class="ba-issue" x="34" y="44" width="42" height="14" rx="3" fill="none" stroke="var(--fail)" stroke-width="1.3" stroke-dasharray="2.5 2.5"/>
+                    <line x1="128" y1="24" x2="128" y2="98" stroke="var(--line)" stroke-width="1"/>
+                    <rect x="132" y="26" width="56" height="6" rx="2" fill="var(--line)"/>
+                    <rect x="132" y="40" width="56" height="7" rx="2" fill="var(--tint)"/>
+                    <rect x="132" y="54" width="44" height="7" rx="2" fill="var(--tint)"/>
+                    <rect x="132" y="68" width="50" height="7" rx="2" fill="var(--tint)"/>
+                  </svg>
+                </div>
+                <div class="ba-type-note" aria-hidden="true"><span class="ba-type-text">맞춤법 오류: '되요' → '돼요'</span><span class="ba-type-caret"></span></div>
+              </div>
+              <div class="ba-link-h" aria-hidden="true"></div>
+              <div class="ba-xfer" aria-hidden="true">
+                <div class="ba-xfer-head">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="ba-xfer-body">
+                  <div class="ba-xfer-send">
+                    <div class="ba-pdf-doc">
+                      <svg viewBox="0 0 64 80">
+                        <path d="M4 2h34l18 18v56a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="var(--surface)" stroke="var(--line)" stroke-width="1.3"/>
+                        <path d="M38 2v14a2 2 0 0 0 2 2h16" fill="none" stroke="var(--line)" stroke-width="1.3"/>
+                        <rect x="10" y="28" width="36" height="5" rx="2" fill="var(--tint)"/>
+                        <rect x="4" y="44" width="48" height="17" rx="2" fill="var(--fail)"/>
+                        <text x="28" y="56.5" font-size="9" font-family="var(--mono)" text-anchor="middle" fill="#fff" font-weight="700" letter-spacing=".5">PDF</text>
+                        <rect x="10" y="68" width="26" height="5" rx="2" fill="var(--tint)"/>
+                      </svg>
+                    </div>
+                    <div class="ba-chat">
+                      <div class="ba-chat-bubble">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14 2.5H7a1 1 0 0 0-1 1v17a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/>
+                          <path d="M14 2.5V7a1 1 0 0 0 1 1h4"/>
+                        </svg>
+                        <span class="ba-chat-text">검수결과.pdf</span>
+                      </div>
+                      <div class="ba-chat-reply">확인했어요</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ba-drag-trail" aria-hidden="true">
+                <svg viewBox="0 0 12 19" width="14" height="19">
+                  <path d="M0 0 L0 16 L4 12.5 L7 18.5 L10 17 L7 11 L12 11 Z" fill="var(--ink-soft)" stroke="var(--surface)" stroke-width="0.8" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <figcaption class="ba-cap">문제를 직접 타이핑해 적고 PDF로 저장한 뒤 대화로 보내야 확인받을 수 있었다</figcaption>
+          </figure>
+          <div class="ba-arrow" aria-hidden="true">→</div>
+          <figure class="ba-fig on">
+            <span class="ba-tag">후</span>
+            <div class="ba-row">
+              <div class="ba-win-wrap">
+                <div class="ba-win-frame">
+                  <svg class="ba-win-svg" viewBox="0 0 200 104" aria-hidden="true">
+                    <rect x="1" y="1" width="198" height="102" rx="8" fill="var(--surface)" stroke="var(--line)" stroke-width="1.2"/>
+                    <path d="M1 9V9a8 8 0 0 1 8-8h182a8 8 0 0 1 8 8v10H1z" fill="var(--tint)"/>
+                    <circle cx="12" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <circle cx="20" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <circle cx="28" cy="10" r="2.2" fill="var(--ink-faint)" opacity=".5"/>
+                    <rect x="14" y="30" width="56" height="6" rx="3" fill="var(--line)"/>
+                    <rect x="14" y="44" width="100" height="14" rx="3" fill="var(--tint)"/>
+                    <rect x="14" y="66" width="110" height="7" rx="3" fill="var(--tint)"/>
+                    <rect x="14" y="80" width="80" height="7" rx="3" fill="var(--tint)"/>
+                    <rect class="ba-issue ba-issue-on" x="34" y="44" width="42" height="14" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"/>
+                    <g class="ba-link-chip">
+                      <rect x="80" y="43" width="44" height="17" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"/>
+                      <svg x="84" y="46.5" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                      </svg>
+                      <text x="99" y="55" font-size="8" font-family="var(--mono)" fill="var(--accent-ink)" font-weight="700">공유</text>
+                    </g>
+                    <line x1="128" y1="24" x2="128" y2="98" stroke="var(--line)" stroke-width="1"/>
+                    <rect x="132" y="26" width="56" height="6" rx="2" fill="var(--line)"/>
+                    <g class="ba-list-row ba-list-row-on">
+                      <rect x="132" y="36" width="56" height="13" rx="2" fill="var(--accent-soft)"/>
+                      <rect x="136" y="39.5" width="16" height="6" rx="1.5" fill="var(--fail)"/>
+                      <rect x="156" y="39.5" width="20" height="6" rx="1.5" fill="var(--accent)"/>
+                    </g>
+                    <g class="ba-list-row">
+                      <rect x="136" y="57.5" width="14" height="5" rx="1.5" fill="var(--fail)" opacity=".45"/>
+                      <rect x="154" y="57.5" width="18" height="5" rx="1.5" fill="var(--accent)" opacity=".45"/>
+                    </g>
+                    <g class="ba-list-row">
+                      <rect x="136" y="75.5" width="18" height="5" rx="1.5" fill="var(--fail)" opacity=".4"/>
+                      <rect x="158" y="75.5" width="16" height="5" rx="1.5" fill="var(--accent)" opacity=".4"/>
+                    </g>
+                  </svg>
+                </div>
+                <div class="ba-load-bar" aria-hidden="true">
+                  <div class="ba-load-stage">
+                    <span class="ba-load-label">자동으로 짚은 자리를 찾는 중</span>
+                    <div class="ba-load-track"><div class="ba-load-fill"></div></div>
+                  </div>
+                  <div class="ba-load-done">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.5l2.7 2.7L16.3 9"/></svg>
+                    <span class="ba-load-label">자동으로 찾았어요</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ba-link-h" aria-hidden="true"></div>
+              <div class="ba-xfer" aria-hidden="true">
+                <div class="ba-xfer-head">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="ba-xfer-body">
+                  <div class="ba-chat">
+                    <div class="ba-chat-bubble">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                      </svg>
+                      <span class="ba-chat-text">여기 확인해주세요</span>
+                    </div>
+                    <div class="ba-chat-reply">확인했어요</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figcaption class="ba-cap">화면에서 짚은 자리를 URL로 바로 공유하면 따로 옮겨 적을 과정 없이 끝났다</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="a">
+        <p>퍼블리셔와 같은 화면을 보면서 바로 짚을 수 있는 도구를 만들고 나니, 캡처해서 옮겨 적고 다시 확인받던 대화가 링크 하나로 줄었어요. 이 도구는 원래 맞춤법만 검사하던 작은 프로그램이었는데, 여기에 시안과 기획서 문구를 대조하는 기능을 붙이면서 '프로덕트 툴'로 이름을 바꿨어요.</p>
       </div>
 
-      <h3 class="q">수백 건 중 실제로 볼 것만 남기려면 어떻게 했나요?</h3>
+      <h3 class="q">시안·기획서 대조에서 오탐은 어떻게 줄였나요?</h3>
       <div class="a">
         <p>다른 점을 찾기 전에 잘못 걸리는 것부터 규칙으로 먼저 걸러 냈어요. 시안과 기획서는 화면을 만드는 방식이 달라서 같은 문구도 여러 조각으로 잡히는 경우가 많았고, 이런 오탐부터 줄이지 않으면 사람이 봐야 할 항목이 줄지 않았거든요.</p>
       </div>
@@ -420,23 +565,16 @@
       <div class="a">
         <p>링크를 받는 사람은 사내 도구를 쓰러 오는 게 아니라 결과만 보러 오는 거라, 화면도 그 기준으로 다시 다듬었어요. 편집 버튼은 눌러도 반응 없이 남지 않도록 화면에서 아예 지웠고, 화면 이미지 용량을 줄여 링크를 열자마자 빨리 뜨도록 만들었어요.</p>
       </div>
-      <div class="cols-2">
-        <ul class="bullets strong">
-          <li>편집 화면은 CSS로 끊어 실수로 눌러도 반응하지 않게 해요</li>
-          <li>링크 복사 버튼을 붙여 결과를 바로 전달할 수 있게 해요</li>
-          <li>화면 이미지를 webp로 압축해 여는 속도를 높여요</li>
-        </ul>
-        <div class="card">
-          <div class="h">공유 리포트 한 건 용량</div>
-          <div class="n mono">4.85MB <span class="arrow">→</span> <span class="to">2.1MB</span></div>
-          <div class="cap">화면 이미지를 webp로 바꾼 뒤, 글자 획은 눈으로 차이가 없이 절반 이하로 줄었어요.</div>
-        </div>
-      </div>
+      <ul class="bullets strong">
+        <li>편집 화면은 CSS로 끊어 실수로 눌러도 반응하지 않게 해요</li>
+        <li>링크 복사 버튼을 붙여 결과를 바로 전달할 수 있게 해요</li>
+        <li>화면 이미지를 webp로 압축해 여는 속도를 높여요</li>
+      </ul>
       <div class="shot compact">
         <img src="assets/product-tools-check-result.png" alt="프로덕트 툴이 실제 페이지 위에서 시안과 기획서 문구를 대조한 검사 결과 화면, 23건 발견" loading="lazy">
         <div class="cap">이름을 프로덕트 툴로 바꾼 뒤, 실제 페이지 위에서 시안과 기획서 문구를 자동으로 대조한 검사 결과 화면이에요.</div>
       </div>
-      <div class="a"><p>이 도구는 원래 퍼블리싱 페이지의 한국어 맞춤법만 검사하던 작은 프로그램이었어요. 여기에 시안·기획서 대조 기능을 붙이면서 도구 이름도 '프로덕트 툴'로 바꿨고, 이어서 제플린 시안을 원본 화질 그대로 받는 기능까지 추가했어요.</p></div>
+      <div class="a"><p>대조 기능에 이어서 제플린 시안을 원본 화질 그대로 받는 기능까지 추가했어요.</p></div>
     </div>
   </section>
 

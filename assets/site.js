@@ -18,6 +18,8 @@ var TERMS = {
   mcp: 'Model Context Protocol의 줄임말로, Claude Code가 Figma, 사내 문서 같은 외부 도구와 연결되어 필요한 정보를 직접 읽고 사용할 수 있게 해주는 방식이에요.',
   skill: '반복해서 쓰는 업무 방법과 규칙을 묶어 두고, 필요한 작업에서 Claude가 불러와 적용할 수 있게 만든 업무 단위예요.',
   context: 'AI가 대화하는 동안 기억하고 참고하는 정보의 범위예요.',
+  pro: '월 $20인 요금제예요. Pro 버전부터 Claude Code를 쓸 수 있어요.',
+  github: '코드를 저장하고 버전을 관리할 수 있는 클라우드 저장소 서비스예요.',
 };
 
 window.SITE = {
@@ -27,7 +29,7 @@ window.SITE = {
   contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
   brand: 'ASKBETTER',
   // 최종 배포 시각. wrangler deploy 전에 scripts/stamp-deploy-time.py 가 이 줄만 고쳐 쓴다
-  meta: { deployedAt: '2026.09.29 18:16' },
+  meta: { deployedAt: '2026.10.01 19:20' },
   // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
   url: 'https://askbetter.studio54.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다

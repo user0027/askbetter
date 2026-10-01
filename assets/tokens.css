@@ -27,6 +27,8 @@
   --accent-soft:#eaf0ff;
   --accent-line:#c8d6ff;
   --good:#1f7a52;
+  --good-soft:#eaf7f1;
+  --good-line:#bfe3d1;
   /* AI가 틀렸던 지점 상자. 글 페이지에서 경고 성격의 강조에만 쓴다 */
   --fail:#c2410c;
   --fail-soft:#fff6f0;
