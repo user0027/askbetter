@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>연말정산 대시보드 목업</title>
+<!-- 홈 3장 부품의 원본. 수임처 AI 연말정산 대시보드를 다시 그린 목업이고, 수임처·사람 이름과 숫자는 전부 지어낸 값이다.
+     scripts/cut-home-shots.py 가 카드를 id 별로 2배로 찍어 assets/work/parts/yearend-*.png 로 자른다. -->
+<style>
+  :root{ --ink:#1d2330; --sub:#6b7280; --line:#e6e8ee; --blue:#2563eb; --violet:#7c5cff; --red:#f2706b; --green:#8bc96a; --gray:#d6d9e0; }
+  *{ box-sizing:border-box; margin:0; }
+  body{ background:#fff; font-family:Pretendard, -apple-system, sans-serif; color:var(--ink); }
+  /* 홈 .stage 와 같은 비율(1456:828)의 판. 카드 네 장을 한 격자에 앉혀 줄·높이를 맞추고,
+     cut-home-shots.py 가 이 판 기준 위치를 재서 index.html 의 --x/--y/--w 로 쓴다 */
+  #board{ width:1180px; height:671px; padding:0 47px; display:grid; grid-template-columns:680px 382px; gap:24px; align-content:center; justify-content:space-between; }
+  #brief{ grid-area:1/1; } #donut{ grid-area:1/2; } #table{ grid-area:2/1; } #deadline{ grid-area:2/2; }
+  .card{ background:#fff; padding:24px 26px; }
+  h3{ font-size:16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  h3 .ic{ width:18px; height:18px; border:1.6px solid #4b5563; border-radius:4px; position:relative; }
+  h3 .ic::after{ content:""; position:absolute; left:3px; right:3px; bottom:3px; height:8px; background:linear-gradient(90deg,#4b5563 2px,transparent 2px 5px,#4b5563 5px 7px,transparent 7px); }
+  .spark{ color:var(--violet); font-size:17px; }
+
+  /* AI 브리핑 */
+  #brief{ display:flex; gap:20px; align-items:center; background:#f3f6ff; }
+  .mascot{ width:104px; height:104px; flex:none; margin:0 4px; filter:hue-rotate(215deg) saturate(1.15) drop-shadow(0 8px 14px rgba(79,70,229,.22)); }
+  .brief h4{ font-size:19px; font-weight:800; }
+  .brief h4 em{ font-style:normal; color:var(--blue); }
+  .brief p{ margin-top:8px; font-size:15px; line-height:1.6; color:#374151; }
+  .brief .go{ margin-top:12px; display:inline-block; background:var(--blue); color:#fff; font-size:14px; font-weight:600; border-radius:99px; padding:7px 18px; }
+  .chips{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; }
+  .chips span{ font-size:14px; font-weight:600; color:#4f46e5; background:#e7e9ff; border-radius:8px; padding:6px 10px; }
+
+  /* 진행 표 */
+  #table{ border:2px solid transparent; border-radius:15px; background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#4f7bff,#a35cff) border-box; }
+  .tbl-head{ display:flex; align-items:center; justify-content:space-between; }
+  .tbl-head small{ font-size:13px; color:var(--sub); }
+  .tbl-head small b{ color:var(--ink); text-decoration:underline; font-weight:600; }
+  .row{ display:grid; grid-template-columns:1.6fr 1.1fr .8fr .8fr 1.7fr .4fr; align-items:center; font-size:15px; height:46px; padding:0 16px; }
+  .row.hd{ margin-top:14px; height:40px; background:#f4f5f8; border-radius:8px; color:#4b5563; font-weight:600; font-size:14px; }
+  .row span:nth-child(n+3){ text-align:center; }
+  .bar{ display:flex; align-items:center; gap:10px; justify-content:flex-end; color:var(--sub); font-size:14px; }
+  .bar i{ width:90px; height:8px; background:#e5e7eb; border-radius:99px; overflow:hidden; display:block; }
+  .bar i b{ display:block; height:100%; background:var(--blue); border-radius:99px; }
+  .late{ display:inline-flex; align-items:center; gap:6px; }
+  .late::after{ content:"!"; width:16px; height:16px; border-radius:50%; border:1.6px solid #ef4444; color:#ef4444; font-size:11px; font-weight:800; display:grid; place-items:center; }
+  .arrow{ color:#6b7280; }
+
+  /* 마감 임박 */
+  
+  .dl{ margin-top:12px; display:grid; grid-template-columns:44px 1fr 80px 34px; gap:12px; align-items:center; padding:9px 0; }
+  .doc{ width:44px; height:44px; border-radius:10px; background:linear-gradient(145deg,#ffe3e3,#ffc9c9); display:grid; place-items:center; color:#f2706b; font-weight:800; font-size:15px; }
+  .dl b{ font-size:15px; display:block; }
+  .dl small{ font-size:12.5px; color:var(--sub); }
+  .dl .track{ height:8px; background:#e5e7eb; border-radius:99px; overflow:hidden; }
+  .dl .track b{ display:block; height:100%; background:var(--blue); border-radius:99px; }
+  .dl em{ font-style:normal; color:#9ca3af; font-size:13px; text-align:right; }
+
+  /* 진행 현황 도넛 */
+  
+  .dn{ margin-top:18px; display:flex; align-items:center; gap:22px; }
+  .dn svg{ width:136px; height:136px; flex:none; }
+  .legend{ display:grid; grid-template-columns:repeat(2, auto); gap:12px 24px; }
+  .legend div{ font-size:14px; color:#4b5563; }
+  .legend div::before{ content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:6px; vertical-align:middle; }
+  .legend b{ display:block; font-size:24px; font-weight:800; color:var(--ink); margin-top:2px; }
+</style>
+</head>
+<body>
+<div id="board">
+  <div class="card" id="brief">
+    <!-- AI 오브젝트: Microsoft Fluent Emoji 3D Sparkles (MIT). 화면 톤에 맞춰 색만 돌린다 -->
+    <img class="mascot" src="ai-sparkles.png" alt="">
+    <div class="brief">
+      <h4>오늘 먼저 챙길 <em>업무를 정리</em>했어요 (2/5)</h4>
+      <p>제출 마감이 얼마 남지 않은 수임처가 많아요.<br>자료를 아직 내지 않은 직원에게 지금 알림을 보내 보세요.</p>
+      <span class="go">알림 보내기 ›</span>
+      <div class="chips"><span>#자료입력 요청 110건</span><span>#증빙자료 확인 30건</span><span>#간소화 자료 확인 21건</span></div>
+    </div>
+  </div>
+
+  <div class="card" id="table">
+    <div class="tbl-head"><h3><span class="spark">✦</span>수임처 30개 <span style="font-weight:500;color:var(--sub)">(자료입력 요청 <b style="color:var(--violet)">110</b>건)</span></h3><small>정렬 기준 <b>마감임박순</b></small></div>
+    <div class="row hd"><span>수임처명</span><span>마감일</span><span>전체 대상자</span><span>제출 완료</span><span style="text-align:right">진행률</span><span></span></div>
+    <div class="row"><span>(주)하늘상사</span><span class="late">2027.01.10</span><span>27</span><span>4</span><span class="bar"><i><b style="width:15%"></b></i>15%</span><span class="arrow">→</span></div>
+    <div class="row"><span>바다세무회계</span><span>2027.01.15</span><span>18</span><span>9</span><span class="bar"><i><b style="width:50%"></b></i>50%</span><span class="arrow">→</span></div>
+    <div class="row"><span>(주)숲디자인</span><span>2027.01.17</span><span>42</span><span>29</span><span class="bar"><i><b style="width:69%"></b></i>69%</span><span class="arrow">→</span></div>
+    <div class="row"><span>(주)들꽃제과</span><span>2027.01.20</span><span>35</span><span>28</span><span class="bar"><i><b style="width:80%"></b></i>80%</span><span class="arrow">→</span></div>
+  </div>
+
+  <div class="card" id="deadline">
+    <h3><span class="ic"></span>자료 제출 마감 임박 수임처</h3>
+    <div class="dl"><span class="doc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f2706b" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 20.5h16"/><path d="M6 20.5V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15.5" fill="#fff"/><path d="M15 9.5h3a1 1 0 0 1 1 1v10" fill="#fff"/><path d="M9 8h3M9 11.5h3M9 15h3"/><path d="M10 20.5v-2.5h1v2.5"/></svg></span><div><b>(주)별빛테크</b><small>2026.12.31까지 (D-5)</small></div><span class="track"><b style="width:80%"></b></span><em>80%</em></div>
+    <div class="dl"><span class="doc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f2706b" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 20.5h16"/><path d="M6 20.5V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15.5" fill="#fff"/><path d="M15 9.5h3a1 1 0 0 1 1 1v10" fill="#fff"/><path d="M9 8h3M9 11.5h3M9 15h3"/><path d="M10 20.5v-2.5h1v2.5"/></svg></span><div><b>노을식품</b><small>2027.01.06까지 (D-11)</small></div><span class="track"><b style="width:20%"></b></span><em>20%</em></div>
+    <div class="dl"><span class="doc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f2706b" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 20.5h16"/><path d="M6 20.5V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15.5" fill="#fff"/><path d="M15 9.5h3a1 1 0 0 1 1 1v10" fill="#fff"/><path d="M9 8h3M9 11.5h3M9 15h3"/><path d="M10 20.5v-2.5h1v2.5"/></svg></span><div><b>(주)구름물류</b><small>2027.01.20까지 (D-25)</small></div><span class="track"><b style="width:50%"></b></span><em>50%</em></div>
+  </div>
+
+  <div class="card" id="donut">
+    <h3><span class="ic"></span>수임처 진행 현황</h3>
+    <div class="dn">
+      <svg viewBox="0 0 150 150">
+        <g transform="rotate(-90 75 75)" fill="none" stroke-width="16">
+          <circle cx="75" cy="75" r="62" stroke="var(--gray)"/>
+          <circle cx="75" cy="75" r="62" stroke="var(--red)" stroke-dasharray="142.7 389.6" stroke-dashoffset="-99.6"/>
+          <circle cx="75" cy="75" r="62" stroke="var(--blue)" stroke-dasharray="126.8 389.6" stroke-dashoffset="-242.3"/>
+          <circle cx="75" cy="75" r="62" stroke="var(--green)" stroke-dasharray="20.5 389.6" stroke-dashoffset="-369.1"/>
+        </g>
+        <text x="75" y="66" text-anchor="middle" font-size="11" fill="#6b7280">담당 수임처</text>
+        <text x="75" y="94" text-anchor="middle" font-size="30" font-weight="800" fill="#1d2330">74</text>
+      </svg>
+      <div class="legend">
+        <div style="--c:var(--gray)">미진행<b>19</b></div>
+        <div style="--c:var(--red)">진행중<b>27</b></div>
+        <div style="--c:var(--green)">기간만료<b>4</b></div>
+        <div style="--c:var(--blue)">마감<b>24</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

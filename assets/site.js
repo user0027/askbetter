@@ -20,16 +20,19 @@ var TERMS = {
   context: 'AI가 대화하는 동안 기억하고 참고하는 정보의 범위예요.',
   pro: '월 $20인 요금제예요. Pro 버전부터 Claude Code를 쓸 수 있어요.',
   github: '코드를 저장하고 버전을 관리할 수 있는 클라우드 저장소 서비스예요.',
+  local: '프로그램과 결과가 지금 쓰는 내 컴퓨터 안에서만 돌아가는 상태예요. 다른 사람 컴퓨터에서는 열 수 없어요.',
+  server: '여러 사람이 네트워크로 접속해 같은 결과를 볼 수 있게 내주는 컴퓨터나 프로그램이에요.',
+  cloudflare: '웹 페이지와 파일을 인터넷에 올려 두고, 어디서든 빠르게 열 수 있게 해주는 클라우드 서비스예요.',
 };
 
 window.SITE = {
   metrics: METRICS,
   terms: TERMS,
   // 연락처. 링크는 data-site-href="contact.mailto" 로 건다
-  contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com' },
+  contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com', copied: '이메일 주소가 복사됐어요' },
   brand: 'ASKBETTER',
   // 최종 배포 시각. wrangler deploy 전에 scripts/stamp-deploy-time.py 가 이 줄만 고쳐 쓴다
-  meta: { deployedAt: '2026.10.01 19:20' },
+  meta: { deployedAt: '2026.10.05 23:41' },
   // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
   url: 'https://askbetter.studio54.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다
@@ -93,6 +96,44 @@ window.SITE = {
   document.querySelectorAll('[data-site-href]').forEach(function (el) {
     var v = get(el.getAttribute('data-site-href'));
     if (v != null) el.setAttribute('href', v);
+  });
+  // data-copy="contact" → 누르면 contact.email 을 복사하고 contact.copied 를 토스트로 띄운다.
+  // 링크(메일 앱 열기)는 그대로 둔다. 메일 앱이 안 열리는 웹메일 사용자도 주소를 가져갈 수 있게
+  var toast, toastTimer;
+  function showToast(text) {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.setAttribute('role', 'status');
+      document.body.appendChild(toast);
+    }
+    toast.textContent = text;
+    toast.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('on'); }, 2400);
+  }
+  function copyText(v) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(v);
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = v;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      ok ? resolve() : reject();
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var c = get(el.getAttribute('data-copy'));
+      if (!c || !c.email) return;
+      copyText(c.email).then(function () { showToast(c.copied); }, function () {});
+    });
   });
   // data-term="cli" (class="term" 과 같이 쓴다) → TERMS 문구로 data-tip·"?" 아이콘을 채운다
   document.querySelectorAll('[data-term]').forEach(function (el) {

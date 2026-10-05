@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>급여이체 목업</title>
+<!-- 홈 2장 부품의 원본. DJBank 계좌이체 화면과 같은 꼴(굵은 라벨+테두리 입력칸, 칸마다 상자인 표, 파란 테두리 실명 열)로
+     그린 급여이체 목업이다. 이름·금액·계좌는 전부 지어낸 값이다.
+     scripts/cut-home-shots.py 가 카드를 id 별로 2배로 찍어 assets/work/parts/payroll-*.png 로 자른다.
+     #board 는 홈 .stage 와 같은 비율(1456:828)이라 출력되는 --w 를 쓰면 부품끼리 글자 크기가 같다 -->
+<style>
+  :root{ --line:#dfe3ea; --head:#f4f5f8; --ink:#1d2330; --sub:#6b7280; --blue:#1a6dff; --ok:#16a34a; --bad:#e5243b; --badbg:#fff5f6; }
+  *{ box-sizing:border-box; margin:0; }
+  body{ background:#fff; font-family:Pretendard, -apple-system, sans-serif; color:var(--ink); }
+  #board{ width:1180px; height:671px; padding:40px 47px; display:flex; flex-direction:column; gap:24px; align-items:flex-start; }
+  .card{ background:#fff; padding:22px 24px; }
+
+  /* 조회 조건 */
+  #filter h1{ font-size:20px; font-weight:800; display:flex; align-items:baseline; gap:10px; }
+  #filter h1 small{ font-size:13px; font-weight:400; color:var(--sub); }
+  .fs{ margin-top:16px; border:1px solid var(--line); border-radius:10px; padding:16px 20px; display:flex; gap:22px; align-items:center; }
+  .f{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:14px; white-space:nowrap; }
+  .in{ height:38px; border:1px solid var(--line); border-radius:6px; padding:0 12px; display:flex; align-items:center; justify-content:space-between; gap:14px; font-weight:400; font-size:14px; }
+  .in i{ color:#9aa1ad; font-style:normal; font-size:11px; }
+
+  /* 지급 대상 표 */
+  #table h2{ font-size:17px; font-weight:800; display:flex; align-items:center; gap:10px; }
+  #table h2 .sum{ margin-left:auto; font-size:13px; font-weight:400; color:var(--sub); }
+  #table h2 .sum b{ color:var(--ink); }
+  .tbl{ margin-top:12px; position:relative; }
+  .row{ display:grid; grid-template-columns:34px 96px 104px 124px 136px 120px 112px; gap:0 7px; align-items:center; height:56px; padding:0 10px; }
+  .row.hd{ height:42px; background:var(--head); color:var(--sub); font-size:13px; }
+  .row.hd span{ text-align:center; }
+  .row.hd i{ font-style:normal; font-size:9px; margin-left:3px; }
+  .row.bad{ background:var(--badbg); }
+  .c{ height:40px; border:1px solid var(--line); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .c.gray{ background:#f6f7f9; }
+  .c.sel{ justify-content:space-between; padding:0 10px 0 12px; }
+  .c.sel i{ color:#9aa1ad; font-style:normal; font-size:10px; }
+  .c.num{ justify-content:flex-end; padding-right:12px; }
+  .bad .c{ background:#fff8f8; }
+  .v{ display:flex; align-items:center; justify-content:center; gap:7px; font-size:14px; }
+  .v .dot{ width:19px; height:19px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:11px; font-weight:800; }
+  .v.ok .dot{ background:var(--ok); }
+  .v.no{ color:var(--bad); font-weight:600; }
+  .v.no .dot{ background:var(--bad); }
+  .cb{ width:20px; height:20px; border:1.5px solid #c9ced8; border-radius:4px; background:#fff; display:grid; place-items:center; margin:auto; }
+  .cb.on{ background:var(--blue); border-color:var(--blue); }
+  .cb.on::after{ content:""; width:9px; height:5px; border:solid #fff; border-width:0 0 2.3px 2.3px; transform:translateY(-1px) rotate(-45deg); }
+  /* 실명 열 테두리. 실제 화면처럼 머리줄 아래부터 다섯 줄을 감싼다 */
+  .frame{ position:absolute; top:46px; bottom:-4px; left:392px; width:144px; border:2px solid var(--blue); border-radius:8px; }
+</style>
+</head>
+<body>
+<div id="board">
+  <div class="card" id="filter">
+    <h1>급여이체 <small>급여대장의 실지급액으로 사원 급여계좌에 이체합니다.</small></h1>
+    <div class="fs">
+      <div class="f">귀속연월 <div class="in" style="width:110px">2026.04 <i>˅</i></div></div>
+      <div class="f">지급일 <div class="in" style="width:138px">2026.05.10 <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="#9aa1ad" stroke-width="1.5"><rect x="2.5" y="3.5" width="13" height="12" rx="2"/><path d="M2.5 7.5h13M6 2v3M12 2v3"/></svg></div></div>
+      <div class="f">출금계좌번호 <div class="in" style="width:200px">급여 지급계좌 ···5555 <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="#9aa1ad" stroke-width="1.6"><circle cx="8" cy="8" r="5"/><path d="M12 12l3.5 3.5"/></svg></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="table">
+    <h2>지급 대상 <span class="sum">5명 중 <b>3명</b> 선택 · 실지급액 합계 <b>10,061,000원</b></span></h2>
+    <div class="tbl">
+      <div class="row hd"><span><span class="cb"></span></span><span>사원명<i>▾</i></span><span>부서<i>▾</i></span><span>입금은행<i>▾</i></span><span>예금주 실명<i>▾</i></span><span>실지급액</span><span>내 통장 표시</span></div>
+      <div class="row"><span><span class="cb on"></span></span><div class="c gray">김하늘</div><div class="c gray">경영지원팀</div><div class="c sel">신한은행 <i>˅</i></div><div class="v ok">김하늘 <span class="dot">✓</span></div><div class="c num">3,412,500</div><div class="c">4월 급여</div></div>
+      <div class="row bad"><span><span class="cb"></span></span><div class="c gray">이준호</div><div class="c gray">개발팀</div><div class="c sel">국민은행 <i>˅</i></div><div class="v no">이정민 <span class="dot">✕</span></div><div class="c num">2,980,000</div><div class="c">4월 급여</div></div>
+      <div class="row"><span><span class="cb on"></span></span><div class="c gray">박서연</div><div class="c gray">디자인팀</div><div class="c sel">우리은행 <i>˅</i></div><div class="v ok">박서연 <span class="dot">✓</span></div><div class="c num">3,105,400</div><div class="c">4월 급여</div></div>
+      <div class="row bad"><span><span class="cb"></span></span><div class="c gray">최도윤</div><div class="c gray">영업팀</div><div class="c sel">기업은행 <i>˅</i></div><div class="v no">최수아 <span class="dot">✕</span></div><div class="c num">2,764,800</div><div class="c">4월 급여</div></div>
+      <div class="row"><span><span class="cb on"></span></span><div class="c gray">정유나</div><div class="c gray">개발팀</div><div class="c sel">농협은행 <i>˅</i></div><div class="v ok">정유나 <span class="dot">✓</span></div><div class="c num">3,543,100</div><div class="c">4월 급여</div></div>
+      <div class="frame"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

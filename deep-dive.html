@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ASKBETTER | Deep Dive</title>
 <!-- og:start -->
-<meta name="description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
+<meta name="description" content="케이스 스터디에서 결과만 적은 작업 방식을 풀어 썼습니다. 하루 작업 흐름, 점검 화면, AI의 기억 관리, 세션 운영, 토큰 사용량을 다룹니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ASKBETTER">
-<meta property="og:title" content="ASKBETTER | 대조 규칙부터 운영 점검까지">
-<meta property="og:description" content="케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다. 대조 규칙, 검수기, 플러그인 배포, 점검 화면을 다룹니다.">
+<meta property="og:title" content="ASKBETTER | AI 세션 여러 개와 일하며 정리한 작업 방식">
+<meta property="og:description" content="케이스 스터디에서 결과만 적은 작업 방식을 풀어 썼습니다. 하루 작업 흐름, 점검 화면, AI의 기억 관리, 세션 운영, 토큰 사용량을 다룹니다.">
 <meta property="og:url" content="https://askbetter.studio54.workers.dev/deep-dive">
 <meta property="og:image" content="https://askbetter.studio54.workers.dev/assets/og/deep-dive.png">
 <meta property="og:image:width" content="1200">
@@ -42,9 +42,9 @@
   <section class="cover">
     <div class="wrap narrow">
       <div class="brand"><a href="case-study.html" data-site-href="story.href">케이스 스터디 심화 자료</a></div>
-      <h1>대조 규칙부터 운영 점검까지<br>설정과 실측 값으로</h1>
+      <h1>AI 세션 여러 개와 일하며<br>정리한 작업 방식</h1>
       <div class="rule"></div>
-      <p class="sub">케이스 스터디에서 결과만 말한 작업을 실제 설정과 실측 값으로 풀었습니다</p>
+      <p class="sub">케이스 스터디에서 결과만 적은 작업 방식을 풀어 쓴 글이에요. 하루 작업 흐름에서 시작해 점검 화면의 탭 순서대로 다뤄요.</p>
       <nav class="toc" aria-label="목차">
         <div class="toc-head"></div>
         <ol>
@@ -53,389 +53,69 @@
     </div>
   </section>
 
+
   <!-- 01 -->
-  <section class="chapter" data-toc="대조 파이프라인">
+  <section class="chapter" data-toc="하루 작업 흐름">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>시안과 기획서 대조는 여섯 단계로 진행한다</h2></div>
+      <div><h2>하루 작업은 점검 화면에서 시작해 점검 화면으로 끝난다</h2></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">케이스 스터디에서 말한 자동 대조는 실제로 어떤 순서로 돌아가나요?</h3>
+      <h3 class="q">하루 작업은 어떤 순서로 진행되나요?</h3>
       <div class="a">
-        <p>Zeplin에 올라온 디자인 시안의 문구가 Figma 기획서와 같은지 확인하는 검수예요. 사내 화면 검사 도구 product-tools가 두 서비스 API에서 화면의 텍스트와 좌표를 직접 받아 대조까지 마쳐요. <strong>사람은 결과를 보고 제외할지만 정하면 돼요.</strong> 단계마다 기준값을 숫자로 정해 두고, 회차가 바뀌어도 같은 결과가 나오게 했어요.</p>
+        <p><strong>AI 세션 여러 개가 동시에 돌아가도 어느 일이 어디까지 됐는지 한 화면에서 확인할 수 있게 하루 작업 순서를 정했어요.</strong> 하루는 점검 화면을 여는 것으로 시작해서, 끝내지 못한 일을 점검 화면에 등록하는 것으로 끝나요. 단계마다 어느 탭에서 확인하는지는 아래와 같아요.</p>
+      </div>
+      <div class="cycle">
+        <div class="cycle-step"><div class="idx">01</div><div class="t">맥 켜기</div><div class="d">서버와 점검 화면 창이 자동으로 뜸</div><span class="tab">모니터링 탭</span></div>
+        <div class="cycle-step"><div class="idx">02</div><div class="t">프로젝트 고르기</div><div class="d">claude만 치면 최근 프로젝트 목록이 나오고, 번호로 고름</div><span class="tab none">런처</span></div>
+        <div class="cycle-step"><div class="idx">03</div><div class="t">세션 시작</div><div class="d">규칙 파일, 메모리 목록, 지난 세션의 마지막 요청이 들어감</div><span class="tab">메모리 탭</span></div>
+        <div class="cycle-step"><div class="idx">04</div><div class="t">작업</div><div class="d">훅이 규칙과 다른 부분을 한 줄로 알림</div><span class="tab">토큰 탭</span></div>
+        <div class="cycle-step"><div class="idx">05</div><div class="t">일 넘기기</div><div class="d">주제가 다른 요청은 그 프로젝트를 맡은 세션으로 보냄</div><span class="tab">구조 탭</span></div>
+        <div class="cycle-step"><div class="idx">06</div><div class="t">마무리</div><div class="d">끝내지 못한 일과 기다리는 이유를 '이어갈 일'에 등록</div><span class="tab">모니터링 탭</span></div>
+      </div>
+      <div class="cycle-back"><b>↺</b>다음 날 아침에는 점검 화면 맨 위의 '이어갈 일'부터 확인해요</div>
+
+      <h3 class="q">왜 점검 화면을 중심에 두었나요?</h3>
+      <div class="a">
+        <p>AI 세션이 늘어나자 어느 일이 어디까지 됐는지 제 기억만으로는 따라갈 수 없었어요. 세션마다 하던 일, 예약 작업 결과, 팀에 공유한 도구 상태, AI가 기억하는 내용을 각각 다른 곳에서 확인해야 했어요. <strong>그래서 이 내용을 점검 화면 한 곳에 모으고, 탭마다 무엇을 확인하는지 하나씩 정했어요.</strong> 이 페이지의 다음 장도 탭 순서를 따라가요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>단계</th><th>하는 일</th><th>기준</th></tr></thead>
+          <thead><tr><th>탭</th><th>확인하는 질문</th><th>다루는 장</th></tr></thead>
           <tbody>
-            <tr><td class="nm">01 수집</td><td>두 서비스 API에서 텍스트·좌표·노드 ID를 받음</td><td>화면 이미지는 1440px로 줄여 리포트에 넣음</td></tr>
-            <tr><td class="nm">02 잡음 제거</td><td>한 글자·기호, 상태 라벨, 예시 데이터를 비교 대상에서 뺌</td><td>hover·disabled·pc·mobile 같은 상태 표기 19종</td></tr>
-            <tr><td class="nm">03 조각 병합</td><td>강조 때문에 여러 노드로 쪼개진 문구를 한 문장으로 합침</td><td>같은 줄 오차 12px, 간격 24px 이내</td></tr>
-            <tr><td class="nm">04 정규화</td><td>공백을 지우고 같은 뜻의 기호를 한 글자로 모음</td><td>가운뎃점 U+00B7 = U+30FB, 머리표 Q.·A. 제거</td></tr>
-            <tr><td class="nm">05 순서 대조</td><td>읽는 순서대로 비교해 변경·누락·추가·순서 변경으로 나눔</td><td>닮은 정도 0.5 이상이면 문구 변경으로 짝지음</td></tr>
-            <tr><td class="nm">06 오탐 제외</td><td>구조·표기 차이로 잘못 잡힌 항목을 제외하고 로그를 남김</td><td>아래 규칙 8개</td></tr>
+            <tr><td class="nm">모니터링</td><td>지금 고칠 것이 있나요?</td><td>2장</td></tr>
+            <tr><td class="nm">메모리</td><td>AI가 기억하는 내용이 정확한가요?</td><td>3장</td></tr>
+            <tr><td class="nm">구조</td><td>어느 세션이 무엇을 맡았고, 누구에게 무엇을 넘겼나요?</td><td>4장</td></tr>
+            <tr><td class="nm">토큰</td><td>어디에 토큰을 많이 썼나요?</td><td>5장</td></tr>
+            <tr><td class="nm">확장</td><td>설치한 플러그인과 MCP가 최신이고, 어떤 기능을 쓸 수 있나요?</td><td>2장 자세히 보기</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <h3 class="q">오탐 제외 규칙 8개는 구체적으로 무엇인가요?</h3>
-      <div class="a">
-        <p>모두 실제 화면에서 잘못 잡힌 항목을 세어 보고 만든 규칙이에요. 뺄 문구를 목록으로 적지 않고, 조건을 정해 그 조건에 맞는 항목만 뺐어요. 예를 들어 푸터는 기획서에 푸터가 아예 없을 때만 빼고, 기획서에 있으면 평소처럼 비교해요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>규칙</th><th>예</th><th>실측</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">줄·노드를 다르게 나눈 것</td><td>기획서 한 줄이 시안의 긴 노드 안에 그대로 있음. 짧은 쪽이 긴 쪽 길이의 60% 미만일 때만 뺌</td><td>75~96건</td></tr>
-            <tr><td class="nm">표·목업의 예시 데이터</td><td>order_20240701.xlsx, ORD-2407-001, (주)가나다, 총 2건</td><td>후보 118건 중 19건</td></tr>
-            <tr><td class="nm">시안에만 있는 짧은 라벨</td><td>표 컬럼명·버튼·내비. 12자 이하이고 종결어미가 없을 때만</td><td>36건</td></tr>
-            <tr><td class="nm">시안 푸터</td><td>이용약관, 개인정보처리방침, 카피라이트. 기획서에 푸터가 없을 때만</td><td>7건</td></tr>
-            <tr><td class="nm">줄바꿈만 다른 것</td><td>리포트 카드에서 시안과 기획서 문구가 똑같아 보여 무엇이 다른지 알 수 없던 항목</td><td>31건</td></tr>
-            <tr><td class="nm">FAQ 머리표</td><td>시안에만 붙는 Q.·A.를 대조와 표시 양쪽에서 뗌</td><td>5건</td></tr>
-            <tr><td class="nm">전각·반각 기호</td><td>재고평가·수불부와 재고평가・수불부를 같은 문구로 봄</td><td></td></tr>
-            <tr><td class="nm">쉼표·마침표만 다른 것</td><td>문구 변경 대신 표기 통일 그룹으로 분류</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cols-2">
-        <div class="a">
-          <p>같은 화면에서 텍스트 515개를 받으면 잡음을 걸러 482개가 남고, 차이 53건은 같은 차이끼리 묶어 카드 27장으로 보여 줘요. 전면 리디자인처럼 차이가 688건 나와도 카드는 72장이에요.</p>
-        </div>
-        <div class="card">
-          <div class="h">한 화면 기준</div>
-          <div class="n mono">53건 <span class="arrow">→</span> <span class="to">27장</span></div>
-          <div class="cap">대조에서 나온 차이와 리포트에 올라간 카드 수</div>
-        </div>
-      </div>
-
-      <h3 class="q">일부러 잡지 않는 차이도 있나요?</h3>
-      <div class="a">
-        <p>색·크기·굵기는 대조하지 않아요. 전면 리디자인에서는 거의 모든 값이 달라져 항목이 수백 건으로 늘었고, 남는 것도 대부분 의도한 변경이었어요. 강조가 실제로 사라진 경우는 다음 장의 AI 판단 단계에서 화면 이미지를 비교해 찾아요.</p>
-        <p>규칙 8개로 시작한 뒤 표기 방식 차이 두 가지를 더 뺐어요. 가운뎃점·붙임표 앞뒤를 띄우는지는 취향이라 비교하지 않고, 기획서가 괄호로 적은 말을 시안이 뱃지로 뺀 경우도 같은 문구로 봐요.</p>
-      </div>
-
-      <h3 class="q">빼낸 항목은 어떻게 확인하나요?</h3>
-      <div class="a">
-        <p>회차마다 규칙별로 몇 건을 왜 뺐는지 로그에 남겨요. 리포트를 받은 사람이 항목을 제외하면 카드가 사라지고 그룹 건수도 같이 줄어요. 제외한 항목을 되살릴 때는 '제외 초기화' 버튼 하나로 되돌려요.</p>
-      </div>
-      <div class="tree">검수 로그 예시<br>
-      <span class="dim">·</span> 줄을 다르게 나눈 것 N건 제외 <span class="dim">(문구는 상대 화면에 그대로 있음)</span><br>
-      <span class="dim">·</span> 시안 푸터 N건 제외 <span class="dim">(기획서에 푸터가 없어 비교 대상이 아님)</span><br>
-      <span class="dim">·</span> 시안에만 있는 짧은 라벨 N건 제외 <span class="dim">(표 컬럼명·예시 값·버튼)</span><br>
-      <span class="dim">·</span> 줄바꿈만 다른 것 N건 제외 <span class="dim">(글자·띄어쓰기는 같음)</span></div>
-
-      <h3 class="q">비슷한 대조를 직접 만든다면 무엇부터 챙기면 되나요?</h3>
-      <div class="a">
-        <p>규칙을 하나 넣을 때마다 로그에 남은 규칙별 건수를 넣기 전과 비교하세요. 규칙이 너무 많이 걸러도 건수가 없으면 알아챌 방법이 없어요. 아래는 만들면서 실제로 바꾼 설정이에요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>항목</th><th>처음 설정</th><th>바꾼 설정과 이유</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">화면 이미지</td><td>960px, 품질 78</td><td>1440px, 품질 85. 표시 폭보다 작아서 글자가 흐렸음</td></tr>
-            <tr><td class="nm">시안 이미지</td><td>Zeplin 1024px 썸네일</td><td>Zeplin 원본. 더 선명하고 받는 시간도 3.7초에서 1.5초로 줄었음</td></tr>
-            <tr><td class="nm">수집 순서</td><td>시안과 기획서를 차례로 받음</td><td>동시에 받고 이미지는 받는 즉시 줄임. 22초에서 12초로 줄었음</td></tr>
-            <tr><td class="nm">순서 변경 항목</td><td>리포트에 그룹으로 표시</td><td>리포트에서는 빼고 대조에서는 계속 잡음. 안 잡으면 같은 문구가 누락 1건과 추가 1건으로 나뉘어 항목이 늘어남</td></tr>
-            <tr><td class="nm">진행 표시</td><td>돌아가는 원 하나</td><td>단계, 진행률, 경과 시간. 1분이 넘는 검사에서 멈춘 것과 구분되지 않았음</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="a mt28">
-        <p>리포트를 다른 팀에 넘긴다면 그룹 이름과 배지도 받는 팀 기준으로 지어 두세요. 여기서는 그룹 이름의 주어를 시안으로 두고('시안에 빠진 문구', '시안에만 있는 문구'), 배지는 누가 할 일인지로 나눴어요('디자인 반영', '기획 확인', '표기 통일').</p>
       </div>
     </div>
   </section>
 
   <!-- 02 -->
-  <section class="chapter" data-toc="AI 판단 단계">
+  <section class="chapter" data-toc="점검 화면">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>중요도 판단은 AI에게, 실패해도 검수는 멈추지 않게</h2></div>
+      <div><h2>도구가 멈추면 바로 알 수 있게 점검 화면을 만들었다</h2></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">기계 대조 뒤에 AI 판단을 한 단계 더 붙인 이유가 있나요?</h3>
+      <h3 class="q">점검 화면을 만든 계기는 무엇인가요?</h3>
       <div class="a">
-        <p>기계 대조로는 글자 차이를 빠짐없이 찾을 수 있지만, 어떤 항목이 중요한지는 가릴 수 없어요. 손으로 검수할 때 실제로 잡던 것은 의도한 리디자인이 아닌 실수, 총 5건이라고 적었는데 행은 7개인 수치 모순, 게시 전에 승인이 필요한 타사 로고 같은 것이었어요.</p>
-        <p>그래서 대조 후보와 두 화면 이미지를 제 맥에서 실행되는 Claude Code에 넘겨요. <strong>사소한 항목은 빼고, 남긴 항목에는 심각도와 이유를 한 줄로 받아요.</strong> AI가 이미지에서 새로 찾은 항목은 리포트에 별도 그룹으로 추가돼요.</p>
-      </div>
-      <div class="formula">
-        <div class="box"><div class="t">기계 대조 후보</div><div class="d">글자 차이를 빠짐없이 찾음</div></div>
-        <div class="op">+</div>
-        <div class="box"><div class="t">AI 판단</div><div class="d">후보 걸러내기와 이미지 비교</div></div>
-        <div class="op">=</div>
-        <div class="box result"><div class="t">리포트</div><div class="d">심각도와 이유가 붙은 항목</div></div>
+        <p>팀에 공유한 링크 검색 도구가 9분 사이에 세 번 끊겼다가 복구된 일이 있었어요. 자동으로 복구돼서 끊긴 줄 아무도 몰랐어요. <strong>끊긴 것을 모르면 같은 문제가 반복돼도 원인을 찾을 수 없어요.</strong> 그래서 제 맥에서 도는 도구와 예약 작업, 팀에 공유한 도구가 정상인지를 한 화면에서 확인하는 점검 화면(status-board)을 만들었어요.</p>
+        <p>처음에는 그날 첫 AI 세션을 열 때 점검 화면도 같이 띄웠어요. 그런데 이렇게 하면 터미널을 열기 전에는 점검 화면을 볼 수 없어서, 맥을 켜면 서버와 크롬 창이 자동으로 뜨게 바꿨어요. 지금은 업무를 시작할 때 이미 떠 있고, 퇴근할 때까지 브라우저 탭 하나에 켜 둬요.</p>
       </div>
 
-      <h3 class="q">AI가 틀리거나 응답하지 않으면 어떻게 되나요?</h3>
+      <h3 class="q">점검 화면을 보고 있지 않을 때는 문제를 어떻게 알아차리나요?</h3>
       <div class="a">
-        <p>판단 단계는 결과에 덧붙이는 단계로만 뒀어요. AI가 없거나 시간이 초과되거나 답 형식이 깨지면 기계 대조 결과를 그대로 써요. <strong>AI 때문에 검수가 멈추는 일은 없게 했어요.</strong></p>
-        <p>정확한 좌표가 필요한 일은 AI에게 맡기지 않았어요. AI가 이미지로 판단한 항목은 좌표가 대략적이어서 리포트 화면에 차이 위치를 찍는 핀이 엉뚱한 곳에 찍혔어요. 기획서에 남은 빨간 검토 메모는 글자색 값으로 직접 찾고, 이미지 판단 항목에는 핀을 붙이지 않아요.</p>
-      </div>
-      <ul class="bullets strong">
-        <li>이미지 판단은 게시 전에 걸러야 하는 상표·검토 표시·수치 모순만 보게 범위를 좁혔습니다</li>
-        <li>판단 결과는 문구 쌍과 화면 내용으로 캐시합니다. 회차마다 바뀌는 좌표·번호는 키에서 뺐습니다</li>
-        <li>판단 모델은 환경변수 하나로 바꿀 수 있게 두었습니다</li>
-      </ul>
-
-      <h3 class="q">판단 단계는 얼마나 걸리나요?</h3>
-      <div class="a">
-        <p>처음에는 모든 후보에 이유를 쓰게 해서 답이 길었어요. 버릴 항목은 ID만, 남길 항목에만 한 줄 이유를 쓰게 바꾸자 시간과 답 길이가 같이 줄었고 걸러내는 기준도 더 엄격해졌어요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th></th><th>전</th><th>후</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">판단 시간</td><td>125초</td><td>89초</td></tr>
-            <tr><td class="nm">답 길이</td><td>4,244자</td><td>700자</td></tr>
-            <tr><td class="nm">후보 30건 중 남긴 항목</td><td>11건</td><td>7건</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="q">판단 단계를 직접 붙인다면 어떤 값을 설정해 두나요?</h3>
-      <div class="a">
-        <p>판단 단계는 맥에 설치된 Claude Code를 claude -p(질문 하나를 보내고 답만 받는 실행 방식)로 부르고 답을 JSON으로 받아요. 그래서 API 키를 따로 두지 않아요. 바꿀 만한 값은 모두 환경변수로 빼 뒀어요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>환경변수</th><th>하는 일</th><th>기본값</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">PT_CLAUDE_BIN</td><td>부를 claude 실행 파일 경로</td><td>Homebrew 설치 경로</td></tr>
-            <tr><td class="nm">PT_QC_JUDGE_MODEL</td><td>글자 후보를 걸러낼 모델</td><td>비워 두면 Claude Code 기본 모델</td></tr>
-            <tr><td class="nm">PT_QC_JUDGE_IMAGE_MODEL</td><td>두 화면 이미지를 비교할 모델</td><td>비워 두면 Claude Code 기본 모델</td></tr>
-            <tr><td class="nm">PT_QC_JUDGE_TIMEOUT</td><td>한 번 호출의 제한 시간</td><td>150초</td></tr>
-            <tr><td class="nm">PT_QC_JUDGE_CACHE</td><td>판단 결과 캐시 파일 위치</td><td>app/reports/qc-judge-cache.json</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <ul class="bullets strong">
-        <li>후보는 30건씩 묶어 보냅니다. 한 번에 보내는 후보가 많으면 프롬프트가 커져서 제한 시간을 넘겼습니다</li>
-        <li>후보를 15건씩 더 잘게 나눠도 시간은 줄지 않았습니다(203초, 211초). 호출마다 드는 고정 시간이 커서 묶음 크기보다 답 길이를 줄이는 쪽이 효과가 있었습니다</li>
-        <li>빠른 모델(haiku)은 68~74초에 끝났지만 후보 30건 중 20~29건을 그대로 남겼습니다. 모델을 바꿀 때는 걸린 시간과 남긴 건수를 같이 잽니다</li>
-        <li>캐시 키에는 문구 쌍과 화면 파일 내용만 들어가고 프롬프트와 모델은 들어가지 않습니다. 프롬프트나 모델을 바꾼 뒤 새 기준으로 다시 판단하려면 캐시 파일을 지우거나 다른 경로를 지정합니다</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 03 -->
-  <section class="chapter" data-toc="세무달력 검수기">
-    <div class="wrap narrow">
-      <div class="num"></div>
-      <div><h2>세무달력 <span data-site="metrics.auto">2.9분</span>과 검수 <span data-site="metrics.checks">22개</span>의 내역</h2></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow">
-      <h3 class="q"><span data-site="metrics.auto">2.9분</span>은 어떻게 나온 숫자인가요?</h3>
-      <div class="a">
-        <p>세무달력은 매달 그달 세무 일정을 달력 이미지로 만들어 발송하는 안내물이에요. 2.9분은 10월분을 만들 때 잰 174초예요. 원본 문서에서 그달 일정을 뽑고, 직전 달 프레임을 복제해 Figma에 그리고, 월 테마 이미지를 만들고, 원본과 대조하는 네 단계를 합친 시간이에요.</p>
-      </div>
-      <div class="stat-strip">
-        <div class="stat"><div class="n">32<span class="unit">초</span></div><div class="l">원본 추출</div></div>
-        <div class="stat"><div class="n">83<span class="unit">초</span></div><div class="l">Figma 빌드</div></div>
-        <div class="stat"><div class="n">30<span class="unit">초</span></div><div class="l">테마 이미지</div></div>
-        <div class="stat"><div class="n">29<span class="unit">초</span></div><div class="l">검증</div></div>
-      </div>
-      <div class="a mt28">
-        <p>스크립트를 만들기 전에는 AI가 Figma를 열두 번 나눠 고쳤고, 그렇게 13분이 걸렸어요. 그중 6분이 Figma를 오가는 시간이었어요. <strong>빌드 스크립트 하나로 그 왕복을 한 번으로 줄였어요.</strong> 복제 원본을 직전 달로 정한 것도 실측에서 나왔어요. 기준으로 쓰던 7월 프레임에는 이후 달에 붙는 홍보 배너가 없었거든요.</p>
-      </div>
-
-      <h3 class="q">자동으로 확인하는 검수 <span data-site="metrics.checks">22개</span>는 무엇인가요?</h3>
-      <div class="a">
-        <p>발송본은 퍼블리셔가 달력 이미지에 링크를 걸어 만든 웹 페이지이고, 일정 항목마다 영상 링크가 붙어요. 검수 <span data-site="metrics.checks">22개</span>는 이 페이지의 링크와 항목을 원본과 맞춰 보는 항목이에요. <strong>원본 대조를 빼고 돌리면 링크가 열리는지만 확인해서, 항목에 엉뚱한 영상이 붙어 있어도 통과해요.</strong> 그래서 원본 기준 파일을 빼고는 실행하지 않게 했어요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>구분</th><th>확인하는 것</th><th>개수</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">월 이동 링크</td><td>이전·다음 달로 가는 링크가 맞는 달을 가리키는지</td><td>1</td></tr>
-            <tr><td class="nm">영상 링크</td><td>영상 링크가 실제로 열리는지</td><td>10</td></tr>
-            <tr><td class="nm">원본 대조</td><td>항목별 영상 9건, 항목 개수, 가이드·배너 분류</td><td>11</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="q">검수기를 만들며 막혔던 곳이 있나요?</h3>
-      <div class="a">
-        <p>발송본 페이지에 링크 태그가 하나도 없었어요. 페이지 전체가 이미지 한 장과 이미지맵이라, 링크 태그만 찾던 검사기는 아무것도 못 찾고 경고만 냈어요. 오랫동안 그 상태로 통과하고 있었어요.</p>
-      </div>
-      <ul class="bullets strong">
-        <li>이미지맵의 영역 태그까지 찾고, 글자가 없는 태그라 대체 텍스트에서 문구를 읽습니다</li>
-        <li>월 표기가 '8월 일정 보기'처럼 한 자리일 때도 잡히게 규칙을 고쳤습니다</li>
-        <li>링크가 회사 도메인이면 영상 링크로 판정하던 규칙을 없앴습니다. 이용가이드 5개가 영상으로 잡히고 있었습니다</li>
-      </ul>
-
-      <h3 class="q">검수에 브라우저를 쓰지 않는 이유가 있나요?</h3>
-      <div class="a">
-        <p>처음에는 브라우저를 띄워 화면을 확인했는데, 나중에 브라우저 단계를 뺐어요. 대상이 스크립트 없는 6KB짜리 정적 HTML이라 파일을 받아 태그만 읽어도 결과가 한 글자도 다르지 않았어요. 발송본, 로컬 사본, 샘플 세 가지로 통과 항목 목록까지 같은지 확인했어요.</p>
-        <p>이유는 속도보다 배포였어요. 링크 한 줄로 설치하는 도구에 브라우저 엔진을 같이 보낼 수는 없어서, 지금은 추가로 설치할 것이 없어요. 실패했을 때 남기던 화면 캡처 대신 문제가 된 태그 원문을 리포트에 실어요.</p>
-      </div>
-
-      <h3 class="q">퍼블리싱 요청 쪽지도 커맨드로 만들었나요?</h3>
-      <div class="a">
-        <p>쪽지는 퍼블리셔에게 그달 발송본 제작을 요청하는 메시지예요. 원본 표의 영상 주소를 눈이나 문자 인식으로 옮기면 대문자 I, 소문자 l, 숫자 1이 섞여 없는 주소가 만들어져요. 9월분에서 실제로 3개가 그랬어요. <strong>그래서 쪽지를 만들기 전에 시안과 항목을 대조하고, 영상 링크가 실제로 재생되는지 확인하는 단계를 커맨드에 넣었어요.</strong> 쪽지는 본문만 만들어 보여 주고 보내는 것은 사람이 해요.</p>
-      </div>
-
-      <h3 class="q">디자인 파일에 달력을 그리는 스크립트는 어디서 막혔나요?</h3>
-      <div class="a">
-        <p>13분이 걸리던 때는 원본 문서를 브라우저로 열다가 로그인 화면에 막혀 50초를 쓰기도 했어요. 지금은 그룹웨어 문서를 읽는 MCP로 본문 HTML을 바로 받아요. 자격증명은 MCP 서버에 있어서 스크립트에는 로그인 절차가 없어요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>구간</th><th>증상과 원인</th><th>대응</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">원본 표 읽기</td><td>월·날짜 칸이 rowspan으로 합쳐져 행마다 칸 수가 6·5·3개로 다름</td><td>빈 칸은 직전 행 값을 이어받아 읽음. 문서에 표가 여러 개라 '세무일정'과 '구분'이 함께 있는 표만 고름</td></tr>
-            <tr><td class="nm">노드 복제</td><td>appendChild: The node with id "…" does not exist 오류로 멈춤. clone()한 노드를 본으로 두고 원래 칸을 비우자 이후 복제가 삭제된 노드를 돌려줌</td><td>본을 두지 않고 있는 노드는 재사용, 없는 노드만 새로 만듦</td></tr>
-            <tr><td class="nm">6주인 달</td><td>프레임이 5행 기준이라 스크립트가 멈춤</td><td>프레임 높이는 디자인 결정이라 자동으로 늘리지 않고 사람에게 넘김</td></tr>
-            <tr><td class="nm">마감 바 간격</td><td>9월 프레임을 손으로 배치해 간격이 43·49·36px로 제각각</td><td>행 위쪽에서 36px 아래에 첫 바를 두고 23px 간격으로 통일</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="a mt28">
-        <p>색·타이포·그리드·검증 규칙은 Figma 프레임에서 md 파일로 옮겼어요. 규칙이 프레임에만 있을 때는 규칙을 읽는 데도 Figma를 오가야 했어요. md로 옮긴 뒤로는 첫 단계가 Figma 왕복 없이 끝나고, 규칙을 고친 이력이 git에 남아요.</p>
-        <p>스크립트를 고친 뒤에는 한 달 프레임을 지우고 새로 만들어 확인했어요. 스펙에 적은 정합성 검증 다섯 항목을 다시 통과하는지, 테마 이미지 해시가 전과 같은지를 확인해요.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 -->
-  <section class="chapter" data-toc="플러그인 배포">
-    <div class="wrap narrow">
-      <div class="num"></div>
-      <div><h2>저장소 하나로 설치하고 세션을 시작할 때 갱신한다</h2></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow">
-      <h3 class="q">케이스 스터디에서 말한 세무달력 폴더는 실제로 어떻게 생겼나요?</h3>
-      <div class="a">
-        <p>Claude Code 플러그인 형식이에요. 저장소 하나가 플러그인이면서 설치 목록 역할도 같이 해요. Figma 연결 설정도 같이 들어 있어서, 받는 사람은 따로 등록하지 않고 Figma 로그인만 하면 돼요.</p>
-      </div>
-      <div class="tree">tip/<br>
-      <span class="dim">├─</span> .claude-plugin/ <span class="dim"># 플러그인 정보와 설치 목록, 버전</span><br>
-      <span class="dim">├─</span> .mcp.json <span class="dim"># Figma 연결 설정</span><br>
-      <span class="dim">├─</span> skills/month/<span class="hi">SKILL.md</span> <span class="dim"># 월 달력 생성·수정</span><br>
-      <span class="dim">├─</span> skills/qa/<span class="hi">SKILL.md</span> <span class="dim"># 발송본 검수</span><br>
-      <span class="dim">├─</span> commands/mg.md <span class="dim"># 퍼블리싱 요청 쪽지</span><br>
-      <span class="dim">├─</span> hooks/hooks.json <span class="dim"># 세션 시작 시 자동 갱신</span><br>
-      <span class="dim">├─</span> references/ <span class="dim"># 작성 스펙 · 원본 문서 · 영상 표기 · Figma 구조 · 월 테마, 월별 확정 데이터</span><br>
-      <span class="dim">└─</span> scripts/ <span class="dim"># 원본 추출 · Figma 빌드 · 테마 이미지 · 검수 · 배포</span></div>
-      <div class="tbl-wrap mt28">
-        <table>
-          <thead><tr><th>종류</th><th>누가 부르나</th><th>이 폴더의 예</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">스킬</td><td>요청이 설명과 맞으면 Claude가 찾아 읽음</td><td>'9월 달력 만들어', '핀 순서 바꿔' 같은 말에 month가 열림</td></tr>
-            <tr><td class="nm">커맨드</td><td>사람이 이름을 직접 입력</td><td>/tip:mg 10</td></tr>
-            <tr><td class="nm">훅</td><td>정해진 상황에 자동 실행</td><td>세션을 시작하면 갱신 확인 스크립트 실행</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="q">팀원은 어떻게 설치하나요?</h3>
-      <div class="a">
-        <p>경로가 두 가지예요. 저장소 권한이 있으면 명령 두 줄로 설치 목록을 등록하고 설치해요. 권한이 없는 팀원은 포털 카드에 적힌 한 줄을 복사해 실행하면 같은 결과가 나와요.</p>
-      </div>
-      <div class="cols-2">
-        <div class="prompt">
-          <div class="label">저장소 권한이 있을 때</div>
-          <div class="cmd">claude plugin marketplace add &lt;저장소&gt;</div>
-          <div class="cmd">claude plugin install tip@tip-marketplace</div>
-        </div>
-        <div class="prompt">
-          <div class="label">포털 설치 카드</div>
-          <div class="cmd">curl -fsSL '&lt;배포 주소&gt;/tip?k=&lt;키&gt;' | bash</div>
-        </div>
-      </div>
-      <div class="shot">
-        <img src="assets/wh-tft-portal-install-tools.jpg" alt="WH-TFT 포털 설치 카드의 curl 명령 실제 화면">
-        <div class="cap">실제 화면 · 설치 카드에 그대로 뜨는 curl 한 줄(주소·토큰 값은 가림)</div>
-      </div>
-
-      <h3 class="q">설치한 뒤 새 버전은 어떻게 받나요?</h3>
-      <div class="a">
-        <p>한 줄로 설치하면 설치 목록이 로컬 폴더라서, 목록을 갱신해도 새 버전이 있는지 알 방법이 없었어요. 그래서 세션을 시작할 때 실행되는 훅으로 새 버전을 확인해요. <strong>세션 시작이 늦어지지 않도록 훅은 버전 확인을 백그라운드로 넘기고 바로 종료돼요.</strong> 받은 새 버전은 다음 세션부터 적용돼요. GitHub 저장소로 설치하면 배포 키가 없어서 훅이 이 확인을 건너뛰니, <code>/plugin update</code>로 직접 갱신해요.</p>
-      </div>
-      <div class="flow">
-        <div class="flow-step"><div class="idx">01</div><div class="t">세션 시작</div><div class="d">지난 확인 결과를 한 줄 알림</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">02</div><div class="t">백그라운드 확인</div><div class="d">마지막 확인이 20시간 넘었을 때만 버전 조회</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">03</div><div class="t">다음 세션</div><div class="d">새 버전을 받아 두고 다음 세션부터 적용</div></div>
-      </div>
-
-      <h3 class="q">배포하면서 특히 조심한 것은 무엇인가요?</h3>
-      <div class="a">
-        <p>배포 파일 하나가 팀원 맥마다 설치되니, 한 번 잘못 나가면 되돌리기 어려웠어요. 그래서 아래 다섯 가지를 배포 절차에 넣어 뒀어요.</p>
-      </div>
-      <ul class="bullets strong">
-        <li>다운로드 키는 배포 파일에 넣지 않습니다. 넣으면 사본마다 키가 따라가 회수할 수 없어서, 설치할 때 받은 키는 그 맥에만 저장하고 다른 사용자가 읽지 못하게 권한을 막습니다</li>
-        <li>버전 조회가 404면 갱신 없음으로 읽지 않고, 파일을 받아 안에서 버전을 확인합니다. 404를 갱신 없음으로 읽으면 영영 갱신되지 않습니다</li>
-        <li>plugin.json과 marketplace.json의 버전을 같이 올립니다. 내용만 바뀌고 버전이 같으면 이미 설치한 사람에게 갱신이 가지 않습니다</li>
-        <li>올린 파일은 다시 받아 해시를 비교하고, 되돌릴 때는 같은 명령에 이전 커밋을 넘깁니다</li>
-        <li>배포 파일 경로에 한글을 쓰지 않습니다. macOS 압축 해제에서 설치가 통째로 실패했습니다</li>
-      </ul>
-
-      <h3 class="q">플러그인을 직접 만들어 배포한다면 어디서 걸리나요?</h3>
-      <div class="a">
-        <p>처음 만들 때 놓치기 쉬운 동작이 몇 가지 있어요. 모두 이 플러그인을 배포하면서 README에 적어 둔 것이에요.</p>
-      </div>
-      <ul class="bullets strong">
-        <li>마켓플레이스로 설치하면 스킬 이름 앞에 플러그인 이름이 붙습니다. /tip:month로 불러야 하고 /month는 동작하지 않습니다. 저장소를 clone 해서 프로젝트 스킬로 쓸 때만 /month가 됩니다</li>
-        <li>플러그인으로 설치하면 CLAUDE.md를 읽지 않습니다. 지켜야 할 규칙은 스킬 본문에 적습니다</li>
-        <li>${CLAUDE_PLUGIN_ROOT}는 스킬·에이전트 본문에서만 설치 경로로 바뀝니다. 스킬이 Read로 여는 참고 파일 안에서는 그대로 남으니 상대 경로로 적습니다</li>
-        <li>저장소 루트의 agents/는 예약된 폴더 이름이라 지침 파일을 두지 않습니다</li>
-        <li>사용자에게 확인받은 값은 설치 폴더에 쓰지 않고 ~/.claude/tip/에 저장합니다. 설치 폴더는 갱신할 때 통째로 덮입니다</li>
-        <li>배포 서버에 올릴 때 플러그인 이름을 빠뜨리면 같은 서버에 있는 다른 플러그인을 덮어씁니다. 업로드 이름 하나가 마켓플레이스 하나입니다</li>
-      </ul>
-
-      <h3 class="q">갱신이 제대로 됐는지는 어떻게 확인하나요?</h3>
-      <div class="a">
-        <p>팀원 맥에서는 갱신 상태 파일이 한 폴더에 모여 있어서 거기부터 확인해요.</p>
-      </div>
-      <div class="tree">~/.claude/tip/<br>
-      <span class="dim">├─</span> update-checked <span class="dim"># 마지막으로 버전을 확인한 시각</span><br>
-      <span class="dim">├─</span> update-notice <span class="dim"># 다음 세션에 띄울 한 줄</span><br>
-      <span class="dim">├─</span> update.log <span class="dim"># 갱신 기록</span><br>
-      <span class="dim">├─</span> years.md <span class="dim"># 사용자가 확인해 준 연도별 원본 문서</span><br>
-      <span class="dim">└─</span> dist.env <span class="dim"># 다운로드 키, 권한 600</span></div>
-      <div class="a mt28">
-        <p>갱신이 한 번도 일어나지 않으면 dist.env가 있는지부터 확인해요. 키가 없으면 훅은 오류 없이 갱신만 건너뛰어요. 설치 한 줄을 거치지 않고 zip을 손으로 받아 설치했을 때 이렇게 돼요.</p>
-        <p>배포하는 쪽에서는 올라간 zip이 어느 커밋인지 확인해요. 배포본을 git archive로 만들어서 zip 주석에 커밋 SHA가 남아 있고, 압축을 풀지 않고 그 40자만 읽으면 돼요. main이 zip보다 앞서 있어도 문서만 바뀐 커밋이면 다시 배포하지 않아요. 5장의 status-board도 두 쪽의 버전이 다를 때만 경고를 띄워요.</p>
-      </div>
-      <div class="prompt">
-        <div class="label">배포본이 어느 커밋인지 확인할 때</div>
-        <div class="cmd">unzip -z &lt;배포본.zip&gt;</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 -->
-  <section class="chapter" data-toc="status-board 쓰는 법">
-    <div class="wrap narrow">
-      <div class="num"></div>
-      <div><h2>출근부터 퇴근까지 켜 두는 status-board</h2></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow">
-      <h3 class="q">점검 화면은 언제 여나요?</h3>
-      <div class="a">
-        <p>status-board는 제 맥에서 도는 도구와 예약 작업, 팀에 공유한 도구가 정상인지 한 화면에 모아 보는 점검 페이지예요. 따로 열지 않아요. 맥을 켜면 status-board 서버가 실행되고, 서버가 응답하는 것을 확인한 뒤 크롬 창까지 자동으로 열려요. <strong>업무를 시작할 때 이미 떠 있고, 퇴근할 때까지 탭 하나로 켜 둬요.</strong></p>
-        <p>처음에는 그날 첫 AI 세션을 열 때 같이 띄웠어요. 그러면 터미널을 열기 전까지 점검 화면이 없어서, 부팅할 때 켜지도록 옮겼어요. 만든 계기는 팀에 공유한 링크 검색 도구가 9분 사이에 세 번 끊겼다 복구된 일이었어요. 자동 복구는 되고 있었는데 아무도 몰랐거든요.</p>
-      </div>
-
-      <h3 class="q">켜 두기만 하면 이상한 건 어떻게 알아차리나요?</h3>
-      <div class="a">
-        <p>탭 아이콘으로 상태를 표시해요. 다른 탭에서 기획서를 보고 있어도 탭 줄의 색과 깜빡임으로 알아챌 수 있어요. 탭 제목은 평소엔 이름만 두고, 문제가 생겼을 때만 뒤에 요약을 붙여요. 평소와 다른 제목이 보이면 문제가 생긴 것을 바로 알 수 있어요.</p>
+        <p><strong>탭 아이콘과 탭 제목으로 상태를 알려요. 정상일 때는 아이콘이 움직이지 않고 제목에는 이름만 보여요.</strong> 정상일 때도 아이콘이 움직이면 문제가 생겨 깜빡여도 알아채기 어려워요. 평소에는 조용하기 때문에, 다른 탭에서 기획서를 보다가도 아이콘 색이 바뀌거나 깜빡이면 바로 알 수 있어요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -447,34 +127,38 @@
           </tbody>
         </table>
       </div>
-      <div class="a mt28">
-        <p>정상일 때 아이콘을 멈춰 둔 이유도 같아요. 늘 움직이는 아이콘은 정작 깜빡여야 할 때 신호로 읽히지 않아요.</p>
-      </div>
 
-      <h3 class="q">열면 무엇부터 보나요?</h3>
+      <h3 class="q">주소가 열리면 정상이라고 봐도 되나요?</h3>
       <div class="a">
-        <p>첫 화면인 모니터링 탭을 위에서 아래로 확인해요. 순서는 오늘 해야 할 일, 팀원이 쓰는 도구, 밤사이 돌았어야 할 작업, 내 커밋 순이에요. 플러그인·MCP처럼 하루 한 번 확인하면 되는 값은 다른 탭으로 옮겼고, 그 탭에서 발생한 문제도 첫 화면의 문제 건수에 함께 포함해요.</p>
+        <p>아니에요. 주소는 열리는데 기능은 멈춰 있던 도구가 며칠 동안 정상으로 표시된 적이 있어요. <strong>그 일 뒤로 주소가 열리는지와 기능이 실제로 동작하는지를 따로 확인해요.</strong> 매일 09:20에 팀원이 쓰는 기능 17가지를 한 번씩 실제로 실행해 보기 때문에, 출근해서 화면을 열면 기능까지 확인한 결과를 바로 볼 수 있어요.</p>
+      </div>
+      <div class="formula">
+        <div class="box"><div class="t">포트 응답</div><div class="d">제 맥에서 도구가 켜져 있음</div></div>
+        <div class="op">→</div>
+        <div class="box"><div class="t">공유 주소 응답</div><div class="d">팀원이 링크로 열 수 있음</div></div>
+        <div class="op">→</div>
+        <div class="box result"><div class="t">아침 QA</div><div class="d">09:20에 팀원이 쓰는 기능 17가지를 실제로 실행</div></div>
+      </div>
+      <h3 class="q">화면에는 무엇을 남기고 무엇을 뺐나요?</h3>
+      <div class="a">
+        <p><strong>화면을 열자마자 지금 고칠 것이 있는지 알 수 있어야 해서, 그 판단에 필요한 값만 남겼어요.</strong> 표마다 무엇을 확인하는 표인지 하나로 정하고, 거기에 필요 없는 값은 빼거나 접어 뒀어요. 색도 판단이 필요한 곳에만 썼어요. 플러그인·MCP처럼 하루 한 번 확인하면 되는 값은 다른 탭으로 옮겼고, 그 탭에서 생긴 문제는 첫 화면의 문제 건수에 함께 더해요.</p>
+      </div>
+      <div class="a">
+        <p>첫 화면은 위에서부터 아래 순서로 확인해요.</p>
       </div>
       <div class="flow">
-        <div class="flow-step"><div class="idx">01</div><div class="t">이어갈 일</div><div class="d">어제 AI 세션이 남긴 일, 사흘 지나면 색 표시</div></div>
+        <div class="flow-step"><div class="idx">01</div><div class="t">이어갈 일</div><div class="d">AI 세션이 끝내지 못한 일. 사흘이 지나면 색이 바뀜</div></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">02</div><div class="t">라이브 서버</div><div class="d">팀원 주소 응답과 09:20 아침 QA 결과</div></div>
+        <div class="flow-step"><div class="idx">02</div><div class="t">라이브 서버</div><div class="d">팀원이 여는 주소의 응답과 09:20 아침 QA 결과</div></div>
         <div class="flow-arrow">→</div>
         <div class="flow-step"><div class="idx">03</div><div class="t">예약 작업</div><div class="d">일일보고·주간 요약이 정해진 시각에 실행됐는지</div></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="idx">04</div><div class="t">저장소</div><div class="d">원격에 안 올린 지난 커밋</div></div>
-      </div>
-      <div class="a mt28">
-        <p>아침 QA는 매일 09:20 에 팀원이 쓰는 기능 17가지를 실제로 한 번씩 실행해 봐요. 주소가 열려도 기능이 멈춘 채 며칠 정상으로 보인 적이 있어서, 출근해서 볼 때는 이미 기능까지 확인된 결과가 떠 있게 했어요.</p>
+        <div class="flow-step"><div class="idx">04</div><div class="t">저장소</div><div class="d">아직 원격에 올리지 않은 커밋</div></div>
       </div>
 
-      <h3 class="q">화면의 각 영역은 무엇을 알려 주나요?</h3>
-      <div class="a">
-        <p>화면을 만들 때 정한 기준은 하나였어요. 열었을 때 지금 손볼 것이 있는지 바로 판단할 수 있어야 해요. 그래서 표마다 답할 질문을 하나로 정하고, 그 질문과 관계없는 값은 빼거나 접어 뒀어요. 색도 판단이 필요한 곳에만 칠했어요.</p>
-      </div>
       <div class="shot">
-        <img src="assets/status-board.jpg" alt="status-board 모니터링 화면. 점수 카드, 라이브 서버 표, 예약 작업 표">
-        <div class="cap">예시 데이터로 재현한 화면 · 퇴사 전 구성을 같은 코드로 다시 띄웠고, 팀에 공유한 주소는 가렸습니다</div>
+        <img src="assets/deep/monitor.png" alt="점검 화면의 모니터링 탭. 점수 카드, 이어갈 일, 라이브 서버 표, 예약 작업 표">
+        <div class="cap">예시 데이터로 다시 그린 화면 · 팀에 공유한 주소와 실제 작업 내용은 싣지 않았습니다</div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -482,46 +166,13 @@
           <tbody>
             <tr><td class="nm">맨 위 점수</td><td>점검하는 항목 중 정상인 비율이에요. 100이면 전부 정상이고, 아래 칩에서 어느 묶음이 몇 개 중 몇 개 정상인지 보여 줘요.</td></tr>
             <tr><td class="nm">라이브 서버</td><td>팀원이 링크로 여는 도구예요. 로컬은 제 맥 안에서 여는 주소, 고정주소는 팀원이 여는 주소예요. 200은 페이지가 정상으로 열렸다는 뜻이고, 옆 숫자는 응답에 걸린 시간이에요.</td></tr>
-            <tr><td class="nm">가동</td><td>도구가 마지막으로 켜진 뒤 흐른 시간이에요. 이 값이 이전보다 줄면 도구가 꺼졌다 다시 켜졌다는 뜻이라, 도구 이름 옆에 '재시작' 표시가 10분 동안 붙어요. 9분 사이 세 번 끊긴 일도 이 표시로 드러나요.</td></tr>
-            <tr><td class="nm">예약 작업</td><td>정해진 시각에 한 번 돌고 끝나는 작업이에요. 일일보고처럼 예정 시각이 지났는데 마지막 실행이 그보다 앞서 있으면 노랑으로 바뀌어요.</td></tr>
+            <tr><td class="nm">가동</td><td>도구가 마지막으로 켜진 뒤 흐른 시간이에요. 가동 시간이 이전보다 줄었다면 도구가 꺼졌다가 다시 켜진 것이라, 도구 이름 옆에 '재시작' 표시를 10분 동안 붙여요. 9분 사이에 세 번 끊겼던 일도 지금은 이 표시로 알 수 있어요.</td></tr>
+            <tr><td class="nm">예약 작업</td><td>정해진 시각에 한 번 실행되는 작업이에요. 예정 시각이 지났는데도 실행 기록이 없으면 노란색으로 바뀌어요.</td></tr>
           </tbody>
         </table>
       </div>
-
-      <h3 class="q">모니터링 말고 다른 탭에서는 무엇을 확인하나요?</h3>
-      <div class="a">
-        <p>위 화면은 첫 탭인 모니터링이에요. 탭이 다섯 개 더 있고, 팀에 건넨 도구뿐 아니라 제가 AI와 일하는 환경 전체를 확인해요.</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>탭</th><th>무엇을 확인하나요</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">모니터링</td><td>서버와 예약 작업 외에, 아침마다 도구에 실제 작업을 한 번씩 시켜 결과가 나오는지 확인해요. 주소는 열리는데 기능이 멈춘 상태를 잡으려고 넣었고, 기능 17개를 확인해요. 아직 올리지 않은 작업이 남은 저장소와, 다른 세션이 끝내지 못하고 넘긴 일 목록도 여기에 있어요.</td></tr>
-            <tr><td class="nm">확장</td><td>설치한 Claude Code 플러그인이 최신 버전인지, 제가 만든 플러그인이 팀원에게 나간 버전과 같은지 보여 줘요. 연결된 MCP 서버마다 어떤 기능을 쓸 수 있는지, 크롬 확장과 Figma 플러그인 목록도 여기서 확인해요.</td></tr>
-            <tr><td class="nm">토큰</td><td>Claude Code를 쓰며 소비한 토큰 양을 날짜별로 모아 보여 줘요.</td></tr>
-            <tr><td class="nm">메모리</td><td>Claude Code가 기억해 두는 메모 파일을 목록으로 보고, 그 자리에서 고치거나 지울 수 있어요. 세션마다 읽히는 목록이 토큰을 얼마나 쓰는지, 끊어진 연결이 있는지도 알려 줘요.</td></tr>
-            <tr><td class="nm">구조</td><td>도구와 저장소가 어떻게 이어져 있는지 그린 관계도예요. 여러 Claude Code 세션이 서로 주고받은 메시지도 메신저처럼 보여 줘요.</td></tr>
-            <tr><td class="nm">web-qa</td><td>사내 화면 자동 검수가 오늘 돈 결과예요. 검사 한 건이 한 줄이고, 실패하면 어느 스펙 문서의 어느 항목 때문인지까지 보여 줘요.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="q">보는 것 말고 점검 화면에서 하는 일도 있나요?</h3>
-      <div class="a">
-        <p>종일 켜 둔 탭이라 자주 여는 도구도 여기서 열어요. 하루 동안 status-board에서 하는 일은 아래와 같아요.</p>
-      </div>
-      <ul class="bullets strong">
-        <li>도구 주소를 눌러 바로 엽니다. 자주 들어가는 주소는 접지 않고 표에 그대로 드러내 뒀습니다</li>
-        <li>이어갈 일을 끝내면 '완료'를 눌러 목록에서 지웁니다</li>
-        <li>아침 QA가 실패했으면 고친 뒤 그 자리에서 다시 돌립니다</li>
-        <li>AI 세션 여러 개에 일을 나눠 맡기므로, 세션끼리 주고받은 메시지를 메신저처럼 보며 누가 누구에게 무엇을 넘겼는지 확인합니다</li>
-        <li>AI 사용량이 초기화되기까지 남은 시간과 오늘 쓴 토큰을 확인합니다</li>
-        <li>AI가 기억하는 메모를 메모리 탭에서 바로 고치거나 지웁니다</li>
-      </ul>
-
-      <h3 class="q">한 달 반 동안 커밋 191개면 계속 바뀐 건가요?</h3>
-      <div class="a">
-        <p>네, 23일에 걸쳐 조금씩 고쳤어요. <strong>안 보게 된 화면은 지웠어요.</strong> 규격 점검 탭은 한동안 열지 않았다는 것을 확인하고 탭째로 삭제했고, 검수 도구 네 개를 나란히 보여 주던 표도 이미 아는 값이라 뺐어요. 탭 순서는 끌어서 바꾸면 기억되게 해 뒀어요.</p>
+      <div class="a mt28">
+        <p>한 달 반 동안 23일에 걸쳐 커밋 191개로 조금씩 고쳤어요. 기능을 더한 만큼 뺀 것도 많아요. 쓰지 않는 화면이 남아 있으면 필요한 정보를 찾기 어려워서, 한동안 열지 않은 탭은 통째로 지웠고 이미 아는 값을 나란히 보여 주던 표도 뺐어요.</p>
       </div>
       <div class="stat-strip">
         <div class="stat"><div class="n">191<span class="unit">개</span></div><div class="l">커밋</div></div>
@@ -530,169 +181,384 @@
         <div class="stat"><div class="n">17<span class="unit">가지</span></div><div class="l">아침 QA 기능</div></div>
       </div>
 
-      <h3 class="q">비슷한 점검 화면을 직접 만든다면 무엇을 조심하나요?</h3>
+      <h3 class="q">그날 끝내지 못한 일은 어떻게 관리하나요?</h3>
       <div class="a">
-        <p>status-board는 파이썬 표준 라이브러리 서버 하나와 macOS launchd로 실행돼요. 만들면서 한 번씩 잘못 읽었던 값을 모았어요.</p>
+        <p>예전에는 할 일 문서를 점검 화면에 펼쳐 두었어요. 그런데 목록이 갱신되지 않아 매일 같은 내용이 남아 있었고, 결국 열어 보지 않았어요. <strong>그래서 남은 일마다 등록한 지 며칠 됐는지를 함께 보여 줘요.</strong> 세션이 끝내지 못한 일은 점검 화면 맨 위 '이어갈 일'에 등록하고, 무엇을 기다리는지와 등록한 날짜를 같이 표시해요. 사흘이 지나도록 남아 있으면 색이 바뀌어요.</p>
+        <p>끝난 일은 '완료'로 표시하지 않고 목록에서 지워요. 이 목록은 남은 일만 보여 줘야 해서, 끝난 일이 섞이면 남은 일이 몇 개인지 알기 어려워요. 세션끼리 주고받은 메시지 원문은 구조 탭에 남아 있어서, 목록에서 지운 뒤에도 근거를 찾을 수 있어요.</p>
       </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>값</th><th>잘못 읽은 방식</th><th>제대로 읽는 법</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">종료 사유</td><td>launchctl list의 LastExitStatus 256을 종료 코드로 표시</td><td>원시 wait status라 256은 종료 코드 1, 15는 SIGTERM</td></tr>
-            <tr><td class="nm">가동 시간</td><td>ps의 etime 값 18:12를 시각으로 읽음</td><td>[일-]시:분:초 형식의 경과 시간. 화면에는 분 단위로 바꿔 표시</td></tr>
-            <tr><td class="nm">마지막 실행 시각</td><td>launchd에서 읽으려 함</td><td>launchd는 이 값을 주지 않음. 로그 파일 수정 시각으로 대신 판단하고 화면에도 '최종 기록 시각'으로 적음</td></tr>
-            <tr><td class="nm">예정 시각</td><td>코드에 따로 적어 둠</td><td>plist의 StartCalendarInterval에서 읽음. Weekday가 없으면 매일, 일요일은 0과 7 둘 다</td></tr>
-            <tr><td class="nm">1회 실행 잡</td><td>RunAtLoad 잡을 PID로 판정해 늘 죽은 것으로 보임</td><td>마지막 종료 코드로 판정. PID로 재는 것은 상주 잡(KeepAlive)뿐</td></tr>
-            <tr><td class="nm">원격 MCP</td><td>401 응답을 장애로 셈</td><td>토큰이 Claude 쪽에 있어서 점검 화면이 따로 요청하면 401이 나옴. 측정 불가로 표시</td></tr>
-          </tbody>
-        </table>
+
+      <h3 class="q">점검 화면이 상태를 잘못 표시한 적도 있나요?</h3>
+      <div class="a">
+        <p>있어요. 한 번 실행되고 끝나는 작업을 꺼져 있다고 표시하거나, 정상인 원격 연결을 장애로 세기도 했어요. <strong>잘못된 경고가 한 번 나오면 그 뒤의 경고도 믿기 어려워서, 잘못 읽은 값을 하나씩 고쳤어요.</strong> 확인할 수 없는 값은 장애로 세지 않고 '측정 불가'로 따로 표시해요. 도구마다 지금 실행 중인지와 다음 부팅 때 자동으로 실행되는지도 나눠서 표시해요.</p>
+        <p>점검 화면에서 확인하는 대상도 점점 늘었어요. 처음에는 팀에 배포한 도구만 확인했는데, 지금은 AI 사용량과 AI 메모리, 세션끼리 주고받은 메시지까지 확인해요. 다음 장부터는 이 탭들을 메모리, 구조, 토큰 순서로 다뤄요.</p>
       </div>
-      <ul class="bullets strong">
-        <li>서버는 ThreadingHTTPServer에 daemon_threads를 켜서 띄웁니다. 단일 스레드 HTTPServer는 크롬이 미리 열어 두는 빈 연결 하나에 묶여 서버 전체가 멈췄고, 시크릿 창에서 접속되지 않던 원인이 이것이었습니다</li>
-        <li>로그 수정 시각으로 실행을 판단할 때는 30분 유예를 둡니다. 몇 분씩 도는 작업이 실행 도중에 오류로 표시되지 않게 하려는 것입니다</li>
-        <li>자동 새로고침은 meta refresh 대신 스크립트로 하고, 메모리를 고치는 탭에서는 끕니다. 편집 중에 페이지가 초기화되면 안 됩니다</li>
-        <li>응답시간·가동시간처럼 매번 바뀌는 값은 변경 강조에서 뺍니다. 매번 강조되면 강조를 보고도 무엇이 바뀌었는지 알 수 없습니다</li>
-        <li>설정의 환경변수를 펼쳐 보일 때는 PASSWORD·SECRET·TOKEN·API_KEY 계열 값을 가립니다</li>
-        <li>화면이 떠 있는 것만으로는 부팅 자동 실행이 되는지 알 수 없습니다. 손으로 띄워도 화면은 같아서, 다음 부팅에도 뜨는지를 launchd 잡 상태로 따로 표시합니다</li>
-      </ul>
-      <div class="prompt">
-        <div class="label">직접 띄워 볼 때</div>
-        <div class="cmd">python3 status.py --serve</div>
-        <div class="cmd">python3 status.py --mcp</div>
-        <div class="cmd">python3 textcheck.py status.py qa.py memview/*.py</div>
-      </div>
-      <div class="a mt28">
-        <p>첫 줄은 30초 주기로 갱신하는 화면을 띄우고, 둘째 줄은 연결된 MCP 서버와 서버별 도구 목록을 보여 줘요. 셋째 줄은 코드 안에 적은 화면 문구에서 두 문장을 줄표로 이은 곳을 찾아요. 제 문구 규칙에서 쓰지 않기로 한 형태라 화면에 나가기 전에 걸러요.</p>
-      </div>
+      <details class="impl">
+        <summary>탭 구성과 잘못 읽었던 값 자세히 보기</summary>
+        <div class="details-body">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>탭</th><th>무엇을 확인하나요</th></tr></thead>
+              <tbody>
+                <tr><td class="nm">모니터링</td><td>서버와 예약 작업, 아침 QA, 아직 올리지 않은 작업이 남은 저장소, 다른 세션이 끝내지 못하고 넘긴 일 목록</td></tr>
+                <tr><td class="nm">확장</td><td>설치한 Claude Code 플러그인이 최신인지, 제가 만든 플러그인이 팀원에게 배포한 버전과 같은지. MCP 서버별로 쓸 수 있는 기능, 크롬 확장과 Figma 플러그인 목록</td></tr>
+                <tr><td class="nm">토큰</td><td>Claude Code에서 쓴 토큰 양을 날짜별로 모아 보여 줌</td></tr>
+                <tr><td class="nm">메모리</td><td>Claude Code가 기억해 두는 메모 파일을 열어 보고 화면에서 바로 고치거나 지움</td></tr>
+                <tr><td class="nm">구조</td><td>도구와 저장소의 관계도, 세션끼리 주고받은 메시지</td></tr>
+                <tr><td class="nm">web-qa</td><td>오늘 실행된 사내 화면 자동 검수 결과. 실패하면 어느 스펙 문서의 어느 항목 때문인지까지 보여 줌</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-wrap mt28">
+            <table>
+              <thead><tr><th>값</th><th>잘못 읽은 방식</th><th>제대로 읽는 법</th></tr></thead>
+              <tbody>
+                <tr><td class="nm">종료 사유</td><td>launchctl list의 LastExitStatus 256을 종료 코드로 표시</td><td>원시 wait status라 256은 종료 코드 1, 15는 SIGTERM</td></tr>
+                <tr><td class="nm">가동 시간</td><td>ps의 etime 값 18:12를 시각으로 읽음</td><td>[일-]시:분:초 형식의 경과 시간. 화면에는 분 단위로 바꿔 표시</td></tr>
+                <tr><td class="nm">마지막 실행 시각</td><td>launchd에서 읽으려 함</td><td>launchd는 이 값을 주지 않음. 로그 파일 수정 시각으로 대신 판단하고 화면에도 '최종 기록 시각'으로 적음</td></tr>
+                <tr><td class="nm">예정 시각</td><td>코드에 따로 적어 둠</td><td>plist의 StartCalendarInterval에서 읽음. Weekday가 없으면 매일, 일요일은 0과 7 둘 다</td></tr>
+                <tr><td class="nm">1회 실행 잡</td><td>RunAtLoad 잡도 PID로 판정해서 늘 꺼진 것으로 표시됨</td><td>마지막 종료 코드로 판정. PID로 판정하는 것은 상주 잡(KeepAlive)뿐</td></tr>
+                <tr><td class="nm">원격 MCP</td><td>401 응답을 장애로 셈</td><td>토큰이 Claude 쪽에 있어서 점검 화면이 따로 요청하면 401이 나옴. 측정 불가로 표시</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="bullets mt28">
+            <li>서버는 파이썬 표준 라이브러리의 ThreadingHTTPServer에 daemon_threads를 켜서 띄웁니다. 단일 스레드 HTTPServer로 띄웠을 때는 크롬이 미리 열어 두는 빈 연결 하나에 막혀 다른 요청을 처리하지 못했습니다</li>
+            <li>로그 수정 시각으로 실행 여부를 판단할 때는 30분 유예를 둬서, 몇 분씩 도는 작업이 실행 중에 오류로 표시되지 않게 합니다</li>
+            <li>자동 새로고침은 스크립트로 하고, 메모리를 고치는 탭에서는 꺼서 편집하던 내용이 날아가지 않게 합니다</li>
+            <li>응답시간·가동시간처럼 매번 바뀌는 값은 변경 강조에서 뺍니다. 매번 강조되면 무엇이 바뀌었는지 알 수 없습니다</li>
+            <li>설정의 환경변수를 펼쳐 보일 때는 PASSWORD·SECRET·TOKEN·API_KEY 계열 값을 가립니다</li>
+          </ul>
+          <div class="prompt mt28">
+            <div class="label">직접 띄워 볼 때</div>
+            <div class="cmd">python3 status.py --serve</div>
+            <div class="cmd">python3 status.py --mcp</div>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
-  <!-- 06 -->
-  <section class="chapter" data-toc="사용 방식">
+  <!-- 03 -->
+  <section class="chapter" data-toc="AI의 기억 관리">
     <div class="wrap narrow">
       <div class="num"></div>
-      <div><h2>플러그인으로 나눠 주고, 로컬에서 돌리고, 서버에 연결한다</h2></div>
+      <div><h2>AI가 매번 지킬 것과 필요할 때 꺼낼 것을 나눠 적었다</h2></div>
     </div>
   </section>
 
-  <section class="section" style="border-bottom:none;">
+  <section class="section">
     <div class="wrap narrow">
-      <h3 class="q">만든 도구는 어떤 방식으로 나눠 쓰나요?</h3>
+      <h3 class="q">AI가 규칙을 잊는 일은 어떻게 줄였나요?</h3>
       <div class="a">
-        <p>플러그인 배포, 웹 링크 공유, 로컬 전용, 서버 연결의 네 가지로 나눠 써요. 앞의 둘은 팀원에게 건네는 방식이 달라요. 플러그인은 팀원 맥마다 설치해서 Claude Code 안에서 쓰고, 웹 링크는 설치 없이 브라우저에서 열어요. 한 도구가 여러 방식을 같이 지원하기도 해서, figma-ai는 플러그인으로도 clone한 폴더에서도 같은 커맨드가 동작하고, 일일보고를 만드는 work-automation은 플러그인과 CLI를 같이 설치해도 돼요.</p>
+        <p><strong>매 세션 지켜야 하는 규칙과 필요할 때만 꺼낼 내용을 서로 다른 파일에 적어서, 규칙을 놓치는 세션이 없게 했어요.</strong> AI의 메모리는 지금 하는 일과 관련 있어 보일 때만 읽혀요. 매 세션 지켜야 하는 규칙을 메모리에만 적어 두면, 관련 없어 보이는 작업을 하는 세션에서는 그 규칙을 놓쳐요. 그래서 AI가 읽는 파일을 언제 읽히는지에 따라 네 가지로 나눴어요.</p>
       </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>방식</th><th>이럴 때 고릅니다</th><th>사례</th></tr></thead>
-          <tbody>
-            <tr><td class="nm">플러그인 배포</td><td>여러 사람이 어느 폴더에서든 같은 커맨드를 써야 할 때</td><td>tip(세무달력), figma-ai(Figma 기획서에 설명 패널과 케이스 시트 작성), jira-gen(Jira 이슈 생성)</td></tr>
-            <tr><td class="nm">웹 링크 공유</td><td>팀원이 설치 없이 브라우저에서 열어야 할 때. 사내망이 필요한 앱은 제 맥에서 돌리고 Cloudflare 터널로 고정 주소를 붙이고, 미리 만들 수 있는 페이지는 Cloudflare Pages에 올립니다</td><td>product-tools, link-hub, pptx-helper, 기획 검수 현황, 검사 결과 공유 사본</td></tr>
-            <tr><td class="nm">로컬 전용</td><td>저만 보는 화면이거나, Claude Code 없이 정해진 시각에 돌아야 할 때</td><td>status-board, work-automation CLI</td></tr>
-            <tr><td class="nm">서버 연결</td><td>외부 서비스의 데이터를 읽어야 할 때</td><td>Figma 원격 MCP, 그룹웨어 문서 MCP</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="q">플러그인으로 묶어 배포하려면 무엇을 설정하나요?</h3>
-      <div class="a">
-        <p>저장소의 .claude-plugin/ 폴더에 plugin.json(이름·버전)과 marketplace.json(설치 목록)을 두면 그 저장소 하나가 마켓플레이스이면서 플러그인이 돼요. 커맨드, 스킬, 훅, MCP 연결 설정(.mcp.json)을 같은 저장소에 넣으면 설치할 때 한꺼번에 설치돼요. 설치 경로는 받는 사람의 환경에 따라 둘로 나눴어요.</p>
-      </div>
-      <div class="cols-2">
-        <div class="prompt">
-          <div class="label">GitHub 저장소 권한이 있을 때</div>
-          <div class="cmd">claude plugin marketplace add &lt;저장소&gt;</div>
-          <div class="cmd">claude plugin install &lt;플러그인&gt;@&lt;마켓플레이스&gt;</div>
-          <div class="cmd">/plugin update &lt;플러그인&gt;</div>
+      <div class="track">
+        <div class="track-col">
+          <div class="when">세션 시작</div><div class="line"></div>
+          <div class="card always"><div class="t">전체 규칙 파일</div><div class="d">모든 프로젝트에서 지킬 작업 규칙</div></div>
+          <div class="card always"><div class="t">프로젝트 규칙 파일</div><div class="d">그 저장소에서만 지킬 규칙. 예를 들어 이 사이트는 소개 영역의 회사 로고를 빼지 않는다는 규칙</div></div>
+          <div class="card always"><div class="t">메모리 목록</div><div class="d">메모마다 한 줄 설명</div></div>
         </div>
-        <div class="prompt">
-          <div class="label">권한이 없거나 개발도구가 없을 때</div>
-          <div class="cmd">curl -fsSL '[가림]/plugin/&lt;이름&gt;?k=[가림]' | bash</div>
+        <div class="track-col">
+          <div class="when">작업 종류가 정해질 때</div><div class="line"></div>
+          <div class="card"><div class="t">스킬</div><div class="d">작문 규칙처럼 길고 특정 작업에만 필요한 지침</div></div>
+        </div>
+        <div class="track-col">
+          <div class="when">관련 있어 보일 때</div><div class="line"></div>
+          <div class="card"><div class="t">메모리 본문</div><div class="d">사용자 정보, 받은 피드백, 진행 중인 일의 배경, 참고 자료 위치. 한 파일에 사실 하나</div></div>
+        </div>
+        <div class="track-col">
+          <div class="when">도구를 부르는 순간</div><div class="line"></div>
+          <div class="card"><div class="t">훅</div><div class="d">정해진 순간에 자동으로 실행되는 검사. 규칙과 다르면 한 줄로 알림</div></div>
         </div>
       </div>
-      <ul class="bullets strong mt28">
-        <li>설치하면 어느 폴더에서 Claude Code를 띄워도 커맨드와 MCP를 쓸 수 있습니다. 커맨드 이름 앞에는 /figma-ai:desc처럼 플러그인 이름이 붙습니다</li>
-        <li>private 저장소는 git 인증이 필요합니다. 저장소를 owner/repo 형식으로 적으면 SSH로 clone하므로, SSH 키를 쓰지 않는다면 gh auth setup-git을 한 번 실행하고 CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1을 설정합니다</li>
-        <li>GitHub 초대를 받지 않았거나 Xcode Command Line Tools가 없는 팀원은 링크 한 줄로 설치합니다. git이 필요 없고, figma-ai는 같은 줄을 다시 실행하면 갱신됩니다</li>
-        <li>플러그인으로 설치하면 저장소의 .claude/settings.json(공유 권한, MCP 자동 승인)이 적용되지 않습니다. 그래서 첫 실행에 Figma 로그인과 도구 승인 확인이 한 번 뜹니다</li>
-        <li>계정이 필요한 플러그인은 설치할 때 물어보고 macOS 키체인에 저장합니다. jira-gen은 Jira 비밀번호를 설정 파일에 남기지 않습니다</li>
-        <li>조직 안에서만 쓰는 파일은 저장소에 넣지 않습니다. jira-gen이 이슈의 기획·설계자, 개발자, QA 칸을 채울 때 쓰는 조직 전용 담당자 규칙 파일(롤 파일)은 사내 채널로 받아 상태 폴더에 넣고, 이 폴더는 플러그인을 갱신해도 지워지지 않습니다</li>
-      </ul>
-
-      <h3 class="q">로컬에서만 쓰는 방식은 언제 고르나요?</h3>
       <div class="a">
-        <p>저장소를 clone해서 그 폴더에서 claude를 띄우는 방식이 가장 단순해요. .claude/commands에 둔 커맨드를 이름 앞 접두사 없이 부를 수 있고, .claude/settings.json으로 권한과 MCP 자동 승인을 팀과 같이 쓸 수 있어요. 대신 그 폴더 안에서만 커맨드가 보여요. figma-ai는 .claude/commands를 commands/ 폴더에 심링크로 연결해서 플러그인과 clone 방식이 같은 커맨드 파일을 읽게 했어요.</p>
-        <p>Claude Code 밖에서 도는 로컬 도구도 있어요. 아래 세 경우는 일부러 로컬에 뒀어요.</p>
+        <p>색을 칠한 칸은 세션을 시작할 때 항상 읽히고, 나머지 칸은 각 시점이 되어야 읽혀요. 그래서 매 세션 지킬 규칙은 왼쪽 칸의 규칙 파일에 두고, 메모리 본문에는 그때그때 필요한 사실만 적어요.</p>
+      </div>
+
+      <h3 class="q">메모리가 많아지면 어떻게 관리하나요?</h3>
+      <div class="a">
+        <p><strong>AI가 기억하는 내용이 정확한지 확인하려고 메모리 뷰어를 만들어 점검 화면의 메모리 탭에 넣었어요.</strong> 메모리가 백 개를 넘자, 파일을 하나씩 열어서는 어떤 메모가 있는지 파악할 수 없었어요. 메모는 한 파일에 사실 하나만 적고, 관련된 메모끼리 링크로 이어요. 메모리 탭에서는 메모를 프로젝트별로 묶어 보고, 그 자리에서 고치거나 지울 수 있어요. 메모 안의 링크를 누르면 관련된 메모로 이동하고, 어떤 메모가 지금 메모를 가리키는지도 함께 보여 줘요.</p>
+        <p>메모리는 많다고 좋은 것이 아니에요. 메모리 목록은 세션마다 전부 읽히고, 긴 메모는 읽힐 때마다 컨텍스트를 많이 써요. 오래된 메모는 지금은 없는 파일이나 이미 끝난 일을 가리키기도 해요. 그래서 고칠 메모만 골라 보는 '손볼 후보만' 필터를 뒀어요.</p>
+      </div>
+      <div class="shot">
+        <img src="assets/deep/memory.png" alt="점검 화면의 메모리 탭. 메모 건수, 손볼 후보, 주제별 메모 카드">
+        <div class="cap">예시 데이터로 다시 그린 화면 · 실제 메모 내용은 싣지 않았습니다</div>
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>사례</th><th>로컬에 둔 이유</th><th>설정과 주의할 점</th></tr></thead>
+          <thead><tr><th>손볼 후보</th><th>왜 고치나요</th></tr></thead>
           <tbody>
-            <tr><td class="nm">product-tools</td><td>1장의 시안·기획서 대조를 돌리는 도구. 사내 퍼블리싱 서버에 접속해야 검사할 수 있음</td><td>clone 후 build_mac_app.sh로 앱을 만들고 브라우저에서 localhost로 엶. 새 검사는 담당자 PC가 켜져 있어야 해서, 검사기가 떠 있는 동안에는 유휴 잠자기를 막음</td></tr>
-            <tr><td class="nm">work-automation CLI</td><td>일일보고(평일 09:10)는 Claude Code를 띄우지 않아도 돌아야 함</td><td>CLI로 설치해야 launchd에 예약으로 등록됨. 계정은 .env에 두므로 저장소에 올리지 않고 .env.example을 보고 각자 만듦</td></tr>
-            <tr><td class="nm">status-board</td><td>내 맥의 서비스와 설정 파일을 직접 읽어야 함</td><td>launchd가 부팅할 때 서버와 크롬 창을 각각 띄움. 5장 참고</td></tr>
+            <tr><td class="nm">본문이 3,000자를 넘는 메모</td><td>읽힐 때마다 컨텍스트를 많이 씀</td></tr>
+            <tr><td class="nm">목록 설명이 80자를 넘는 메모</td><td>메모리 목록은 세션마다 전부 읽힘</td></tr>
+            <tr><td class="nm">끊어진 링크</td><td>관련된 메모로 이어지지 않음</td></tr>
+            <tr><td class="nm">지금 없는 경로를 가리키는 메모</td><td>AI가 옮기거나 지운 파일을 근거로 답함</td></tr>
+            <tr><td class="nm">'어제', '지난주'처럼 적은 날짜</td><td>나중에 읽으면 언제인지 알 수 없음</td></tr>
+            <tr><td class="nm">목록과 실제 파일이 어긋남</td><td>목록에 없는 메모는 읽히지 않음. 화면 맨 위에 경고로 표시</td></tr>
           </tbody>
         </table>
       </div>
-      <ul class="bullets strong mt28">
-        <li>서명·공증하지 않은 앱은 처음 열 때 '개발자를 확인할 수 없습니다' 경고가 뜹니다. '휴지통으로 이동'은 누르지 말고 시스템 설정 &gt; 개인정보 보호 및 보안에서 '그래도 열기'를 누릅니다</li>
-        <li>브라우저가 자동으로 열리지 않거나 포트가 이미 쓰이고 있다고 나오면 주소창에 localhost 주소를 직접 입력해 엽니다</li>
-        <li>같은 기능을 플러그인과 CLI로 같이 설치해도 됩니다. work-automation은 같은 코드를 쓰고 학습 결과만 따로 저장됩니다</li>
-      </ul>
 
-      <h3 class="q">서버에 연결해 쓰는 방식은 어떻게 설정하나요?</h3>
+      <h3 class="q">메모는 어떤 기준으로 묶나요?</h3>
       <div class="a">
-        <p>연결하는 상대에 따라 설정하는 자리와 인증 방식이 달라요.</p>
+        <p><strong>메모를 찾는 사람이 바로 고를 수 있게 프로젝트 단위로 묶었어요.</strong> 처음에는 '내가 만든 도구' 한 묶음에 메모 29개가 들어 있어서, 묶음을 눌러도 그 안에서 원하는 메모를 다시 하나씩 찾아야 했어요. 지금은 프로젝트마다 묶음을 두고, 메모 하나에 묶음을 여러 개 붙일 수 있게 했어요. 가장 큰 묶음이 29개에서 13개로 줄었어요.</p>
+        <p>AI에게 준 피드백 메모도 어느 프로젝트에 대한 것인지에 따라 묶어요. 예전에는 피드백 메모를 모두 '작업 규칙'에 넣어서, 특정 프로젝트에만 해당하는 규칙을 그 프로젝트 묶음에서 찾을 수 없었어요.</p>
+      </div>
+      <div class="stat-strip">
+        <div class="stat"><div class="n">106<span class="unit">개</span></div><div class="l">메모</div></div>
+        <div class="stat"><div class="n">239<span class="unit">개</span></div><div class="l">메모 사이 링크</div></div>
+        <div class="stat"><div class="n">15<span class="unit">개</span></div><div class="l">프로젝트 묶음</div></div>
+        <div class="stat"><div class="n">29<span class="unit-muted">→</span>13</div><div class="l">가장 큰 묶음의 메모 수</div></div>
+      </div>
+      <h3 class="q">같은 지적을 두 번 받으면 어떻게 하나요?</h3>
+      <div class="a">
+        <p><strong>요청받은 부분만 고치고 끝내지 않고, 왜 같은 실수가 반복됐는지 확인해서 규칙을 고쳐요.</strong> 같은 지적을 다시 받았다면, 처음 지적받았을 때 그 부분만 고치고 규칙은 그대로 둔 거예요. 먼저 규칙이 아예 없었는지, 메모리에만 있어서 읽히지 않았는지, 설정이 오히려 허용하고 있었는지를 확인해요. 이 사이트도 회사 로고가 빠진 일을 두 번 지적받은 뒤에, 로고를 빼지 말라는 내용을 메모리에서 프로젝트 규칙 파일로 옮겼어요.</p>
+      </div>
+      <div class="causes">
+        <div class="cause">
+          <div class="why"><div class="k">원인</div><div class="t">규칙이 아예 없었다</div></div>
+          <div class="arrow">↓</div>
+          <div class="fix"><div class="k">고치는 곳</div><div class="t">전체·프로젝트 규칙 파일에 추가</div></div>
+        </div>
+        <div class="cause">
+          <div class="why"><div class="k">원인</div><div class="t">메모리에만 있어서 읽히지 않았다</div></div>
+          <div class="arrow">↓</div>
+          <div class="fix"><div class="k">고치는 곳</div><div class="t">규칙 파일로 옮김</div></div>
+        </div>
+        <div class="cause">
+          <div class="why"><div class="k">원인</div><div class="t">설정이 오히려 허용하고 있었다</div></div>
+          <div class="arrow">↓</div>
+          <div class="fix"><div class="k">고치는 곳</div><div class="t">설정에서 허용을 빼거나 훅 추가</div></div>
+        </div>
+      </div>
+      <div class="a">
+        <p>두 번째 지적이면 AI가 규칙을 기억할 거라고 기대하지 않고 훅을 추가해요. 훅은 대부분 작업을 막지 않고 한 줄 알림만 띄워서, 작업을 이어 가면서도 규칙과 다른 부분을 바로 알 수 있어요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>연결 대상</th><th>쓰는 곳과 설정</th><th>인증</th></tr></thead>
+          <thead><tr><th>훅</th><th>언제 실행되나</th><th>무엇을 알려 주나</th></tr></thead>
           <tbody>
-            <tr><td class="nm">Figma 원격 MCP</td><td>저장소의 .mcp.json. clone하면 프로젝트 MCP로, 플러그인으로 설치하면 플러그인 MCP로 등록됨</td><td>토큰이나 .env가 필요 없음. Claude Code에서 /mcp로 Figma 로그인</td></tr>
-            <tr><td class="nm">그룹웨어 문서 MCP</td><td>세무달력 원본 문서를 브라우저 대신 MCP로 받음</td><td>MCP 서버가 자격증명을 가지고 있어 스크립트에 로그인 절차가 없음</td></tr>
-            <tr><td class="nm">Jira API</td><td>jira-gen이 직접 호출해 이슈를 만들고, 프로젝트에서 쓸 수 있는 이슈 타입 이름을 읽어 둠</td><td>설치할 때 받은 계정을 키체인에 저장</td></tr>
-            <tr><td class="nm">결과 공유 사본</td><td>product-tools가 검사 결과 사본을 Cloudflare에 같이 올림</td><td>받은 사람은 로그인 없이 보기 전용으로 열람</td></tr>
+            <tr><td class="nm">명령 묶기</td><td>명령을 하나씩 따로 보내는 일이 이어질 때</td><td>한 번에 묶을 수 있는지 확인하라고 알려요. 주고받는 횟수가 늘수록 토큰 사용량도 늘어요(5장)</td></tr>
+            <tr><td class="nm">문장 검사</td><td>답변과 파일에 새로 쓴 문장</td><td>번역투나 메모체 같은 금지 표현이 있으면 알려요</td></tr>
+            <tr><td class="nm">원본 확인</td><td>검수 판정을 적을 때</td><td>최근 30분 안에 원본 화면이나 응답을 열었는지 확인해요</td></tr>
+            <tr><td class="nm">넘김 확인</td><td>다른 세션에 일을 넘길 때</td><td>받는 세션이 그 프로젝트 폴더에서 열린 세션인지 확인해요</td></tr>
           </tbody>
         </table>
       </div>
-      <ul class="bullets strong mt28">
-        <li>결과 공유 사본이 있어서 담당자 PC가 꺼져 있어도 이미 나온 결과 링크는 열립니다(60일 보관). 새 검사는 여전히 PC가 켜져 있어야 합니다. 검사는 로컬에서 실행하고 결과만 서버에 올리는 구성입니다</li>
-        <li>MCP 토큰은 Claude Code가 가지고 있어서, 점검 화면처럼 다른 프로그램이 같은 서버에 따로 요청하면 401이 나옵니다. 연결이 끊긴 것으로 읽지 않습니다</li>
-        <li>설치 토큰이 든 파일(설치 마법사 HTML 등)이 있으면 저장소를 private으로 둡니다. 포털은 개인 GitHub에 백업할 때 스크립트가 사내 IP·도메인·메일·배포 토큰을 가린 사본을 만들어 올리고, --dry-run으로 사본만 만들어 먼저 확인할 수 있습니다</li>
-      </ul>
-    </div>
-  </section>
 
-  <section class="chapter" data-toc="값 한 곳에 두기">
-    <div class="wrap narrow">
-      <div class="num"></div>
-      <div><h2>여러 곳에 쓰는 값은 처음부터 한 곳에 둔다</h2></div>
-    </div>
-  </section>
-
-  <section class="section" style="border-bottom:none;">
-    <div class="wrap narrow">
-      <h3 class="q">값을 곳곳에 직접 적어 두면 무엇이 문제인가요?</h3>
+      <h3 class="q">고친 값이 일부에만 반영되는 일은 왜 생기나요?</h3>
       <div class="a">
-        <p>고칠 때 한 곳만 바뀌고 나머지가 그대로 남아요. AI에게 '제목 바꿔 줘'라고 하면 지금 보고 있는 자리만 고치고 끝나는 일이 많아서, 같은 값이 몇 군데에 더 있는지는 사람이 따로 챙겨야 해요. 이 발표 페이지를 만들면서 실제로 아래 문제가 생겼어요.</p>
-        <p>도구를 만들 때도 같은 이유로 값을 한 곳에 모았어요. 2장의 판단 모델과 제한 시간은 환경변수로, 3장의 세무달력 색·그리드 규칙은 md 파일로 옮겼고, 5장의 예약 시각은 코드에 따로 적지 않고 plist에서 읽어요.</p>
+        <p><strong>같은 값을 여러 곳에 적어 두면, AI는 지금 보고 있는 곳만 고치고 나머지는 놓치기 쉬워요.</strong> '제목 바꿔 줘'라고 하면 한 곳만 바뀌고, 같은 값이 몇 군데에 더 있는지는 사람이 따로 챙겨야 해요. 이 페이지를 만들면서 실제로 아래 문제가 생겼고, 지금은 값마다 한 파일에만 두고 다른 곳에서는 불러다 써요.</p>
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>생긴 문제</th><th>원인</th><th>지금 두는 자리</th></tr></thead>
+          <thead><tr><th>생긴 문제</th><th>원인</th><th>지금 값을 두는 곳</th></tr></thead>
           <tbody>
-            <tr><td class="nm">목차에서 장이 빠짐</td><td>목차를 본문과 따로 적어 두어서, 6장을 추가할 때 목차에는 넣지 않은 채 남음</td><td>story-toc.js가 본문의 장 순서대로 목차를 만듦</td></tr>
+            <tr><td class="nm">목차에서 장이 빠짐</td><td>목차를 본문과 따로 적어 두어서, 장을 추가해도 목차에는 빠진 채 남음</td><td>story-toc.js가 본문의 장 순서대로 목차를 만듦</td></tr>
             <tr><td class="nm">장 번호가 어긋남</td><td>장을 나누거나 순서를 바꾸면 본문 번호, 목차 번호, 'N개 챕터' 숫자를 각각 고쳐야 했음</td><td>번호와 이동 주소도 같은 스크립트가 붙임. 제목은 각 장 제목 한 곳에만 둠</td></tr>
-            <tr><td class="nm">페이지마다 색이 조금씩 다름</td><td>메인과 글 페이지가 같은 팔레트라고 적어 두었지만 보조 글자색, 연한 배경색, 선 색이 파일마다 다른 값이었음. 헤더는 색을 또 따로 적었고 글꼴 불러오기도 두 곳에서 굵기 목록이 달랐음</td><td>tokens.css 한 파일. 다른 CSS는 변수 이름으로만 씀</td></tr>
+            <tr><td class="nm">페이지마다 색이 조금씩 다름</td><td>메인과 글 페이지가 같은 팔레트라고 적어 두었지만 보조 글자색, 연한 배경색, 선 색이 파일마다 다른 값이었음</td><td>tokens.css 한 파일. 다른 CSS는 변수 이름으로만 씀</td></tr>
             <tr><td class="nm">수치가 문장마다 따로 남음</td><td><span data-site="metrics.auto">2.9분</span>, <span data-site="metrics.checks">22개</span> 같은 측정값이 세 파일 열 곳 넘게 직접 적혀 있어서, 측정을 다시 하면 전부 찾아 고쳐야 했음</td><td>site.js의 metrics. 본문은 그 값을 불러다 씀</td></tr>
             <tr><td class="nm">바꾼 이름이 일부에만 반영됨</td><td>케이스 스터디 이름을 'Case Study'로 바꾼 뒤에도 이 페이지 맨 아래 링크에는 한글 이름이 남아 있었음</td><td>site.js의 story.label. 메뉴, 본문 링크, 하단 링크가 같은 값을 씀</td></tr>
           </tbody>
         </table>
       </div>
-      <ul class="bullets strong mt28">
-        <li>두 번 이상 쓰일 값은 처음 적을 때부터 한 파일에 모읍니다. 지금 한 곳뿐이어도 다른 페이지로 옮겨 쓸 값이면 같습니다</li>
-        <li>일단 되게 만들고 나중에 정리하는 순서로 가면 그 위에 다음 수정이 얹혀서, 정리할 때 드는 수고가 처음보다 커집니다</li>
-        <li>AI에게 이름이나 숫자를 바꾸라고 할 때는 '이 값이 쓰인 곳을 전부 찾아서 바꿔 줘'까지 적습니다. 값을 한 곳에 모아 두었다면 그 한 곳만 알려 주면 됩니다</li>
-        <li>HTML에 직접 적힌 글자는 스크립트가 돌지 않을 때 보이는 대체값으로만 둡니다. 페이지가 열리면 모아 둔 값으로 바뀝니다</li>
+      <div class="a mt28">
+        <p>도구에도 같은 원칙을 썼어요. 6장 검수 도구의 판단 모델과 제한 시간은 설정 파일로 분리했고, 2장 점검 화면의 예약 시각은 코드에 따로 적지 않고 예약 설정 파일에서 읽어요. 값을 바꿀 때 한 곳만 고치면 되고, 확인도 그곳만 하면 돼요.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="chapter" data-toc="세션 나누고 넘기기">
+    <div class="wrap narrow">
+      <div class="num"></div>
+      <div><h2>프로젝트마다 세션을 나누고, 일은 맡은 세션으로 넘겼다</h2></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h3 class="q">세션을 프로젝트마다 나눈 이유는 무엇인가요?</h3>
+      <div class="a">
+        <p>한 세션에서 여러 주제를 이어서 하면, AI는 주제가 바뀔 때마다 그 프로젝트를 처음부터 다시 파악해야 했어요. 앞서 하던 일의 내용도 놓치기 쉬웠어요. <strong>그래서 프로젝트마다 세션을 따로 두고, 주제가 다른 요청은 그 프로젝트를 맡은 세션으로 넘겨요.</strong> 각 세션은 맡은 프로젝트의 구조를 알고 있어서, 같은 내용을 다시 파악하지 않아도 돼요.</p>
+        <p>세션을 열고, 맡은 세션을 찾고, 일을 넘기는 과정은 개인 도구 모음(dev-tools)으로 자동화했어요. 맥 두 대와 회사 PC가 같은 저장소를 받아 쓰고, 설치 스크립트를 실행하면 같은 설정이 적용돼요.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>도구</th><th>하는 일</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">런처</td><td>터미널에서 claude만 치면 최근 작업한 프로젝트 목록을 띄우고, 고른 폴더에서 세션을 열어요. 지난 세션의 마지막 요청과 답을 첫 맥락으로 넣어 줘서 '이어서'만 쳐도 하던 일을 이어 가요</td></tr>
+            <tr><td class="nm">세션 이름</td><td>주제가 잡히면 세션에 이름을 붙여요. 이름이 있어야 다른 세션이 찾아서 일을 넘길 수 있어요</td></tr>
+            <tr><td class="nm">세션 찾기</td><td>지금 떠 있는 세션을 프로젝트 폴더별로 묶고, 작업 중인지 대기 중인지 보여 줘요</td></tr>
+            <tr><td class="nm">편지</td><td>세션끼리 일을 넘기거나 물어볼 때 메시지를 직접 보내요. 제가 한 세션의 내용을 다른 세션에 옮겨 적지 않아도 돼요</td></tr>
+            <tr><td class="nm">새 탭 열기</td><td>그 프로젝트를 맡은 세션이 없으면 새 탭에 세션을 띄우고 요청 원문을 그대로 넘겨요</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="q">일은 어느 세션으로 넘기나요?</h3>
+      <div class="a">
+        <p><strong>실제로 고칠 파일이 있는 저장소를 먼저 찾고, 그 저장소에서 열린 세션으로 넘겨요.</strong> 처음에는 세션 이름이나 요청에 나온 낱말을 보고 골랐어요. 그러다 포털 요청이 이름만 비슷한 발표 자료 세션으로 가고, 데모 화면의 카드 넘김 속도를 고쳐 달라는 요청도 '데모', '발표'라는 낱말 때문에 같은 세션으로 갔어요. 실제로 고칠 파일은 두 번 다 포털 저장소에 있었어요. 그래서 넘기기 전에 후보 저장소에서 요청에 나온 낱말을 한 번 검색해 봐요.</p>
+      </div>
+      <div class="formula">
+        <div class="box"><div class="t">요청</div><div class="d">사용자가 지금 세션에 한 말</div></div>
+        <div class="op">→</div>
+        <div class="box"><div class="t">맡을 저장소 찾기</div><div class="d">실제로 고칠 파일이 있는 저장소</div></div>
+        <div class="op">→</div>
+        <div class="box result"><div class="t">그 저장소의 세션 확인</div><div class="d">떠 있는지, 작업 중인지</div></div>
+      </div>
+      <div class="branch">
+        <div class="opt"><div class="cond">세션이 있고 쉬는 중</div><div class="t">편지로 바로 넘김</div><div class="d">무엇을 왜, 확인한 방법, 남은 일을 함께 적음</div></div>
+        <div class="opt"><div class="cond">세션이 있고 작업 중</div><div class="t">몇 분 안에 끝나면 여기서 처리</div><div class="d">더 크면 같은 프로젝트 새 탭에 넘김. 편지는 하던 일이 끝날 때까지 읽히지 않음</div></div>
+        <div class="opt"><div class="cond">세션이 없음</div><div class="t">새 탭에 세션을 띄움</div><div class="d">요청 원문을 그대로 넘겨 그 탭에서 바로 시작</div></div>
+      </div>
+      <ul class="bullets strong">
+        <li>넘길 때는 무엇을 왜 하는지, 어떻게 확인했는지, 남은 일이 무엇인지, 커밋은 받는 쪽이 한다는 것까지 적습니다</li>
+        <li>사용자 승인은 편지에 실어 보내지 않습니다. 승인은 그 세션이 그때 하려던 일에만 유효해서, 받는 세션은 사용자에게 다시 받습니다</li>
+        <li>권한이 막혀 못 한 일을 다른 세션에 시켜 우회하지 않습니다</li>
+      </ul>
+
+      <h3 class="q">세션끼리 주고받은 내용은 어디서 보나요?</h3>
+      <div class="a">
+        <p><strong>누가 누구에게 무엇을 넘겼는지 한곳에서 확인하려고, 점검 화면의 구조 탭에 세션별 대화 화면을 만들었어요.</strong> 왼쪽에서 세션 하나를 고르면 그 세션이 주고받은 메시지만 메신저처럼 보여 줘요. 보낸 메시지는 오른쪽, 받은 메시지는 왼쪽에 놓고, 상자를 누르면 전문이 펼쳐져요. 같은 탭의 관계도에서는 도구와 저장소가 서로 무엇을 주고받는지 보여 줘요.</p>
+        <p>처음에는 여덟 세션의 메시지를 한 목록에 시간순으로 늘어놓았어요. 세션 이름 길이가 행마다 달라 내용이 시작되는 위치가 들쭉날쭉해서 훑어보기 어려웠어요. 그래서 세션을 먼저 고르고 그 세션의 메시지만 보는 지금 화면으로 바꿨어요. 같은 폴더에서 세션 네 개가 동시에 돌기도 해서, 왼쪽 목록은 폴더 이름 대신 세션 이름으로 나눠요.</p>
+      </div>
+      <div class="shot">
+        <img src="assets/deep/structure.png" alt="점검 화면의 구조 탭. 도구와 저장소 관계도, 세션별 대화 목록">
+        <div class="cap">예시 데이터로 다시 그린 화면 · 실제 메시지 내용은 싣지 않았습니다</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="chapter" data-toc="토큰 사용량">
+    <div class="wrap narrow">
+      <div class="num"></div>
+      <div><h2>토큰을 어디에 많이 쓰는지 먼저 재고 줄였다</h2></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h3 class="q">토큰은 어디에 가장 많이 썼나요?</h3>
+      <div class="a">
+        <p><strong>짐작으로 줄이지 않고, 대화 기록을 집계해 토큰이 어디에 많이 드는지부터 쟀어요.</strong> 가장 큰 원인은 AI와 주고받는 횟수였어요. 2026년 8월 5일에 재 보니 AI가 도구를 부를 때 96.4%는 한 번에 하나만 불렀어요. 한 번 주고받을 때마다 명령과 생각, 응답이 더해져 컨텍스트가 1,210토큰씩 늘었어요. 그래서 같은 일을 해도 주고받는 횟수가 많을수록 토큰을 더 썼어요.</p>
+      </div>
+      <div class="formula">
+        <div class="box"><div class="t">명령</div><div class="d">AI가 보낸 도구 호출</div></div>
+        <div class="op">+</div>
+        <div class="box"><div class="t">생각</div><div class="d">다음에 할 일을 정하는 과정</div></div>
+        <div class="op">+</div>
+        <div class="box"><div class="t">응답</div><div class="d">도구 결과와 답변</div></div>
+        <div class="op">=</div>
+        <div class="box result"><div class="t">1,210토큰</div><div class="d">한 번 주고받을 때 늘어나는 컨텍스트</div></div>
+      </div>
+
+      <h3 class="q">어떻게 줄였나요?</h3>
+      <div class="a">
+        <p>연달아 할 명령은 하나로 묶고, 서로 관계없는 호출은 한 번에 보내라는 규칙을 전체 규칙 파일 맨 위에 적었어요. 그런데 이틀 뒤에 다시 재 보니, 한 번 주고받을 때 부르는 도구는 평균 1.09개로 거의 그대로였어요. 규칙 파일은 세션을 시작할 때 한 번 읽힐 뿐이라, 명령을 보내는 순간에는 AI가 그 규칙을 떠올리지 못했어요. <strong>그래서 명령을 보내는 순간에 알려 주는 훅을 추가했어요.</strong> 명령을 하나씩 따로 보내는 일이 세 번 이어지면 훅이 묶을 수 있는지 확인하라고 알려 줘요.</p>
+      </div>
+      <ul class="bullets strong">
+        <li>컨텍스트가 20만 토큰에 닿으면 그 자리에서 세션을 끊습니다. 상태줄 색이 노랑으로 바뀌는 지점이 이 값입니다</li>
+        <li>한 세션이 200턴을 넘으면 남은 일을 정리해 새 세션으로 넘기자고 먼저 제안합니다. 대화가 길어지면 앞부분이 자동으로 요약돼서 AI는 대화가 얼마나 길어졌는지 알 수 없습니다. 그래서 훅이 실제 턴 수를 세어 알려 줍니다</li>
+        <li>파일은 필요한 범위만 읽고, 위치를 모르면 검색으로 먼저 찾습니다</li>
+      </ul>
+
+      <h3 class="q">토큰 탭에서는 무엇을 보나요?</h3>
+      <div class="a">
+        <p><strong>규칙을 넣은 뒤 실제로 줄었는지 확인하려고 사용량을 날짜별, 프로젝트별로 모아 보여 줘요.</strong> 가장 많이 쓴 세션도 함께 보여 줘서, 어떤 작업에서 토큰이 많이 들었는지 찾을 수 있어요.</p>
+      </div>
+      <div class="shot">
+        <img src="assets/deep/tokens.png" alt="점검 화면의 토큰 탭. 날짜별 사용량 막대와 프로젝트별 표">
+        <div class="cap">예시 데이터로 다시 그린 화면</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="chapter" data-toc="같은 방식으로 만든 팀 도구">
+    <div class="wrap narrow">
+      <div class="num"></div>
+      <div><h2>같은 방식으로 팀이 쓰는 검수 도구를 만들고 배포했다</h2></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h3 class="q">이 도구는 무엇을 하나요?</h3>
+      <div class="a">
+        <p><strong>기획서와 시안이 어긋난 곳을 사람이 하나씩 비교해 찾지 않아도 되게 하려고 만들었어요.</strong> 이 도구(product-tools)는 원래 맞춤법만 검사하던 작은 프로그램이었어요. 여기에 Zeplin 시안과 Figma 기획서의 문구를 대조하는 기능을 붙였어요. 도구가 두 서비스에서 화면의 텍스트와 좌표를 받아 대조까지 하고, 사람은 결과를 보며 뺄 항목만 고르면 돼요.</p>
+        <p>처음에는 글자가 같아도 강조 때문에 노드가 나뉘었거나 줄을 다르게 나눈 문구를 모두 다르다고 표시해서, 화면 하나에서 200건 넘게 나왔어요. 이렇게 잘못 잡힌 항목을 조건으로 걸러 한 화면에 카드 27장 정도로 줄였어요.</p>
+      </div>
+
+      <h3 class="q">규칙으로 거를 수 없던 것은 무엇이었나요?</h3>
+      <div class="a">
+        <p>잘못 잡힌 항목을 조건으로 걸러 내도, 남은 차이 중 어떤 것이 중요한지는 조건으로 정할 수 없었어요. 손으로 검수할 때 실제로 찾던 것은 의도한 리디자인이 아닌 실수, '총 5건'이라고 적었는데 행은 7개인 수치 오류, 게시 전에 승인을 받아야 하는 타사 로고 같은 것이었어요.</p>
+        <p>그래서 기계 대조가 찾은 후보와 두 화면 이미지를 제 맥의 Claude Code에 넘겨요. <strong>차이를 찾는 일은 기계 대조가 하고, AI에게는 어떤 항목이 중요한지 판단하는 일만 맡겼어요.</strong> AI는 사소한 항목을 빼고, 남긴 항목마다 심각도와 이유를 한 줄로 적어 돌려줘요. AI가 이미지에서 새로 찾은 항목은 리포트에 따로 묶어 보여 줘요.</p>
+      </div>
+      <div class="formula">
+        <div class="box"><div class="t">기계 대조 후보</div><div class="d">글자 차이를 빠짐없이 찾음</div></div>
+        <div class="op">+</div>
+        <div class="box"><div class="t">AI 판단</div><div class="d">후보 걸러내기와 이미지 비교</div></div>
+        <div class="op">=</div>
+        <div class="box result"><div class="t">리포트</div><div class="d">심각도와 이유가 붙은 항목</div></div>
+      </div>
+
+      <h3 class="q">처음 붙인 판단 단계는 왜 느렸나요?</h3>
+      <div class="a">
+        <p><strong>AI가 쓰는 답이 길수록 판단 시간도 길어져서, 답에 꼭 필요한 내용만 쓰게 했어요.</strong> 처음에는 후보마다 이유를 쓰게 해서 답이 길었어요. 버릴 항목은 번호만 적고, 남길 항목에만 한 줄 이유를 쓰게 바꿨어요. 그러자 판단 시간과 답 길이가 함께 줄었고, AI가 남기는 항목도 11건에서 7건으로 줄었어요.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th></th><th>전</th><th>후</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">판단 시간</td><td>125초</td><td>89초</td></tr>
+            <tr><td class="nm">답 길이</td><td>4,244자</td><td>700자</td></tr>
+            <tr><td class="nm">후보 30건 중 남긴 항목</td><td>11건</td><td>7건</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="q">혼자 쓰던 도구를 처음 팀에 공유할 때 어떤 문제가 있었나요?</h3>
+      <div class="a">
+        <p>처음에는 GitHub 저장소를 받아 각자 실행하는 방식으로 공유했어요. 받는 사람이 직접 환경을 준비해야 해서 번거로웠고, 직접 만든 앱은 회사 보안 정책 때문에 실행되지 않기도 했어요. <strong>그래서 공유 방식을 하나로 정하지 않고, 받는 사람이 설치해야 하는지와 어디서 쓰는지에 따라 네 가지로 나눴어요.</strong> 한 도구를 여러 방식으로 함께 배포하기도 해요.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>방식</th><th>이럴 때 고릅니다</th><th>사례</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">플러그인 배포</td><td>여러 사람이 어느 폴더에서든 같은 명령을 써야 할 때. 팀원 맥마다 설치해서 Claude Code 안에서 씁니다</td><td>figma-ai(Figma 기획서에 설명 패널과 케이스 시트 작성), jira-gen(Jira 이슈 생성)</td></tr>
+            <tr><td class="nm">웹 링크 공유</td><td>팀원이 설치 없이 브라우저에서 열어야 할 때</td><td>product-tools, link-hub, pptx-helper, 검사 결과 공유 사본</td></tr>
+            <tr><td class="nm">로컬 전용</td><td>저만 보는 화면이거나, Claude Code 없이 정해진 시각에 돌아야 할 때</td><td>status-board, 일일보고 자동화</td></tr>
+            <tr><td class="nm">서버 연결</td><td>외부 서비스의 데이터를 읽어야 할 때</td><td>Figma 원격 MCP, Jira API</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="q">설치한 뒤에는 어떤 문제가 있었나요?</h3>
+      <div class="a">
+        <p>설치는 포털 카드에 적힌 명령 한 줄로 끝나게 했어요. 그런데 이렇게 설치하면 설치 정보가 팀원 맥에만 저장돼서, 제가 새 버전을 올려도 팀원 맥은 알 수 없었어요. 팀원이 다시 설치하지 않으면 설치한 날의 버전을 계속 썼어요.</p>
+        <p><strong>그래서 팀원이 따로 갱신하지 않아도 Claude Code 세션을 시작할 때 새 버전을 자동으로 확인하게 했어요.</strong> 세션 시작이 늦어지지 않도록 확인은 백그라운드에서 하고, 받은 새 버전은 다음 세션부터 적용돼요.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="idx">01</div><div class="t">세션 시작</div><div class="d">지난번 확인 결과를 한 줄로 알림</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="idx">02</div><div class="t">백그라운드 확인</div><div class="d">마지막 확인 뒤 20시간이 지났을 때만 버전 조회</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="idx">03</div><div class="t">다음 세션</div><div class="d">새 버전을 받아 두고 다음 세션부터 적용</div></div>
+      </div>
+
+      <h3 class="q">이 페이지에서 공통으로 지킨 기준은 무엇인가요?</h3>
+      <div class="a">
+        <p><strong>AI에게 맡긴 결과를 사람이 확인할 수 있게, 확인하는 방법도 함께 만들었어요.</strong> 문제를 하나 해결하면 그 결과를 믿어도 되는지 확인할 방법이 필요했고, 그 방법을 만들다 보면 다음 문제가 보였어요. 다른 일에도 적용할 수 있는 기준을 정리하면 아래와 같아요.</p>
+      </div>
+      <ul class="bullets strong">
+        <li>확인할 것은 한 화면에 모으고, 탭마다 확인할 질문을 하나로 정합니다</li>
+        <li>주소가 열리는지와 기능이 동작하는지는 따로 확인합니다. 정상일 때는 알림을 띄우지 않아야 문제가 생겼을 때 눈에 띕니다</li>
+        <li>매번 지킬 규칙은 규칙 파일에, 필요할 때만 꺼낼 내용은 메모리에 적습니다. 같은 지적이 두 번 나오면 훅으로 자동 검사를 추가합니다</li>
+        <li>줄이기 전에 먼저 잽니다. 규칙을 넣은 뒤에도 다시 재서 실제로 줄었는지 확인합니다</li>
+        <li>차이를 찾는 일은 기계 대조로 하고, 무엇이 중요한지 판단하는 일만 AI에게 맡깁니다. AI가 실패해도 전체 작업은 끝까지 진행되게 합니다</li>
+        <li>도구를 배포할 때는 설치 방법과 함께 새 버전을 전달하는 방법을 정합니다</li>
       </ul>
     </div>
   </section>
@@ -706,6 +572,7 @@
 
 </article>
 <script src="assets/site.js"></script>
+<script src="assets/story-grid.js"></script>
 <script src="assets/story-toc.js"></script>
 <script src="assets/nav.js"></script>
 </body>

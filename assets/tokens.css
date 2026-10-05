@@ -26,29 +26,41 @@
   --accent-ink:var(--accent);
   --accent-soft:#eaf0ff;
   --accent-line:#c8d6ff;
-  --good:#1f7a52;
-  --good-soft:#eaf7f1;
-  --good-line:#bfe3d1;
   /* AI가 틀렸던 지점 상자. 글 페이지에서 경고 성격의 강조에만 쓴다 */
   --fail:#c2410c;
   --fail-soft:#fff6f0;
   --fail-line:#f6d5c2;
+  /* 발생했던 문제 상자. 포인트 블루와 같은 계열의 블루그레이로 둔다 */
+  --issue:var(--ink-soft);
+  --issue-soft:var(--tint);
+  --issue-line:var(--tint-2);
+  --stop:#e5484d;            /* 3장 도식: 막힌 자리 ✕ */
+  --stop-soft:#fdeeee;
+  --stop-line:#f6c4c5;
   --accent-on-dark:#8fa8ff;  /* 어두운 판 위의 포인트 */
   --term-ok:#27c93f;         /* 터미널 창의 완료 표시·POST 메서드 */
   --term-warn:#ffbd2e;       /* 터미널 창의 GET 메서드·노란 점 */
+  --term-err:#ff5f56;        /* 터미널 창의 빨간 점 */
+  --on-dark:#ffffff;         /* 포인트·어두운 판 위의 글자, 흰 버튼 */
+  --support:#f0b98d;         /* 후원 버튼 아이콘 */
+  --gpt:#10a37f;             /* 대화 예시의 ChatGPT 아바타 */
+  --cal-red:#e5383b;         /* 세무달력 재현: 마감·일정 글자 */
+  --cal-pill:#fdeeee;        /* 세무달력 재현: 일정 칸 바탕 */
+  --cal-play:#f76a5c;        /* 세무달력 재현: 영상 링크 버튼 */
+  --cal-note:#e3f7f6;        /* 세무달력 재현: 안내 칸 바탕 */
+  --cal-note-ink:#1a9e98;
 
   /* 어두운 판(글 페이지 표지·마무리) */
   --navy:#0f1830;
   --navy-surface:#16213f;
   --navy-ink:#eef1fb;
   --navy-ink-soft:#a7b0cf;
-
-  /* 후원 버튼 */
-  --coffee:#a9673a;
-  --coffee-soft:#f7ece2;
-  --coffee-line:#e3c6ae;
+  --ch-glow:#2f4fb8;         /* 장 표지 오른쪽 위 빛 번짐 */
 
   --shadow:0 1px 2px rgba(19,26,46,.04), 0 8px 24px rgba(19,26,46,.06);
+  /* 홈 화면 위에 겹쳐 뜬 카드. box-shadow 용과 투명 PNG 부품의 drop-shadow 용 */
+  --shadow-pop:0 30px 60px -30px rgba(19,26,46,.35), 0 8px 24px -12px rgba(19,26,46,.18);
+  --shadow-float:0 14px 22px rgba(19,26,46,.14);
 
   /* 글꼴 */
   --sans:'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -64,5 +76,4 @@
   /* 넓은 화면 글 페이지의 두 단(왼쪽 질문·제목, 오른쪽 답·자료) */
   --rail:260px;
   --rail-gap:56px;
-  --rail-min:861px;
 }

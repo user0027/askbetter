@@ -141,11 +141,19 @@
   /* 01·02·03·04 · 텍스트 왼쪽, 화면이 오른쪽 가장자리까지 흐른다 */
   .ch-1 .txt, .ch-2 .txt, .ch-3 .txt, .ch-4 .txt{ grid-column:1 / 6; align-self:start; position:sticky; top:120px; }
   .ch-1 .media, .ch-2 .media, .ch-3 .media, .ch-4 .media{ grid-column:6 / -1; margin-right:calc(-1 * (max(0px, (100vw - var(--max)) / 2) + var(--gut))); }
-  .ch-1 .shot, .ch-2 .shot, .ch-3 .shot, .ch-4 .shot{ aspect-ratio:1456 / 828; }
-  .ch-1 .shot img, .ch-2 .shot img, .ch-3 .shot img{ object-position:left top; }
+  .ch-1 .shot, .stage{ aspect-ratio:1456 / 828; }
+  .ch-1 .shot img{ object-position:left top; }
+  /* 02·03·04 · 화면을 부품(scripts/cut-home-shots.py)으로 잘라 판 위에 겹쳐 놓는다.
+     자리는 각 img 의 --x·--y·--w, 떠오르는 순서는 --d 가 정한다 */
+  .stage{ position:relative; overflow:hidden; }
+  .stage.tint{ background:var(--tint); }   /* 팝업처럼 바탕 위에 뜬 화면만 판을 깐다 */
+  .stage .part{ position:absolute; left:var(--x); top:var(--y); width:var(--w); height:auto; filter:drop-shadow(var(--shadow-float));
+    opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform 1.2s var(--ease); }
+  .stage.is-in .part{ opacity:1; transform:none; transition-delay:calc(.3s + var(--d)); }
+  .ch:hover .stage .part{ transform:translateY(-6px); transition-delay:0s; }
   /* jira-gen 설치 카드: 포털 화면 위에 팝업처럼 겹치고, 화면에 들어오면 한 박자 늦게 떠오른다 */
   .ch-1 .sub{ width:48%; margin-top:clamp(-120px, -8vw, -48px); margin-left:6%; position:relative; overflow:visible; background:none; aspect-ratio:auto;
-    border-radius:18px; box-shadow:0 30px 60px -30px rgba(19,26,46,.35), 0 8px 24px -12px rgba(19,26,46,.18); }
+    border-radius:18px; box-shadow:var(--shadow-pop); }
   .ch-1 .sub img{ display:block; height:auto; object-fit:initial; border-radius:18px; }
   .ch-1 .sub.rv{ transform:translateY(40px) scale(.96); transition:opacity .5s ease, transform .6s var(--ease); }
   .ch-1 .sub.rv.is-in{ transform:none; transition:opacity 1s ease .5s, transform 1.3s var(--ease) .5s; }
@@ -201,7 +209,7 @@
     *{ animation:none !important; transition:none !important; }
     .hl > span{ transform:none; }
     .hl > span{ opacity:1; }
-    .rv{ opacity:1; transform:none; } .unveil{ clip-path:none; }
+    .rv, .stage .part{ opacity:1; transform:none; } .unveil{ clip-path:none; }
     .hero-photo, .who, .hero-q, .hero-a .tag{ opacity:1; transform:none; }
   }
 </style>
@@ -308,7 +316,10 @@
           </div>
         </div>
         <div class="media">
-          <div class="shot unveil"><img src="assets/work/djbank-hero.png" alt="DJ Bank 계좌이체 화면, ERP 급여 데이터와 은행 이체 업무 연동" loading="lazy"></div>
+          <div class="stage unveil">
+            <img class="part" src="assets/work/parts/payroll-filter.png" alt="급여이체 조회 조건, 귀속연월·지급일·출금계좌번호" style="--x:3%;--y:6%;--w:65.2%;--d:0.00s" loading="lazy">
+            <img class="part" src="assets/work/parts/payroll-table.png" alt="급여대장과 연동된 지급 대상 표, 예금주 실명 열에서 일치는 초록·불일치는 빨강으로 표시" style="--x:23%;--y:30%;--w:70.85%;--d:0.15s" loading="lazy">
+          </div>
         </div>
       </div>
     </article>
@@ -326,7 +337,12 @@
           </div>
         </div>
         <div class="media">
-          <div class="shot unveil"><img src="assets/work/yearend-tax-hero.png" alt="연말정산 초기 설정 위자드 화면, WEHAGO T" loading="lazy"></div>
+          <div class="stage unveil">
+            <img class="part" src="assets/work/parts/yearend-brief.png" alt="AI 업무 브리핑, 마감이 가까운 수임처와 자료입력 요청 건수" style="--x:3%;--y:6%;--w:57.63%;--d:0.00s" loading="lazy">
+            <img class="part" src="assets/work/parts/yearend-donut.png" alt="수임처 진행 현황 도넛, 미진행·진행중·기간만료·마감" style="--x:63%;--y:3%;--w:32.37%;--d:0.10s" loading="lazy">
+            <img class="part" src="assets/work/parts/yearend-table.png" alt="수임처별 마감일·대상자·제출 완료·진행률 표" style="--x:6.5%;--y:44%;--w:57.63%;--d:0.20s" loading="lazy">
+            <img class="part" src="assets/work/parts/yearend-deadline.png" alt="자료 제출 마감 임박 수임처 목록" style="--x:66%;--y:41%;--w:32.37%;--d:0.30s" loading="lazy">
+          </div>
         </div>
       </div>
     </article>
@@ -344,7 +360,11 @@
           </div>
         </div>
         <div class="media">
-          <div class="shot unveil"><img src="assets/work/game-editor-hero.png" alt="게임 공유 플랫폼 zempie 커뮤니티 화면" loading="lazy"></div>
+          <div class="stage unveil">
+            <img class="part" src="assets/work/parts/zempie-nav.png" alt="zempie 상단 메뉴, COMMUNITY·GAMES·게임 업로드" style="--x:3%;--y:6%;--w:94%;--d:0.00s" loading="lazy">
+            <img class="part" src="assets/work/parts/zempie-post.png" alt="zempie 커뮤니티 공지 게시물" style="--x:3%;--y:19%;--w:54%;--d:0.15s" loading="lazy">
+            <img class="part" src="assets/work/parts/zempie-recent.png" alt="최근 게시물 카드, 게임잼 후기" style="--x:52%;--y:25%;--w:23%;--d:0.30s" loading="lazy">
+          </div>
         </div>
       </div>
     </article>
@@ -398,7 +418,7 @@
       <span class="label">Contact</span>
       <p class="lead">궁금한 게 있으면 편하게 물어보세요.</p>
       <div class="ways">
-        <a href="mailto:71d2sr@gmail.com" data-site-href="contact.mailto" aria-label="이메일 보내기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a href="mailto:71d2sr@gmail.com" data-site-href="contact.mailto" data-copy="contact" aria-label="이메일 보내기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></a>
         <a href="https://linkedin.com/in/yujin1113" target="_blank" rel="noopener" aria-label="LinkedIn 프로필"><span class="in">in</span></a>
         <a class="coffee" href="#" data-site-href="support.href" target="_blank" rel="noopener" aria-label="Ko-fi로 커피 후원하기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg><span data-site="support.label">커피 한 잔 후원하기</span></a>
       </div>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>zempie 썸네일 목업</title>
+<!-- 홈 4장 zempie 화면의 썸네일 자리를 채우는 그림. 원본 목업에는 회색 아이콘만 있어서 직접 그린다.
+     scripts/cut-home-shots.py 가 각 요소를 2배로 찍어 game-editor-hero.png 의 같은 자리에 붙인다. -->
+<style>
+  body{ margin:0; padding:20px; background:#fff; display:flex; flex-direction:column; gap:20px; align-items:flex-start; }
+  .bell{ position:relative; overflow:hidden; background:radial-gradient(120% 140% at 75% 40%, #ffe08a 0%, #ffbf4d 45%, #ff9838 100%); }
+  .bell svg{ position:absolute; inset:0; width:100%; height:100%; }
+  #banner{ width:672px; height:170px; }
+  #recent{ width:276px; height:120px; }
+  canvas{ display:block; width:68px; height:68px; image-rendering:pixelated; }
+</style>
+</head>
+<body>
+<template id="bell-art">
+  <!-- 업데이트 공지 배너: 게임패드와 떠 있는 게임 아이템 -->
+  <svg viewBox="0 0 672 170" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f3f0ec"/><stop offset="1" stop-color="#d9d2c8"/></linearGradient>
+      <linearGradient id="padtop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <radialGradient id="coin" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff6c8"/><stop offset=".5" stop-color="#ffd23f"/><stop offset="1" stop-color="#e39a12"/></radialGradient>
+      <radialGradient id="btn" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#b85400" flood-opacity=".35"/></filter>
+    </defs>
+    <circle cx="90" cy="30" r="70" fill="#fff" opacity=".18"/>
+    <circle cx="610" cy="150" r="90" fill="#fff" opacity=".14"/>
+    <!-- 게임패드 -->
+    <g filter="url(#sh)" transform="translate(322 24) rotate(-8 110 70) scale(.82)">
+      <path d="M48 8h124c26 0 40 18 46 44l12 52c5 22-8 36-24 36-12 0-20-8-28-20l-12-18H54l-12 18c-8 12-16 20-28 20-16 0-29-14-24-36l12-52C8 26 22 8 48 8z" fill="url(#pad)"/>
+      <path d="M48 12h124c20 0 32 12 38 30H10c6-18 18-30 38-30z" fill="url(#padtop)"/>
+      <g fill="#3a3f4b"><rect x="40" y="44" width="14" height="42" rx="3"/><rect x="26" y="58" width="42" height="14" rx="3"/></g>
+      <circle cx="166" cy="48" r="10" fill="#2fc2a8"/><circle cx="186" cy="66" r="10" fill="#e2504c"/>
+      <circle cx="146" cy="66" r="10" fill="#3d7bd9"/><circle cx="166" cy="84" r="10" fill="#ffc531"/>
+      <g fill="url(#btn)"><circle cx="166" cy="48" r="10"/><circle cx="186" cy="66" r="10"/><circle cx="146" cy="66" r="10"/><circle cx="166" cy="84" r="10"/></g>
+      <circle cx="84" cy="98" r="15" fill="#4b505c"/><circle cx="84" cy="98" r="9" fill="#5d6370"/>
+      <circle cx="132" cy="98" r="15" fill="#4b505c"/><circle cx="132" cy="98" r="9" fill="#5d6370"/>
+      <rect x="94" y="54" width="12" height="6" rx="3" fill="#b9b1a5"/><rect x="114" y="54" width="12" height="6" rx="3" fill="#b9b1a5"/>
+    </g>
+    <!-- 떠 있는 동전 -->
+    <g filter="url(#sh)">
+      <g transform="translate(262 54)"><ellipse cx="0" cy="0" rx="17" ry="20" fill="url(#coin)"/><ellipse cx="0" cy="0" rx="9" ry="12" fill="none" stroke="#e39a12" stroke-width="3"/></g>
+      <g transform="translate(566 46) scale(.75)"><ellipse cx="0" cy="0" rx="17" ry="20" fill="url(#coin)"/><ellipse cx="0" cy="0" rx="9" ry="12" fill="none" stroke="#e39a12" stroke-width="3"/></g>
+    </g>
+    <!-- 픽셀 하트 -->
+    <g transform="translate(276 108)" fill="#e2504c"><path d="M3 0h6v3h3V0h6v3h3v9h-3v3h-3v3h-3v3H9v-3H6v-3H3v-3H0V3h3z"/><rect x="3" y="3" width="3" height="3" fill="#ff9a95"/></g>
+    <!-- 픽셀 별 -->
+    <g transform="translate(552 108)" fill="#fff"><path d="M9 0h3v6h3v3h6v3h-3v3h3v6h-3v-3h-3v-3h-3v3h-3v3H6v-3H3v3H0v-6h3v-3H0V9h6V6h3z" opacity=".95"/></g>
+    <g fill="#fff">
+      <path d="M600 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+      <path d="M218 36l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" opacity=".8"/>
+      <circle cx="250" cy="120" r="3" opacity=".7"/>
+    </g>
+  </svg>
+</template>
+<div class="bell" id="banner"></div>
+<div class="bell" id="recent"></div>
+<canvas id="jam" width="34" height="34"></canvas>
+<canvas id="meetup" width="34" height="34"></canvas>
+<canvas id="online" width="34" height="34"></canvas>
+<script>
+  for (const id of ['banner', 'recent']) document.getElementById(id).append(document.getElementById('bell-art').content.cloneNode(true));
+
+  // 픽셀 그림은 34×34 칸에 그리고 CSS 로 키운다
+  const pix = (id, fn) => { const c = document.getElementById(id).getContext('2d'); fn((x, y, w, h, col) => { c.fillStyle = col; c.fillRect(x, y, w, h); }); };
+  const sprite = (r, x, y, rows, pal) => rows.forEach((row, j) => [...row].forEach((ch, i) => { if (ch !== '.') r(x + i, y + j, 1, 1, pal[ch]); }));
+
+  // 펜스터 게임잼 후기: 밤 도시 지붕 위 캐릭터
+  pix('jam', r => {
+    for (let y = 0; y < 34; y++) r(0, y, 34, 1, `rgb(${40 + y * 2},${30 + y * 2},${90 + y * 3})`);
+    r(25, 4, 5, 5, '#ffe9a8'); r(26, 3, 3, 1, '#ffe9a8'); r(26, 9, 3, 1, '#ffe9a8'); r(27, 5, 2, 2, '#f3d27a');
+    [[3,3],[9,7],[15,2],[20,9],[6,12]].forEach(([x,y]) => r(x, y, 1, 1, '#fff'));
+    [[0,18,6,16,'#2b2350'],[6,14,7,20,'#352c63'],[13,20,6,14,'#2b2350'],[19,16,8,18,'#3a3070'],[27,21,7,13,'#2b2350']].forEach(([x,y,w,h,c]) => r(x,y,w,h,c));
+    [[2,21],[8,17],[10,20],[21,19],[24,23],[15,24],[29,24]].forEach(([x,y]) => r(x, y, 1, 2, '#ffcf5a'));
+    r(0, 29, 34, 5, '#1d1838');
+    sprite(r, 12, 21, ['..oo..', '.oooo.', '.owow.', '.oooo.', 'rrbbrr', '.bbbb.', '.b..b.', '.k..k.'],
+      { o: '#ffb36b', w: '#2a1d10', r: '#e8942e', b: '#3d7bd9', k: '#1a1a1a' });
+  });
+
+  // 개발자·퍼블리셔 교류: 무대 현수막 앞에 모인 사람들
+  pix('meetup', r => {
+    r(0, 0, 34, 34, '#f4ead8'); r(0, 0, 34, 6, '#e8942e'); r(0, 6, 34, 1, '#c9741d');
+    [[3,9],[11,9],[19,9],[27,9]].forEach(([x,y]) => r(x, y, 4, 4, '#fff'));
+    r(4, 10, 2, 2, '#e8942e'); r(12, 10, 2, 2, '#3d7bd9'); r(20, 10, 2, 2, '#2fc2a8'); r(28, 10, 2, 2, '#e8942e');
+    r(2, 16, 30, 2, '#d9cbb3');
+    const pal = ['#2a1d10', '#5a3a1e', '#1a1a1a', '#8a5a2b', '#2a1d10', '#5a3a1e'], shirt = ['#3d7bd9', '#e8942e', '#2fc2a8', '#7a5af5', '#e2504c', '#4b5563'];
+    [[1,21],[7,20],[13,22],[19,20],[25,21],[30,22]].forEach(([x,y], i) => {
+      r(x, y, 4, 2, pal[i]); r(x, y + 2, 4, 3, '#ffcf9e'); r(x - 1, y + 5, 6, 9, shirt[i]);
+    });
+    r(0, 32, 34, 2, '#c9b89a');
+  });
+
+  // 첫 온라인 게임잼: 플랫포머 한 장면
+  pix('online', r => {
+    r(0, 0, 34, 34, '#7ec8f5');
+    [[3,5,7,2],[4,4,4,1],[20,8,8,2],[22,7,4,1]].forEach(([x,y,w,h]) => r(x, y, w, h, '#fff'));
+    r(0, 27, 34, 7, '#a0612f'); r(0, 26, 34, 2, '#4cc14b'); r(0, 25, 34, 1, '#7ee07a');
+    for (let x = 2; x < 34; x += 6) r(x, 30, 2, 1, '#7c4520');
+    r(18, 17, 10, 3, '#a0612f'); r(18, 16, 10, 1, '#4cc14b');
+    [[20,12],[24,12],[10,14]].forEach(([x,y]) => { r(x, y, 2, 3, '#ffd23f'); r(x, y, 1, 1, '#fff3b0'); });
+    sprite(r, 6, 18, ['.rrr.', 'rrrrr', '.sss.', '.sws.', 'bbbbb', '.b.b.', 'kk.kk'], { r: '#e2504c', s: '#ffcf9e', w: '#1a1a1a', b: '#3d7bd9', k: '#5a3a1e' });
+    sprite(r, 27, 22, ['.ggg.', 'gwgwg', 'ggggg', 'g.g.g'], { g: '#7a5af5', w: '#fff' });
+  });
+</script>
+</body>
+</html>
