@@ -32,7 +32,7 @@ window.SITE = {
   contact: { email: '71d2sr@gmail.com', mailto: 'mailto:71d2sr@gmail.com', copied: '이메일 주소가 복사됐어요' },
   brand: 'ASKBETTER',
   // 최종 배포 시각. wrangler deploy 전에 scripts/stamp-deploy-time.py 가 이 줄만 고쳐 쓴다
-  meta: { deployedAt: '2026.10.05 23:41' },
+  meta: { deployedAt: '2026.10.07 00:09' },
   // 배포 주소. 공유 미리보기(og 태그)가 절대 주소를 써야 해서 scripts/make-og.py 가 읽는다
   url: 'https://askbetter.studio54.workers.dev',
   // 헤더 메뉴는 로고에 맞춰 영어로 쓴다. 본문 링크 문구도 story.label(영어)을 쓴다

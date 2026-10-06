@@ -151,6 +151,9 @@
     opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform 1.2s var(--ease); }
   .stage.is-in .part{ opacity:1; transform:none; transition-delay:calc(.3s + var(--d)); }
   .ch:hover .stage .part{ transform:translateY(-6px); transition-delay:0s; }
+  /* 장식 오브젝트는 들어온 뒤에도 천천히 떠다닌다. 들어오는 효과(transform)와 겹치지 않게 translate·rotate 만 움직인다 */
+  .stage .part.float{ animation:float 4.8s ease-in-out infinite; animation-delay:var(--fd, 0s); }
+  @keyframes float{ 0%, 100%{ translate:0 0; rotate:0deg; } 50%{ translate:0 -12px; rotate:-4deg; } }
   /* jira-gen 설치 카드: 포털 화면 위에 팝업처럼 겹치고, 화면에 들어오면 한 박자 늦게 떠오른다 */
   .ch-1 .sub{ width:48%; margin-top:clamp(-120px, -8vw, -48px); margin-left:6%; position:relative; overflow:visible; background:none; aspect-ratio:auto;
     border-radius:18px; box-shadow:var(--shadow-pop); }
@@ -319,6 +322,9 @@
           <div class="stage unveil">
             <img class="part" src="assets/work/parts/payroll-filter.png" alt="급여이체 조회 조건, 귀속연월·지급일·출금계좌번호" style="--x:3%;--y:6%;--w:65.2%;--d:0.00s" loading="lazy">
             <img class="part" src="assets/work/parts/payroll-table.png" alt="급여대장과 연동된 지급 대상 표, 예금주 실명 열에서 일치는 초록·불일치는 빨강으로 표시" style="--x:23%;--y:30%;--w:70.85%;--d:0.15s" loading="lazy">
+            <!-- 장식 오브젝트: Microsoft Fluent Emoji 3D (MIT) 의 Money with wings·Coin -->
+            <img class="part float" src="assets/work/parts/payroll-money.png" alt="" style="--x:76%;--y:3%;--w:13%;--d:0.30s" loading="lazy">
+            <img class="part float" src="assets/work/parts/payroll-coin.png" alt="" style="--fd:-2.4s;--x:9%;--y:66%;--w:8%;--d:0.40s" loading="lazy">
           </div>
         </div>
       </div>
@@ -362,8 +368,10 @@
         <div class="media">
           <div class="stage unveil">
             <img class="part" src="assets/work/parts/zempie-nav.png" alt="zempie 상단 메뉴, COMMUNITY·GAMES·게임 업로드" style="--x:3%;--y:6%;--w:94%;--d:0.00s" loading="lazy">
-            <img class="part" src="assets/work/parts/zempie-post.png" alt="zempie 커뮤니티 공지 게시물" style="--x:3%;--y:19%;--w:54%;--d:0.15s" loading="lazy">
-            <img class="part" src="assets/work/parts/zempie-recent.png" alt="최근 게시물 카드, 게임잼 후기" style="--x:52%;--y:25%;--w:23%;--d:0.30s" loading="lazy">
+            <img class="part" src="assets/work/parts/zempie-post.png" alt="zempie 커뮤니티 공지 게시물" style="--x:3%;--y:17%;--w:64%;--d:0.15s" loading="lazy">
+            <img class="part" src="assets/work/parts/zempie-recent.png" alt="최근 게시물 카드, 게임잼 후기" style="--x:70%;--y:16%;--w:26%;--d:0.30s" loading="lazy">
+            <!-- 장식 오브젝트: Microsoft Fluent Emoji 3D (MIT) 의 Video game -->
+            <img class="part float" src="assets/work/parts/zempie-gamepad.png" alt="" style="--x:56%;--y:72%;--w:13%;--d:0.45s" loading="lazy">
           </div>
         </div>
       </div>
