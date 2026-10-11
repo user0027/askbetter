@@ -933,3 +933,26 @@ footer.pagefoot a{ text-decoration:none; border-bottom:1px solid var(--line); }
   .formula{ flex-direction:column; gap:8px; }
   .formula .op{ justify-content:center; }
 }
+
+/* 받은 질문들: 질문을 누르면 답이 펼쳐지는 아코디언. 표(.tbl-wrap)와 같은 카드 틀을 쓴다 */
+.faq{ border:1px solid var(--line); border-radius:12px; }
+/* overflow:hidden 을 쓰면 질문 사이 구분선(::before)이 잘려서, 모서리는 첫·끝 칸에 따로 준다 */
+.faq details:first-child summary{ border-radius:11px 11px 0 0; }
+.faq details:last-child:not([open]) summary, .faq details:last-child .details-body{ border-radius:0 0 11px 11px; }
+.faq details{ padding:0; border-top:1px solid var(--line); }
+.faq details:first-child{ border-top:0; }
+.faq details:last-of-type{ border-bottom:0; }
+.faq summary{
+  gap:20px; padding:18px 20px; font-size:15.5px; line-height:1.6; color:var(--ink);
+  transition:background .15s;
+}
+.faq summary:hover, .faq details[open] summary{ background:var(--bg-tint); }
+.faq summary::after{
+  content:''; flex-shrink:0; width:8px; height:8px; margin-right:4px;
+  border-right:2px solid var(--ink-faint); border-bottom:2px solid var(--ink-faint);
+  transform:translateY(-3px) rotate(45deg); transition:transform .2s;
+}
+.faq details[open] summary::after{ content:''; transform:translateY(2px) rotate(-135deg); border-color:var(--accent); }
+.faq details[open] summary{ color:var(--accent-ink); }
+.faq .details-body{ padding:16px 20px 22px; background:var(--bg-tint); }
+.faq .details-body p{ font-size:15px; line-height:1.8; }
